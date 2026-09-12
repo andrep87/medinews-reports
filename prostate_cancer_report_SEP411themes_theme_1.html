@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prostate Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #2563eb08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #2563eb !important;
+            color: #2563eb !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        Notice: This summary has been generated using AI and Human workflow with focus on summarization of news articles released during the week by reputable sources. This summary does not represent any kind of health or treatment advice, recommendations, or suggestion for your specific situation. Always consult with your healthcare team
+    </div>
+
+    <!-- BRANDING HEADER WITH COMPACT AUDIO CONTROLS -->
+    <header class="glass border-b border-blue-100 px-6 py-5 sticky top-0 z-40 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #2563eb">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Prostate Cancer</h1>
+                    <p class="text-[10px] text-blue-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+            <!-- Right: Small Audio Controls -->
+            <div class="flex items-center gap-1.5 md:gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-full shadow-sm">
+                <span class="text-[9px] font-black uppercase tracking-wider text-slate-400 mr-1 hidden sm:inline">Audio</span>
+                
+                <!-- Back 10s -->
+                <button onclick="skipActiveAudio(-10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Back 10 seconds">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button id="header-play-btn" onclick="toggleActiveAudio()" class="w-8 h-8 rounded-full text-white shadow-md hover:scale-105 transition-all flex items-center justify-center shrink-0" style="background-color: #2563eb" aria-label="Play podcast">
+                    <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5" id="header-play-icon"></i>
+                    <i data-lucide="pause" class="w-4 h-4 fill-current hidden" id="header-pause-icon"></i>
+                </button>
+
+                <!-- Forward 10s -->
+                <button onclick="skipActiveAudio(10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Forward 10 seconds">
+                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Audio Time Display -->
+                <span id="header-audio-time" class="text-[10px] font-bold text-slate-500 ml-1 min-w-[28px] text-right">0:00</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-0" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/Prostate-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Active Surveillance Becomes the Standard for Low-Risk Prostate Cancer, But Many Men Still Miss Out</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #2563eb">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"A landmark VA study shows 93% of veterans with low-risk prostate cancer now choose active surveillance — monitoring with regular tests instead of immediate surgery or radiation — up from just 27% two decades ago. This approach delivers the same survival while avoiding incontinence, erectile dysfunction, and bowel problems. However, outside the VA system, fewer than 60% of eligible U.S. men receive this option, and Black and Hispanic patients are less likely to be offered it regardless of cancer features."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-blue-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Researchers tracked over 73,000 veterans diagnosed with low-risk or favorable intermediate-risk prostate cancer across the VA system from 2005 to 2024.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">In 2024, 93% of veterans with low-risk disease chose active surveillance — regular PSA [prostate-specific antigen] blood tests, MRI scans, and repeat biopsies [tissue samples] — instead of immediate treatment, up from 27% in 2005.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For favorable intermediate-risk disease, active surveillance use rose from 14% to 61% over the same period.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The VA&#x27;s integrated system — shared records, quality tracking, and long-term doctor-patient continuity — drove adoption far beyond the national average, where under 60% of low-risk men receive surveillance.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Low-risk prostate cancer (Gleason Grade Group 1 [a measure of how aggressive cancer cells look under a microscope]) almost never spreads. Treating it immediately exposes men to lifelong side effects without a survival benefit.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Active surveillance avoids urinary incontinence [leaking urine], erectile dysfunction [trouble getting or keeping an erection], and bowel issues from surgery or radiation in men whose cancer would never threaten their life.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The VA data strongly suggest that a system-wide commitment to guideline-based care can nearly eliminate overtreatment — but most U.S. men are treated in fragmented systems where surveillance rates lag.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men diagnosed with low-risk prostate cancer: PSA under 10 ng/mL, Gleason Grade Group 1 (3+3=6), and cancer confined to a small portion of the prostate.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men with favorable intermediate-risk disease: Grade Group 2 (3+4=7) in a limited number of biopsy cores, PSA under 10 ng/mL — surveillance rose to 55–88% depending on specific features.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Black and Hispanic men, and those in economically disadvantaged areas, were less likely to be offered surveillance even with identical cancer features — this disparity needs active attention.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If your PSA is elevated, ask your doctor: &#x27;Should I get an MRI and biomarker tests (like the 4Kscore, PHI, or new PSB blood test) before deciding on a biopsy?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If diagnosed with Grade Group 1 cancer, ask: &#x27;Am I a candidate for active surveillance? What is the monitoring schedule — PSA every 3–6 months, MRI at 12 months, repeat biopsy at 12–18 months?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Request a clear explanation of your Gleason Grade Group and whether your cancer meets criteria for surveillance (Grade Group 1, or favorable Grade Group 2 with low volume).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you are Black, have a family history, or carry a BRCA gene mutation, start screening discussions at age 40–45 per guidelines — do not wait until 50.</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Large Observational Study (73,000+ veterans, 2005–2024)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [JAMA Publication]
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [VA PROFOUND-VET Initiative / UCSF / San Francisco VA]
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [5] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Most men with low-risk disease can safely avoid treatment side effects for decades; many never need intervention.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Surveillance requires discipline — missed appointments or biopsies risk missing progression. Anxiety about &#x27;untreated cancer&#x27; is real and leads some to request treatment anyway.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Outside VA systems, you may need to advocate for surveillance; some urology practices still treat all low-risk patients immediately.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Disparities persist — Black men are about 70% more likely to be diagnosed and twice as likely to die from prostate cancer, partly due to later-stage diagnosis and unequal access to guideline-concordant care.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Active surveillance protocol: PSA every 3–6 months, digital rectal exam annually, prostate MRI at 12–18 months, systematic plus targeted biopsy at 12–18 months then every 2–5 years (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">New blood test (5Q Spectra Prostate Dx/PSB): a lab-developed test available now; AUC 0.86 alone, 0.92 combined with AI and imaging; may eliminate up to 44% of unnecessary biopsies after an elevated PSA.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PSMA PET/CT [a specialized scan that detects prostate cancer spread] (Pylarify, Illuccix): now standard for staging; detects spread earlier than CT or bone scan, especially when PSA is low.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Triggers for treatment on surveillance: grade upgrade to Group 2 or higher, significant volume increase on MRI/biopsy, or PSA doubling time under 3 years (general medical guidance).</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">VA study: 73,000+ patients, 19-year span, real-world data showing survival equivalence to treatment. Supported by the PIVOT trial (surgery vs. observation, 20-year follow-up, no mortality difference).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Limitation: VA population is older, predominantly male, and system-integrated — results may not generalize to younger men or fee-for-service settings.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Surveillance disparities: Black/Hispanic veterans and those in high-disadvantage areas had lower surveillance odds independent of clinical factors — cause unclear (access, communication, bias?).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The long-term psychological burden of &#x27;living with cancer&#x27; is unmeasured; some men still choose treatment due to anxiety despite counseling.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Validation of the 5Q Spectra PSB blood test and other liquid biopsies (urine, blood) to further reduce unnecessary biopsies.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Trials testing whether genomic classifiers (Decipher, Oncotype DX GPS) can better predict which Grade Group 1 tumors harbor hidden aggressive features.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">National efforts to close the surveillance gap: quality metrics, payment reform, and shared decision-making tools for community practices.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Long-term follow-up of the VA cohort: 20+ year metastasis and mortality data by surveillance vs. treatment choice.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.usmedicine.com/clinical-topics/cancer/prostate-cancer-cancer/active-surveillance-chosen-by-93-of-veterans-with-low-risk-prostate-cancer/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Active Surveillance Chosen by 93% of Veterans With Low-Risk Prostate Cancer</a>
+<a href="https://www.news-medical.net/news/20260906/New-prostate-cancer-screening-advances-improve-early-detection.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New prostate cancer screening advances improve early detection</a>
+<a href="https://www.health.qld.gov.au/newsroom/news/dont-wait-to-test-your-prostate" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Don&#x27;t wait to test your prostate</a>
+<a href="https://www.oncodaily.com/genitourinary-oncology/joe-biden-583436" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Joe Biden Raises Prostate Cancer Awareness, Urges Men to Discuss Screening With Their Doctors</a>
+<a href="https://www.imt.ie/news/campaign-highlights-conflicting-emotions-around-prostate-cancer-10-09-2026/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Campaign highlights conflicting emotions around prostate cancer</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-blue-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-blue-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-blue-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-blue-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        let currentThemeIdx = 0;
+
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds < 0) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ":" + (secs < 10 ? "0" : "") + secs;
+        }
+        
+        // Header Audio Player Logic
+        function toggleActiveAudio() {
+            toggleAudio(currentThemeIdx);
+        }
+
+        function skipActiveAudio(seconds) {
+            skipAudio(currentThemeIdx, seconds);
+        }
+
+        function toggleAudio(id) {
+            const audio = document.getElementById('audio-' + id);
+            if (!audio) return;
+            
+            // Pause all other audios on the page
+            document.querySelectorAll('audio').forEach(a => {
+                if (a.id !== 'audio-' + id) a.pause();
+            });
+
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+
+            attachAudioListeners(id);
+            updateHeaderAudioUI();
+        }
+
+        function updateHeaderAudioUI() {
+            const audio = document.getElementById('audio-' + currentThemeIdx);
+            const playIcon = document.getElementById('header-play-icon');
+            const pauseIcon = document.getElementById('header-pause-icon');
+            const timeEl = document.getElementById('header-audio-time');
+
+            if (!audio) return;
+
+            if (!audio.paused) {
+                if (playIcon) playIcon.classList.add('hidden');
+                if (pauseIcon) pauseIcon.classList.remove('hidden');
+            } else {
+                if (playIcon) playIcon.classList.remove('hidden');
+                if (pauseIcon) pauseIcon.classList.add('hidden');
+            }
+
+            if (timeEl) {
+                timeEl.innerText = formatTime(audio.currentTime);
+            }
+        }
+
+        function attachAudioListeners(id) {
+            const audio = document.getElementById('audio-' + id);
+            if (!audio || audio.dataset.listenersAttached) return;
+
+            audio.addEventListener('timeupdate', () => {
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            });
+
+            audio.addEventListener('ended', () => {
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            });
+
+            audio.dataset.listenersAttached = "true";
+        }
+
+        function skipAudio(id, seconds) {
+            const audio = document.getElementById('audio-' + id);
+            if (audio && !isNaN(audio.duration)) {
+                audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            }
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+
+            document.querySelectorAll('audio').forEach(audio => {
+                const id = audio.id.replace('audio-', '');
+                attachAudioListeners(id);
+            });
+
+            updateHeaderAudioUI();
+        };
+        </script>
+    </body>
+    </html>
