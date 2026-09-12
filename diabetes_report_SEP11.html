@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0ea5e908; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #0ea5e9 !important;
+            color: #0ea5e9 !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        Notice: This summary has been generated using AI and Human workflow with focus on summarization of news articles released during the week by reputable sources. This summary does not represent any kind of health or treatment advice, recommendations, or suggestion for your specific situation. Always consult with your healthcare team
+    </div>
+
+    <!-- BRANDING HEADER WITH COMPACT AUDIO CONTROLS -->
+    <header class="glass border-b border-sky-100 px-6 py-5 sticky top-0 z-40 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #0ea5e9">
+                    <i data-lucide="activity"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Diabetes</h1>
+                    <p class="text-[10px] text-sky-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+            <!-- Right: Small Audio Controls -->
+            <div class="flex items-center gap-1.5 md:gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-full shadow-sm">
+                <span class="text-[9px] font-black uppercase tracking-wider text-slate-400 mr-1 hidden sm:inline">Audio</span>
+                
+                <!-- Back 10s -->
+                <button onclick="skipActiveAudio(-10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Back 10 seconds">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button id="header-play-btn" onclick="toggleActiveAudio()" class="w-8 h-8 rounded-full text-white shadow-md hover:scale-105 transition-all flex items-center justify-center shrink-0" style="background-color: #0ea5e9" aria-label="Play podcast">
+                    <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5" id="header-play-icon"></i>
+                    <i data-lucide="pause" class="w-4 h-4 fill-current hidden" id="header-pause-icon"></i>
+                </button>
+
+                <!-- Forward 10s -->
+                <button onclick="skipActiveAudio(10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Forward 10 seconds">
+                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Audio Time Display -->
+                <span id="header-audio-time" class="text-[10px] font-bold text-slate-500 ml-1 min-w-[28px] text-right">0:00</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+        <div class="bg-white rounded-[2rem] shadow-sm border border-sky-100 p-6 md:p-8 mb-12">
+            <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-6">This Week's Themes</h3>
+            <div class="flex flex-wrap gap-3">
+
+                <button onclick="switchTheme('0')" class="flex items-center gap-3 bg-slate-50 hover:bg-sky-50 border border-slate-100 hover:border-sky-200 px-2 py-2 pr-5 rounded-full transition-all group">
+                    <span class="w-7 h-7 rounded-full text-white text-xs font-bold flex items-center justify-center shadow-sm shrink-0" style="background-color: #0ea5e9">1</span>
+                    <span class="text-sm font-semibold text-slate-700 transition-colors text-left">Reprogramming the Pancreas: Gene Editing and Menin Inhibition Offer Paths to Regrow Insulin-Producing Cells</span>
+                </button>
+
+                <button onclick="switchTheme('1')" class="flex items-center gap-3 bg-slate-50 hover:bg-sky-50 border border-slate-100 hover:border-sky-200 px-2 py-2 pr-5 rounded-full transition-all group">
+                    <span class="w-7 h-7 rounded-full text-white text-xs font-bold flex items-center justify-center shadow-sm shrink-0" style="background-color: #0ea5e9">2</span>
+                    <span class="text-sm font-semibold text-slate-700 transition-colors text-left">Gestational Diabetes Is a Cardiometabolic Emergency — Not a Pregnancy-Only Condition</span>
+                </button>
+
+                <button onclick="switchTheme('2')" class="flex items-center gap-3 bg-slate-50 hover:bg-sky-50 border border-slate-100 hover:border-sky-200 px-2 py-2 pr-5 rounded-full transition-all group">
+                    <span class="w-7 h-7 rounded-full text-white text-xs font-bold flex items-center justify-center shadow-sm shrink-0" style="background-color: #0ea5e9">3</span>
+                    <span class="text-sm font-semibold text-slate-700 transition-colors text-left">Advanced Diabetes Technology Alone Cannot Close the Equity Gap</span>
+                </button>
+
+                <button onclick="switchTheme('3')" class="flex items-center gap-3 bg-slate-50 hover:bg-sky-50 border border-slate-100 hover:border-sky-200 px-2 py-2 pr-5 rounded-full transition-all group">
+                    <span class="w-7 h-7 rounded-full text-white text-xs font-bold flex items-center justify-center shadow-sm shrink-0" style="background-color: #0ea5e9">4</span>
+                    <span class="text-sm font-semibold text-slate-700 transition-colors text-left">Once-Weekly Insulin, App-Controlled Pumps, and Safer SGLT2 Use — What&#x27;s Actionable Now</span>
+                </button>
+
+            </div>
+        </div>
+
+    <section id="content-theme-0" class="theme-section  anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-0" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/diabetes-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Reprogramming the Pancreas: Gene Editing and Menin Inhibition Offer Paths to Regrow Insulin-Producing Cells</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #0ea5e9">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Researchers have discovered two distinct molecular &#x27;brakes&#x27; — the ALDH3B2 gene and the menin protein — that keep pancreatic duct cells from becoming insulin-producing beta cells [the cells that make insulin]. Disabling either brake in human cells triggers their transformation into functional beta-like cells that normalize blood sugar in diabetic mice, opening a potential path to regenerate a patient&#x27;s own insulin supply without transplants or lifelong immunosuppression [drugs that weaken the immune system to prevent rejection]."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-sky-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Harvard researchers (Joslin Diabetes Center) used a genome-wide CRISPR screen [a technique that tests thousands of genes at once] across 19,000 genes in human pancreatic duct cells and identified ALDH3B2 as a master switch that locks duct cells in their default identity. Silencing it increased the conversion of duct cells to beta-like cells from under 1% to about 8.5%.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The reprogrammed cells began producing insulin. They lost a chemical marker (DNA methylation) on the insulin gene that had been keeping it switched off, passed through a temporary progenitor-like state, and matured into glucose-responsive beta-like cells.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Separately, Kura Oncology spun out Caspian Therapeutics with $50 million in funding (led by BVF Partners, joined by Eli Lilly and others) to develop KO-7246, an oral menin inhibitor [a drug that blocks the menin protein]. Menin is a scaffold protein that prevents beta cells from multiplying. Note: T1D Fund involvement was reported by some outlets but could not be independently confirmed in all press releases.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">In multiple animal models of Type 1 and Type 2 diabetes, blocking menin expanded functional beta-cell mass, increased the body&#x27;s own insulin production, improved blood sugar control, and — notably — the effects persisted even after treatment stopped, suggesting durable regeneration.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Current diabetes care replaces insulin (injections, pumps) or transplants donor or stem-cell beta cells — both limited by supply, cost, and the need for lifelong immunosuppression to prevent rejection.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">These approaches aim to unlock a patient&#x27;s own abundant pancreatic duct cells, converting them into insulin factories from within — potentially avoiding immune rejection and donor shortages entirely.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">ALDH3B2 is an enzyme, so a future drug could block it with a pill (not just gene editing). Researchers already saw similar conversion using DEAB, a broad ALDH-blocking chemical.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Menin inhibitors are already FDA-approved for leukemia (ziftomenib/Komzifti), providing a known safety framework. Caspian&#x27;s KO-7246 is designed specifically for metabolic disease with a potentially better safety profile (no low blood sugar episodes in preclinical testing).</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ultimately, anyone with Type 1 diabetes (autoimmune beta-cell destruction) or Type 2 diabetes (progressive beta-cell loss) who still has pancreatic duct cells — which is nearly all patients (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Early applications would likely target recently diagnosed patients with some remaining duct-cell flexibility, or those facing transplant waitlists or immunosuppression risks (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The research is preclinical (lab and animal studies only); no human trials have begun. Caspian aims for regulatory filing &#x27;as soon as practicable&#x27; with Phase I data expected around 2028.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ask your endocrinologist whether you qualify for any ongoing beta-cell preservation or regeneration trials (such as teplizumab for recent-onset Type 1 diabetes). Note: menin-inhibitor studies are still in preclinical stages (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have Type 1 diabetes, discuss autoantibody screening for family members — early detection enables preventive therapies that preserve beta cells before full destruction (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Stay informed about Caspian Therapeutics&#x27; clinical trial timeline. New KO-7246 preclinical data will be presented at the EASD 2026 conference on September 29.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Maintain optimal glucose control now. Preserving your existing beta-cell function is the best strategy until regenerative therapies arrive (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Preclinical Study (Science Translational Medicine)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Biotech Launch (Caspian Therapeutics, $50M Series A)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Harvard Medical School / Joslin Diabetes Center, Kura Oncology, Eli Lilly, BVF Partners]
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [4] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: A pill or gene therapy that restores your own insulin production could transform diabetes from a lifelong injection burden into a curable or durably controllable condition.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Leukemia drugs targeting menin carry warnings for differentiation syndrome [a serious immune reaction] and cytopenias [low blood cell counts]; metabolic dosing may differ, but long-term safety is unknown. ALDH3B2&#x27;s role in other body tissues is unstudied (general medical guidance).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Access: Even if approved, gene therapies and novel biologic drugs often launch at high cost with restricted access. Lilly&#x27;s involvement suggests commercial scaling is planned, but pricing and equity are unresolved (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Timeline: Caspian is targeting Phase I around 2028; the ALDH3B2 approach is even earlier in development. Most patients should expect a wait of 7–12+ years for any approved regenerative therapy (general medical guidance).</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ALDH3B2 inhibition (Harvard/Joslin): Gene-editing proof-of-concept in human cells and mice; a chemical inhibitor (DEAB) mimics the effect. Next step: identify selective ALDH3B2 inhibitors for drug development.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Menin inhibitor KO-7246 (Caspian Therapeutics): Next-generation, selective, oral small molecule; $50M funded through IND-enabling studies and early clinical proof-of-concept. Preclinical data in Type 1 and Type 2 diabetes models and human islet organoids [lab-grown clusters of insulin-producing cells].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Teplizumab (Tzield, Sanofi): Already FDA-approved to delay Stage 2 Type 1 diabetes onset by about 2 years; also used at diagnosis to preserve remaining beta cells — the only approved disease-modifying therapy for T1D.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Combination potential: Caspian is exploring menin inhibitors combined with GLP-1 agonists [a class of drugs including semaglutide that helps lower blood sugar and weight] for patients not controlled on current therapies.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ALDH3B2: Tested in human duct cells in the lab plus diabetic immunodeficient mice (6-week follow-up); 8.5% conversion rate. Uncertain: long-term stability, whether the immune system would attack these new cells in Type 1 diabetes, scalability, and unintended gene-editing effects.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Menin inhibition: Consistent results across multiple Type 1 and Type 2 diabetes animal models; beta-cell expansion persisted after the drug was stopped; supportive data from human islet organoids. Uncertain: how well this translates to humans, correct dosing, how long benefits last, and cancer risk (menin acts as a tumor suppressor in other contexts) (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Key gap: No human data yet for either approach. Both are years from clinical use. The regulatory path for these kinds of regenerative therapies is uncharted.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">EASD 2026 (September 29): Caspian presenting KO-7246 preclinical data in Type 1 and Type 2 diabetes models and human organoids — the first detailed public look at their lead drug candidate.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Caspian IND filing: Expected &#x27;as soon as practicable&#x27;; the design of their Phase I trial (safety, C-peptide [a marker of insulin production], beta-cell mass imaging) will reveal their clinical strategy.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ALDH3B2 drug discovery: Watch for publications on selective ALDH3B2 inhibitors and non-human primate studies.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Combination potential: Whether menin inhibitors plus GLP-1 or SGLT2-class drugs move toward joint development for synergistic metabolic benefit.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://medicalxpress.com/news/2026-09-disabling-gene-pancreatic-cells-insulin.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Disabling a gene brake in pancreatic cells unlocks insulin-producing potential</a>
+<a href="https://theindianpractitioner.com/disabling-a-genetic-brake-unlocks-insulin-production-in-pancreatic-cells/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Disabling a Genetic Brake Unlocks Insulin Production in Pancreatic Cells</a>
+<a href="https://www.biopharmadive.com/news/caspian-diabetes-kura-oncology-menin-inhibitors-lilly/829860/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Kura spins diabetes work into a Lilly-backed biotech startup</a>
+<a href="https://www.statnews.com/2026/09/09/kura-oncology-spins-off-diabetes-focused-caspian-therapeutics/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Leukemia drug data suggested a different way to treat diabetes. A new biotech will test that idea</a>
+</div></details>
+</div></section>
+
+    <section id="content-theme-1" class="theme-section hidden anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-1" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/diabetes-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Gestational Diabetes Is a Cardiometabolic Emergency — Not a Pregnancy-Only Condition</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #0ea5e9">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Gestational diabetes (GDM) [diabetes that develops during pregnancy] is not a temporary pregnancy complication — it marks women for a roughly 10-fold higher risk of Type 2 diabetes, 5-fold higher prediabetes risk, and significantly elevated high blood pressure, high cholesterol, obesity, and cardiovascular disease within just 2–3 years after delivery. Published data from over 1 million women, plus a Danish registry study awaiting full peer-reviewed publication, show Type 2 diabetes is diagnosed roughly 13 years earlier in women with prior GDM, and 40% are diagnosed before age 40."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-sky-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-1-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-1-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-1-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-1-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-1-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A Stanford-led analysis of 1,153,998 commercially insured US women (median follow-up 2.4 years), published in JAMA Network Open: gestational diabetes was linked to 10 times higher risk of Type 2 diabetes (aHR 10.02), 5 times higher risk of prediabetes (5.32), 2.7 times higher risk of metabolic syndrome (2.72), 2 times higher risk of high cholesterol (2.00), 1.8 times higher risk of high blood pressure (1.76), 1.8 times higher risk of obesity (1.75), and 1.3 times higher risk of heart disease (1.28). Kidney disease risk was not increased (aHR 0.96).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The extra cardiometabolic risk appeared within the same window as routine postpartum glucose screening (the first few years after birth), not decades later. Type 2 diabetes risk stayed over 6-fold higher even 5–10 years after delivery.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A Danish registry study (DD2 cohort, n=2,865 women with prior pregnancy) — still an unpublished conference finding set to be presented at EASD 2026 (Sept 28–Oct 2), not yet peer-reviewed: women with prior GDM (n=173) were diagnosed with Type 2 diabetes at median age 43.5 vs. 56.3 years (almost 13 years earlier); about 40% were under age 40 at diagnosis vs. 6% without GDM. The GDM group used insulin twice as often at diagnosis (10.4% vs. 5.2%) and had lower C-peptide [a marker of insulin production].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A Japanese study (n=470): High-intensity breastfeeding (at least 80% breast milk) was linked to 75% lower odds of high triglycerides and 73% lower odds of an unhealthy cholesterol ratio at 6–9 weeks after birth, regardless of insulin sensitivity.</span>
+                        </div>
+</div>
+<div id="sub-1-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">GDM acts like a &#x27;failed stress test&#x27; — pregnancy reveals hidden heart and metabolism vulnerability that persists and worsens after delivery.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Current guidelines treat the postpartum visit as a glucose check only. These data suggest it should become a comprehensive cardiometabolic visit: blood pressure, cholesterol, weight, glucose, and kidney function.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Earlier Type 2 diabetes onset means longer disease duration, more complications, and higher lifetime costs (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Breastfeeding intensity is a modifiable factor that improves early postpartum cholesterol and triglyceride levels — a rare actionable intervention in this time window.</span>
+                        </div>
+</div>
+<div id="sub-1-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">All women with a history of GDM (affects roughly 1 in 7 pregnancies globally, about 300,000 per year in the US).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Particularly urgent for women with additional risk factors: South Asian/Asian American ethnicity (higher GDM prevalence and progression risk), Medicaid/uninsured status (structural barriers to postpartum care), prior preeclampsia, or family history of diabetes/heart disease.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Women with borderline glucose levels that don&#x27;t quite meet GDM diagnostic thresholds also showed 47% higher adverse pregnancy odds and faster fetal growth — suggesting even sub-GDM blood sugar elevation carries risk.</span>
+                        </div>
+</div>
+<div id="sub-1-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you had GDM: Schedule a comprehensive cardiometabolic visit now (not just glucose) — request blood pressure, lipid panel [cholesterol test], weight, HbA1c [average blood sugar over 3 months], and kidney function tests (eGFR, UACR). Repeat annually.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ask your provider: &#x27;Am I up to date on the National Diabetes Prevention Program (DPP)?&#x27; DPP lifestyle coaching or metformin has been shown to reduce Type 2 diabetes progression in women with a GDM history.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If pregnant or postpartum: Aim for high-intensity breastfeeding (at least 80% breast milk) if feasible — it&#x27;s linked to a better early cholesterol profile. Request lactation support if needed.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If planning pregnancy: Discuss optimizing weight, blood pressure, and cholesterol with your OB/GYN or primary care before conceiving — earlier intervention may change the long-term trajectory (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Track your numbers: Keep a personal record of postpartum HbA1c, blood pressure, cholesterol, and weight. Share with any new provider — the handoff from obstetrics to primary care is a major gap where information gets lost.</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Retrospective Cohort (&gt;1.1M women, Merative MarketScan, published in JAMA Network Open)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Registry Cohort (Danish DD2, n=2,865 women) — unpublished conference findings presented at EASD 2026, not yet peer-reviewed
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Stanford University, Steno Diabetes Centers, ACOG, ADA]
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [4] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: GDM identifies a high-risk population early — exactly when prevention works best. We already have tools (DPP, metformin, breastfeeding support) that could change the trajectory.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Fewer than half of women with GDM complete the recommended postpartum glucose test. The handoff from OB to primary care fails systematically. Medicaid and uninsured women — often the highest risk — have the least access.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Cost/access: DPP isn&#x27;t universally covered by insurance; using newer diabetes drugs purely for prevention isn&#x27;t guideline-endorsed or reliably insured. Breastfeeding requires societal support (paid leave, workplace accommodation) (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Disparities: Asian American women have high GDM rates but are understudied. Structural racism affects postpartum follow-up.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">DPP lifestyle program and metformin: Proven to reduce Type 2 diabetes progression in women with a GDM history; still underused after pregnancy.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SGLT2 inhibitors / GLP-1 receptor agonists [newer diabetes/heart/kidney drug classes]: ACC 2025 guideline prioritizes these for cardiorenal protection in diabetes; emerging but not yet definitive data support use in high-risk women with prior GDM (off-label for prevention, needs trials) (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Postpartum care models: &#x27;Fourth trimester&#x27; frameworks (from ACOG) and care-navigation/coaching trials (Stanford) testing extended support beyond the standard 6-week visit.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Breastfeeding support: Structural (paid leave, lactation consultants) and clinical (hospital breastfeeding-friendly practices) interventions to enable higher-intensity breastfeeding.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Strengths: MarketScan (1.15 million women, real-world, diverse, peer-reviewed and published in JAMA Network Open); DD2 (deep phenotyping with C-peptide, insulin use data); both show consistent magnitude and timing of risk. The breastfeeding study adjusted for insulin sensitivity.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Limitations: MarketScan is insurance-claims data (no lab values, and doesn&#x27;t include Medicaid/uninsured women). DD2 findings are from a selected cohort and, as of this writing, an unpublished conference presentation (EASD 2026) rather than a peer-reviewed paper — exact figures could be revised on publication. The breastfeeding study is observational, self-reported, and from a single center in Japan. Cause and effect not proven.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Unknown: Whether early, aggressive cardiometabolic intervention (blood pressure, cholesterol, weight, glucose) after GDM actually changes long-term heart and kidney outcomes. Dedicated trials are needed (Stanford is pursuing one).</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Guideline updates: Will ADA/ACOG mandate blood pressure, cholesterol, and weight checks alongside glucose at the postpartum visit?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">DPP expansion: Will CMS or state Medicaid programs expand coverage for postpartum women with a GDM history?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Trials: Stanford&#x27;s proposed care-navigation/coaching trial; kidney-outcome studies in postpartum women with GDM history.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Breastfeeding policy: Paid-leave legislation and hospital lactation-support metrics tied to reimbursement.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Long-term CVD/CKD data: Extended follow-up of MarketScan and DD2 cohorts — including whether the DD2 findings move from conference presentation to full peer-reviewed publication.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.medscape.com/viewarticle/cardiometabolic-risks-emerge-early-after-gestational-2026a1000x34" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Cardiometabolic Risks Arise Early After Gestational Diabetes</a>
+<a href="https://medicaldialogues.in/amp/obstetrics-gynaecology/news/gestational-diabetes-linked-to-earlier-more-severe-type-2-diabetes-in-women-finds-study-178693" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Gestational Diabetes Linked to Earlier, More Severe Type 2 Diabetes in Women, finds study</a>
+<a href="https://www.ausdoc.com.au/news/type-2-diabetes-diagnosed-13-years-earlier-after-gestational-diabetes-new-study-finds/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Type 2 diabetes diagnosed 13 years earlier after gestational diabetes, new study finds</a>
+<a href="https://medicaldialogues.in/amp/diabetes-endocrinology/news/breastfeeding-intensity-linked-to-better-early-postpartum-lipid-profile-after-gestational-diabetes-jama-178820" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Breastfeeding Intensity Linked to Better Early Postpartum Lipid Profile After Gestational Diabetes: JAMA</a>
+</div></details>
+</div></section>
+
+    <section id="content-theme-2" class="theme-section hidden anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-2" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/diabetes-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Advanced Diabetes Technology Alone Cannot Close the Equity Gap</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #0ea5e9">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Providing continuous glucose monitors (CGM) [wearable sensors that track blood sugar] and insulin pumps does not eliminate the blood-sugar disparities driven by social and economic circumstances. In a study of 1,743 CGM users, Black race was independently associated with higher HbA1c [average blood sugar], and public insurance was independently associated with less time in a healthy blood-sugar range and more time in dangerous high blood sugar — even with identical technology access. A significant interaction effect was found specifically among Black children for higher average sensor glucose readings. Equity requires pairing devices with education, behavioral support, and structural interventions."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-sky-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-2-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-2-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-2-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-2-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-2-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">JAMA Network Open study (Williamson et al.): 1,743 adults and children with Type 1 or Type 2 diabetes using CGM (with or without a pump). Black race was independently associated with 0.55% higher HbA1c. A significant interaction effect was found specifically among Black children for higher average sensor glucose (+17.88 mg/dL). Public insurance was independently associated with 0.26% higher HbA1c, 3.56% less time-in-range [time blood sugar stays in a healthy zone], 3.49% more time-above-range [time blood sugar is dangerously high], and a 4.5-point higher glycemic risk index [an overall measure of blood sugar danger]. Living in a more economically disadvantaged neighborhood was linked to 3.26% more glucose variability [day-to-day blood sugar swings].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">NIH-funded Utah study (ARCHES, about 3 million women, 99,978 with endometriosis): Endometriosis [a condition where uterine-like tissue grows outside the uterus] was linked to 46% higher Type 2 diabetes risk overall. Risk more than doubled for extra-pelvic endometriosis [tissue found outside the pelvis]. Link was strongest in premenopausal women without obesity (BMI under 30) — a group usually considered low-risk for diabetes.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Brazilian Indigenous study (946 people in Tupiniquim and Guarani communities): Despite tropical sun exposure, vitamin D deficiency (below 30 ng/mL) was independently linked to 77% higher Type 2 diabetes odds; each 1 ng/mL increase in vitamin D was linked to about 4% lower odds.</span>
+                        </div>
+</div>
+<div id="sub-2-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Technology access does not equal technology benefit. CGM and pumps generate data, but acting on that data requires literacy, time, stable housing, food security, and clinical support — all unevenly distributed (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The endometriosis finding reveals a new, inflammation-driven metabolic risk in women without traditional risk factors (obesity, older age), suggesting current diabetes screening misses a vulnerable group.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Vitamin D deficiency in a sun-rich environment shows that biology (skin pigmentation, genetics, inflammation) and behavior (time spent indoors, diet) can matter more than latitude — routine screening and supplementation could be a low-cost way to reduce disparities (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">These findings are not about patients failing to &#x27;comply&#x27; — they point to systemic gaps in addressing the real-world context in which people live and use technology (general medical guidance).</span>
+                        </div>
+</div>
+<div id="sub-2-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">CGM/pump users: Especially those with public insurance (Medicaid/Medicare), Black patients, and residents of economically disadvantaged neighborhoods — disparities persisted even after accounting for pump use and other demographics.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Women with endometriosis: Particularly premenopausal and not obese (BMI under 30) — current guidelines don&#x27;t flag this group for early metabolic screening.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Indigenous people, people with more skin pigmentation, and those who spend a lot of time indoors: Vitamin D deficiency is common even in sunny climates, and the associated metabolic risk is independent of traditional factors.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Clinicians and insurers: Prescribing technology without also addressing social and economic needs (food, housing, health literacy, support) wastes resources and widens outcome gaps (general medical guidance).</span>
+                        </div>
+</div>
+<div id="sub-2-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you use a CGM or pump but struggle to hit your targets: Ask your clinic for a diabetes care and education specialist (DCES) visit focused on interpreting your data, not just device training. Ask about a social-needs screening (food, housing, transportation) — many clinics now have patient navigators (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have endometriosis (especially if premenopausal and not obese): Ask your OB/GYN or primary care doctor for an annual HbA1c, cholesterol panel, and blood pressure check — &#x27;I have endometriosis, which research links to earlier Type 2 diabetes risk. Can we screen proactively?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ask about vitamin D testing: &#x27;Given my diabetes risk, can we check my 25-hydroxyvitamin D level?&#x27; If it&#x27;s low (below 30 ng/mL), discuss supplementation with your doctor (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Advocate for bundled coverage: Ask your insurer or employer benefits team whether CGM coverage includes mandatory education visits and support for social needs — device access alone doesn&#x27;t improve outcomes (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Use community resources: Ask your clinic about ADA-recognized diabetes self-management education programs, community health workers, and food-assistance programs (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Cross-Sectional Study (JAMA Network Open, n=1,743, Oct 2017–Feb 2025)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Retrospective Cohort (Utah Population Database / ARCHES study, ~3M women)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Cross-Sectional Study (Indigenous Brazilian, n=946)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [3] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Technology can help close gaps if paired with structured education, community health workers, and care models that address social needs. Vitamin D screening and supplementation are cheap and easy to scale. Endometriosis screening could catch high-risk women early (general medical guidance).</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Most clinics bill for device training, not ongoing data coaching. Medicaid reimbursement for diabetes education is low or absent in many states. Vitamin D testing isn&#x27;t universally covered by insurance. The endometriosis-diabetes link isn&#x27;t yet reflected in screening guidelines (general medical guidance).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Cost: CGM plus pump therapy costs $5,000–$10,000+ per year. Adding education and navigation increases upfront costs but may prevent far larger complication costs ($50,000+). Payers need return-on-investment data (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Trust: Historical mistreatment of some communities by the medical system makes people understandably wary of new screening or technology programs. Community-partnered design is essential, not optional (general medical guidance).</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CGM/pump technology: Abbott Libre 3 Plus now integrates with multiple pump platforms (Omnipod 5, Tandem t:slim X2, YpsoPump, MiniMed 780G). Dexcom G7 offers similar integration.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Diabetes self-management education (DSMES): Structured programs (DESMOND in the UK, ADCES in the US) are proven to improve outcomes. Digital DESMOND is now nationally available in the UK.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Endometriosis-metabolism link: The ARCHES cohort (Utah) is ongoing. Mechanistic studies examining inflammatory pathways (IL-6, TNF-α) and insulin resistance are underway.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Vitamin D supplementation trials: Needed in high-risk populations (Indigenous, dark-skinned, obese) to test whether correcting deficiency actually reduces new diabetes cases.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CGM/social-factors study: Large dataset with detailed glucose metrics, published in JAMA Network Open. Used inverse probability weighting and mixed-effects modeling. Limitations: cross-sectional (not proof of cause-and-effect), 86.5% White, single US health system. Note: the strongest glucose-level effect (+17.88 mg/dL) applied specifically to a subgroup of Black children, not all Black patients across the study.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Endometriosis/T2D: Very large cohort (about 3 million women), long follow-up, subtype analysis. Limitations: relies on billing codes (which can misclassify conditions), and women with endometriosis may see doctors more often (leading to more diagnoses of anything, including diabetes) (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Vitamin D/T2D: Strong independent association (adjusted OR 1.77), dose-response effect. Limitations: cross-sectional, Indigenous Brazilian population only, no causality proven, residual confounding from lifestyle and genetics.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CMS/coverage policy: Will Medicare/Medicaid bundle CGM reimbursement with mandatory diabetes education visits and social-needs screening?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Endometriosis guidelines: Will ADA/ACOG add endometriosis (especially extra-pelvic, premenopausal) as an independent Type 2 diabetes risk factor warranting early screening?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Vitamin D trials: NIH-funded supplementation trials in high-risk populations (such as VITAL-D substudies).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Digital equity: Broadband access, health-literacy-friendly apps, and multilingual CGM interfaces as part of diabetes care infrastructure.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Funding for community-based participatory research on pairing technology with real-world support.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://medicaldialogues.in/diabetes-endocrinology/news/advanced-diabetes-technologies-alone-may-not-eliminate-sociodemographic-disparities-in-glycemic-outcomes-study-177569" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Advanced Diabetes Technologies Alone May Not Eliminate Sociodemographic Disparities in Glycemic Outcomes</a>
+<a href="https://www.nih.gov/news-events/nih-research-matters/endometriosis-may-increase-type-2-diabetes-risk" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Endometriosis may increase type 2 diabetes risk</a>
+<a href="https://medicaldialogues.in/diabetes-endocrinology/news/vitamin-d-deficiency-independently-linked-to-type-2-diabetes-suggests-study-178758" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Vitamin D Deficiency Independently Linked to Type 2 Diabetes, suggests study</a>
+</div></details>
+</div></section>
+
+    <section id="content-theme-3" class="theme-section hidden anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-3" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/diabetes-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Once-Weekly Insulin, App-Controlled Pumps, and Safer SGLT2 Use — What&#x27;s Actionable Now</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #0ea5e9">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Three practical changes are reaching patients: once-weekly basal insulin (icodec, brand name Awiqli, FDA-approved March 26, 2026) cuts injections from 365 to 52 per year but requires a careful one-time dose adjustment and strict missed-dose rules; MiniMed Flex — already FDA-cleared and launched in the US since mid-2026, and now also CE-Marked in Europe — is the first smartphone-app-controlled insulin pump with 80% time-in-range in real-world use; and a 322,597-episode Scandinavian study shows SGLT2 inhibitor ketoacidosis risk persists throughout treatment (not just at start), meaning ongoing risk checks and &#x27;sick-day&#x27; pausing of the drug during illness matter."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-sky-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-3-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-3-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-3-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-3-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-sky-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-3-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Insulin icodec (Awiqli, Novo Nordisk): FDA-approved on March 26, 2026 for adults with Type 2 diabetes only, with nationwide US launch in the second half of 2026. The ONWARDS clinical trials showed it controls blood sugar as well as daily basal insulin. A separate trial in Type 1 diabetes (ONWARDS 6) showed more severe low blood sugar episodes, so Type 1 is excluded. Insulin efsitora alfa (Lilly) is in the QWINT Phase 3 program, not yet approved.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">MiniMed Flex (from MiniMed, spun out of Medtronic): FDA-cleared March 18, 2026 and launched in the US in June 2026 — its first market. It then received CE Mark for Europe in September 2026, with a European launch expected around November 2026. In the US it&#x27;s approved for Type 1 diabetes ages 7+ and insulin-requiring Type 2 in adults; the European version covers ages 2+ (Type 1 and Type 2) and use during pregnancy. About half the size of the prior MiniMed 780G, holds 300 units of insulin, controlled entirely from a smartphone app, uses an algorithm (SmartGuard) that auto-adjusts insulin about every 5 minutes, includes Meal Detection technology, and works with the Simplera Sync and Instinct (Abbott-made) glucose sensors. Real-world data show users spend about 80% of their time in a healthy glucose range with recommended settings.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">SGLT2 inhibitor ketoacidosis [a dangerous buildup of acids called ketones in the blood] (Karolinska-led study, Sweden/Denmark/Norway): 322,597 treatment episodes among 282,282 patients with Type 2 diabetes, 1,452 DKA events (2.43 per 1,000 person-years), published in The Lancet Diabetes &amp; Endocrinology. Risk was highest in the first roughly 180 days but persisted throughout treatment. Risk factors included high HbA1c (≥83 mmol/mol or 9.7%: 15× odds), low BMI (&lt;20: roughly 10×), prior DKA (&gt;10×), malnutrition (&gt;10×), recent low blood sugar (&gt;5×). Infection was the most common trigger (in 31.8% of DKA cases, OR 7.6). After a DKA episode, only 25% stayed on their SGLT2 drug; insulin use jumped from 32% to 73%.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Dapagliflozin + insulin (small RCT, n=86, 3 months): Combination reduced HbA1c by 24.9% vs. 10.3% with insulin alone; fasting glucose fell more (-23.6% vs. -5.6%); weight dropped more (-5.4% vs. -3.3%); blood pressure improved; cholesterol improved (total cholesterol -35%, LDL -15.7%, HDL +16.3%). Adverse events were 71.4% lower; no DKA occurred.</span>
+                        </div>
+</div>
+<div id="sub-3-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Once-weekly insulin dramatically reduces injection burden — but only for Type 2 diabetes. Switching requires a one-time &#x27;loading dose&#x27; (not simply the daily dose multiplied by seven). The missed-dose window is 4 days maximum. Pharmacists need to watch for mix-ups with other weekly injectable drugs (like semaglutide or dulaglutide) (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The app-controlled pump moves pump interaction to a phone — more discreet, potentially less stigma, and easier for caregivers to help remotely. Meal Detection catches missed meal doses. Because MiniMed Flex launched in the US months before its European approval, US patients and doctors have a head start building real-world experience. It is still not &#x27;set and forget&#x27; — sensors and infusion sites still need regular changes, and alarms still need a response (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Doctors often only assess ketoacidosis risk with SGLT2 drugs when a patient starts treatment. This data shows the risk is ongoing and driven by factors that can change over time (blood sugar control, weight, illness). &#x27;Sick-day&#x27; pausing of the SGLT2 drug during acute illness is evidence-based but widely underused.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The dapagliflozin + insulin trial challenges the common approach of simply increasing insulin doses when blood sugar isn&#x27;t controlled — adding an SGLT2 drug may offer broader benefits (blood sugar, weight, blood pressure, cholesterol) with fewer side effects.</span>
+                        </div>
+</div>
+<div id="sub-3-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Insulin icodec: Adults with Type 2 diabetes on basal insulin (or starting insulin for the first time) — not for Type 1 diabetes, not during pregnancy, limited data in advanced kidney disease. Best suited to people who dislike daily injections and have a stable weekly routine (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">MiniMed Flex: People with Type 1 or Type 2 diabetes on insulin seeking a smaller, phone-controlled pump — now available in the US (since June 2026) and rolling out in Europe (from around November 2026). The European version is also approved for use during pregnancy. Requires a compatible sensor (Simplera Sync or Instinct) and a smartphone.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">SGLT2 ketoacidosis vigilance: Anyone taking an SGLT2 inhibitor (empagliflozin, dapagliflozin, canagliflozin, ertugliflozin) — especially those with poorly controlled blood sugar, low body weight, a prior DKA episode, malnutrition, frequent low blood sugar, or recurring infections.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Dapagliflozin + insulin: People with Type 2 diabetes on insulin who aren&#x27;t at their blood sugar goal — particularly those who are also overweight, have high blood pressure, high cholesterol, or kidney disease, where SGLT2 drugs have proven benefits (general medical guidance).</span>
+                        </div>
+</div>
+<div id="sub-3-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If on daily basal insulin for Type 2 diabetes: Ask your provider, &#x27;Am I a candidate for once-weekly icodec, which is now available in the US? Can we do the dose-conversion process together with pharmacist support?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If considering a pump: Ask your diabetes team, &#x27;Is MiniMed Flex available to me?&#x27; — it&#x27;s already on the US market, and European patients should ask about the local launch timeline following the September 2026 approval. Also ask how Meal Detection works if you miss a meal dose.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If on an SGLT2 inhibitor: Keep a &#x27;sick-day&#x27; card that says: &#x27;If I am acutely ill (vomiting, diarrhea, fever, or unable to eat), I will STOP my SGLT2 inhibitor and check for ketones.&#x27; Ask your pharmacist to review this with you at every refill.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If on insulin and not at your target: Ask, &#x27;Could we add dapagliflozin or a similar SGLT2 drug instead of just increasing my insulin dose?&#x27; Discuss the trial data showing larger blood sugar reduction plus weight, blood pressure, and cholesterol benefits with a lower adverse-event rate.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-sky-50/30 border border-sky-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0ea5e9">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If on an SGLT2 inhibitor plus insulin, or have Type 1 diabetes: Ask your doctor about glucose-ketone combination sensors, which can flag rising ketone levels early.</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Phase 3 Program (ONWARDS, insulin icodec); FDA approval March 26, 2026
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Regulatory Approvals (FDA clearance March 2026 + CE Mark September 2026, MiniMed Flex)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Nationwide Registry Study (Lancet Diabetes &amp; Endocrinology, n=322,597 treatment episodes)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-sky-100 shadow-sm transition-transform" style="color: #0ea5e9">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [4] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Fewer injections, smaller pumps, smarter algorithms, and combining drugs thoughtfully can reduce daily burden and improve outcomes at the same time.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Icodec is Type 2 only; dose-conversion errors can cause dangerous high or low blood sugar. MiniMed Flex is already available in the US and expanding into Europe, but still requires sensor and site changes and a compatible smartphone. SGLT2 ketoacidosis is rare but serious; &#x27;sick-day&#x27; pausing is often not followed. Dapagliflozin + insulin is not yet a guideline-standard approach (general medical guidance).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Cost/access: Icodec pricing vs. daily basal insulin? MiniMed Flex pump and supply cost in each market? Generic dapagliflozin helps but the SGLT2 drug class is still brand-heavy in some markets. Insurance may require trying other medications first (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Equity: A phone-controlled pump requires a smartphone and data plan. Once-weekly insulin requires a reliable weekly routine, which can be hard for shift workers or people facing housing instability. Following SGLT2 &#x27;sick-day&#x27; rules requires a certain level of health literacy and access to care (general medical guidance).</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Insulin icodec (Awiqli): A once-weekly insulin that binds loosely to a blood protein (albumin) for slow, steady release. Approved in the US (March 2026), EU, and other markets for Type 2 diabetes. ONWARDS 1–5 trials positive; ONWARDS 6 (Type 1) stopped for safety.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Insulin efsitora alfa (Lilly): A different once-weekly insulin (fusion protein technology), in Phase 3 (QWINT program). Mechanism distinct from icodec — not interchangeable (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">MiniMed Flex + SmartGuard: An automated insulin-delivery system that adjusts basal insulin automatically while meal doses are entered manually. Meal Detection provides auto-correction for missed meals. FDA-cleared and US-launched first (March/June 2026); CE-Marked for Europe second (September 2026).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Dapagliflozin (Farxiga): An SGLT2 inhibitor, now available as a generic in some markets. FDA-approved for Type 2 diabetes, heart failure, and chronic kidney disease (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Oral insulin (Endo Axiom, Sydney): Early-phase research using enzyme-responsive, liver-targeted nanoparticles [tiny particles designed to deliver insulin through the digestive system]. Phase 1a in healthy volunteers. Phase 1b in Type 1 diabetes planned. Over 20 years of research in this area.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Icodec: ONWARDS program (roughly 2,700–3,500 adults with Type 2 diabetes across component trials); non-inferior HbA1c, similar severe low blood sugar rates vs. daily basal. FDA approval confirmed for March 26, 2026. Uncertain: long-term (beyond 1 year) safety, real-world adherence to a weekly schedule, cost/access, Type 1 diabetes contraindication.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">MiniMed Flex: Real-world 80% time-in-range with recommended settings. FDA clearance (March 2026) and US launch (June 2026) preceded the European CE Mark (September 2026) — these are sequential milestones, not simultaneous. Uncertain: randomized trial data, performance in diverse populations (children, older adults, people with lower health literacy), pump failure rates.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SGLT2 DKA: Large, real-world registry study (322,597 treatment episodes, 1,452 events), published in a peer-reviewed journal. Uncertain: causality (confounding by indication), generalizability outside Scandinavia, optimal HbA1c threshold for pausing, restart criteria after illness.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Dapagliflozin + insulin: Randomized trial but small (n=86), 3 months, open-label, single site (Brazil). Uncertain: durability of benefit, hard outcomes (heart disease, kidney disease), generalizability, optimal insulin dose reduction.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0ea5e920; color: #0ea5e9;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Icodec real-world evidence: Post-marketing surveillance for dose-conversion errors, adherence, off-label use in Type 1 diabetes, and cost-effectiveness.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Efsitora alfa Phase 3 readouts (2026–2027): Head-to-head vs. icodec? Type 1 diabetes data? FDA submission timeline.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">MiniMed Flex European launch: Expected around November 2026 following the September CE Mark; watch for real-world European data alongside the already-available US experience.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SGLT2 sick-day protocol standardization: ADA/EASD/KDIGO guideline updates on when to pause and restart; pharmacy-led sick-day counseling mandates.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Dapagliflozin + insulin guideline inclusion: Will SGLT2 add-on become preferred over increasing insulin doses in future ADA/EASD algorithms?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Oral insulin Phase 1b (Type 1 diabetes): Safety, dosing, and whether this delivery approach can work in actual diabetes patients.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.drugtopics.com/view/wicked-good-cardiometabolic-chat-once-weekly-insulin-management" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Wicked Good Cardiometabolic Chat: Once-Weekly Insulin Management</a>
+<a href="https://diabetestimes.co.uk/minimeds-first-app-controlled-insulin-pump-receives-ce-mark-in-europe/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>MiniMed&#x27;s first app-controlled insulin pump receives CE Mark in Europe</a>
+<a href="https://diabetestimes.co.uk/sglt2-inhibitor-ketoacidosis-risk-persists-throughout-treatment-study-finds/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>SGLT2 inhibitor ketoacidosis risk persists throughout treatment, study finds</a>
+<a href="https://medicaldialogues.in/diabetes-endocrinology/news/dapagliflozin-enhances-metabolic-outcomes-when-added-to-insulin-in-t2dm-suggests-study-178972" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-sky-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Dapagliflozin Enhances Metabolic Outcomes When Added to Insulin in T2DM, Suggests Study</a>
+</div></details>
+</div></section>
+
+    </main>
+
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-sky-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+        <button onclick="window.print()" class="text-slate-500 hover:text-sky-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+            <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+        </button>
+        <div class="h-4 w-px bg-sky-200"></div>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-sky-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+            <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+        </button>
+    </div>
+
+    <script>
+    let currentThemeIdx = 0;
+
+    function switchTheme(idx) {
+        currentThemeIdx = parseInt(idx, 10);
+
+        document.querySelectorAll('.theme-section').forEach(s => s.classList.add('hidden'));
+        const target = document.getElementById('content-theme-' + idx);
+        if (target) target.classList.remove('hidden');
+        
+        // Stop any playing audio when switching themes
+        document.querySelectorAll('audio').forEach(a => a.pause());
+        updateHeaderAudioUI();
+        
+        // Update URL hash silently
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, '#theme-' + idx);
+        } else {
+            window.location.hash = '#theme-' + idx;
+        }
+        
+        lucide.createIcons();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function switchSubTab(btn, id) {
+        const c = btn.closest('section');
+        c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+        c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+        btn.classList.add('active');
+        document.getElementById(id).classList.remove('hidden');
+        lucide.createIcons();
+    }
+
+    function formatTime(seconds) {
+        if (isNaN(seconds) || seconds < 0) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return mins + ":" + (secs < 10 ? "0" : "") + secs;
+    }
+    
+    // Header Audio Player Logic
+    function toggleActiveAudio() {
+        toggleAudio(currentThemeIdx);
+    }
+
+    function skipActiveAudio(seconds) {
+        skipAudio(currentThemeIdx, seconds);
+    }
+
+    function toggleAudio(id) {
+        const audio = document.getElementById('audio-' + id);
+        if (!audio) return;
+        
+        // Pause all other audios on the page
+        document.querySelectorAll('audio').forEach(a => {
+            if (a.id !== 'audio-' + id) a.pause();
+        });
+
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+
+        attachAudioListeners(id);
+        updateHeaderAudioUI();
+    }
+
+    function updateHeaderAudioUI() {
+        const audio = document.getElementById('audio-' + currentThemeIdx);
+        const playIcon = document.getElementById('header-play-icon');
+        const pauseIcon = document.getElementById('header-pause-icon');
+        const timeEl = document.getElementById('header-audio-time');
+
+        if (!audio) return;
+
+        if (!audio.paused) {
+            if (playIcon) playIcon.classList.add('hidden');
+            if (pauseIcon) pauseIcon.classList.remove('hidden');
+        } else {
+            if (playIcon) playIcon.classList.remove('hidden');
+            if (pauseIcon) pauseIcon.classList.add('hidden');
+        }
+
+        if (timeEl) {
+            timeEl.innerText = formatTime(audio.currentTime);
+        }
+    }
+
+    function attachAudioListeners(id) {
+        const audio = document.getElementById('audio-' + id);
+        if (!audio || audio.dataset.listenersAttached) return;
+
+        audio.addEventListener('timeupdate', () => {
+            if (id == currentThemeIdx) updateHeaderAudioUI();
+        });
+
+        audio.addEventListener('ended', () => {
+            if (id == currentThemeIdx) updateHeaderAudioUI();
+        });
+
+        audio.dataset.listenersAttached = "true";
+    }
+
+    function skipAudio(id, seconds) {
+        const audio = document.getElementById('audio-' + id);
+        if (audio && !isNaN(audio.duration)) {
+            audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+            if (id == currentThemeIdx) updateHeaderAudioUI();
+        }
+    }
+
+    window.onload = () => {
+        lucide.createIcons();
+
+        document.querySelectorAll('audio').forEach(audio => {
+            const id = audio.id.replace('audio-', '');
+            attachAudioListeners(id);
+        });
+
+        updateHeaderAudioUI();
+        
+        // Hash auto-activate logic
+        setTimeout(() => {
+            const hash = window.location.hash;
+            const match = hash.match(/^#theme-(\d+)$/);
+            if (match) {
+                const idx = match[1];
+                switchTheme(idx);
+            }
+        }, 600);
+    };
+    </script>
+</body>
+</html>

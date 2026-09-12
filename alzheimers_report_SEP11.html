@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alz | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #7c3aed08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #7c3aed !important;
+            color: #7c3aed !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        Notice: This summary has been generated using AI and Human workflow with focus on summarization of news articles released during the week by reputable sources. This summary does not represent any kind of health or treatment advice, recommendations, or suggestion for your specific situation. Always consult with your healthcare team
+    </div>
+
+    <!-- BRANDING HEADER WITH COMPACT AUDIO CONTROLS -->
+    <header class="glass border-b border-violet-100 px-6 py-5 sticky top-0 z-40 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #7c3aed">
+                    <i data-lucide="brain"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Alz</h1>
+                    <p class="text-[10px] text-violet-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+            <!-- Right: Small Audio Controls -->
+            <div class="flex items-center gap-1.5 md:gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-full shadow-sm">
+                <span class="text-[9px] font-black uppercase tracking-wider text-slate-400 mr-1 hidden sm:inline">Audio</span>
+                
+                <!-- Back 10s -->
+                <button onclick="skipActiveAudio(-10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Back 10 seconds">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button id="header-play-btn" onclick="toggleActiveAudio()" class="w-8 h-8 rounded-full text-white shadow-md hover:scale-105 transition-all flex items-center justify-center shrink-0" style="background-color: #7c3aed" aria-label="Play podcast">
+                    <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5" id="header-play-icon"></i>
+                    <i data-lucide="pause" class="w-4 h-4 fill-current hidden" id="header-pause-icon"></i>
+                </button>
+
+                <!-- Forward 10s -->
+                <button onclick="skipActiveAudio(10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Forward 10 seconds">
+                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Audio Time Display -->
+                <span id="header-audio-time" class="text-[10px] font-bold text-slate-500 ml-1 min-w-[28px] text-right">0:00</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+        <div class="bg-white rounded-[2rem] shadow-sm border border-violet-100 p-6 md:p-8 mb-12">
+            <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-6">This Week's Themes</h3>
+            <div class="flex flex-wrap gap-3">
+
+                <button onclick="switchTheme('0')" class="flex items-center gap-3 bg-slate-50 hover:bg-violet-50 border border-slate-100 hover:border-violet-200 px-2 py-2 pr-5 rounded-full transition-all group">
+                    <span class="w-7 h-7 rounded-full text-white text-xs font-bold flex items-center justify-center shadow-sm shrink-0" style="background-color: #7c3aed">1</span>
+                    <span class="text-sm font-semibold text-slate-700 transition-colors text-left">Prevention Trials and Early Intervention Reshape the Alzheimer&#x27;s Timeline</span>
+                </button>
+
+                <button onclick="switchTheme('1')" class="flex items-center gap-3 bg-slate-50 hover:bg-violet-50 border border-slate-100 hover:border-violet-200 px-2 py-2 pr-5 rounded-full transition-all group">
+                    <span class="w-7 h-7 rounded-full text-white text-xs font-bold flex items-center justify-center shadow-sm shrink-0" style="background-color: #7c3aed">2</span>
+                    <span class="text-sm font-semibold text-slate-700 transition-colors text-left">Alzheimer&#x27;s Biology Expands Beyond Brain Amyloid — Vascular, Immune, Gut, and Tau Origins</span>
+                </button>
+
+                <button onclick="switchTheme('2')" class="flex items-center gap-3 bg-slate-50 hover:bg-violet-50 border border-slate-100 hover:border-violet-200 px-2 py-2 pr-5 rounded-full transition-all group">
+                    <span class="w-7 h-7 rounded-full text-white text-xs font-bold flex items-center justify-center shadow-sm shrink-0" style="background-color: #7c3aed">3</span>
+                    <span class="text-sm font-semibold text-slate-700 transition-colors text-left">Diagnostic Landscape Transforms — Blood Tests, Tau PET, Retinal AI, but Caveats Abound</span>
+                </button>
+
+                <button onclick="switchTheme('3')" class="flex items-center gap-3 bg-slate-50 hover:bg-violet-50 border border-slate-100 hover:border-violet-200 px-2 py-2 pr-5 rounded-full transition-all group">
+                    <span class="w-7 h-7 rounded-full text-white text-xs font-bold flex items-center justify-center shadow-sm shrink-0" style="background-color: #7c3aed">4</span>
+                    <span class="text-sm font-semibold text-slate-700 transition-colors text-left">Next-Generation Therapeutic Pipeline Diversifies Beyond Anti-Amyloid Monoclonals</span>
+                </button>
+
+            </div>
+        </div>
+
+    <section id="content-theme-0" class="theme-section  anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-0" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/Alz-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Prevention Trials and Early Intervention Reshape the Alzheimer&#x27;s Timeline</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #7c3aed">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Major phase 3 prevention trials are now testing anti-amyloid drugs in cognitively healthy people at high risk, while new blood-based screening tools and an FDA-cleared biomarker test aim to identify Alzheimer&#x27;s pathology years before symptoms appear — shifting the field from reactive treatment to proactive prevention."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-violet-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Roche launched the phase 3 PrevenTRON trial, recruiting about 1,600 cognitively healthy adults aged 55–80 who have elevated p-tau217 [a blood marker of Alzheimer&#x27;s brain changes] to test trontinemab, a &#x27;Brainshuttle&#x27; anti-amyloid antibody [a drug designed to clear amyloid plaques] engineered to cross the blood–brain barrier about 50 times more efficiently than current drugs.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The AHEAD 3-45 trial is testing lecanemab (Leqembi) in people with amyloid buildup but no symptoms. It uses a new blood-based algorithm that cut unnecessary PET scans from over 70% to 31% by combining p-tau217, amyloid-beta ratio, age, and APOE4 gene status.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The FDA cleared PrecivityAD2 (C2N Diagnostics) on August 20, 2026 — a blood test using mass spectrometry [a precise lab technique to measure proteins] for adults 40 and older with cognitive symptoms. In a 1,142-person validation study, it showed 97.6% positive predictive value [accuracy when the test says &#x27;positive&#x27;] and 93.1% negative predictive value [accuracy when the test says &#x27;negative&#x27;] compared to amyloid PET scans or spinal fluid testing.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A critical review warned that the separately FDA-cleared Lumipulse p-tau217/Aβ42 blood ratio has significant limitations — unstable protein fragments, contamination from blood-clotting cells (platelets), and poor accuracy in low-prevalence settings like primary care where most people tested do not have the disease.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Prevention trials target the 10–20 year &#x27;preclinical&#x27; window when amyloid accumulates silently in the brain — intervening earlier could preserve thinking ability before irreversible nerve cell loss occurs (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Blood-based screening dramatically lowers the cost, time, and burden of enrolling in trials (from 3 months to weeks), speeding drug development and broadening access beyond specialty centers.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">PrecivityAD2 and similar tests could streamline real-world diagnosis, helping patients get answers faster and potentially qualify for disease-modifying therapies sooner.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The Lumipulse critique is an important reminder that blood biomarkers are not yet standalone diagnostics — they need clinical context and confirmatory testing, especially in primary care where false positives are common.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Cognitively healthy adults 55–80 with elevated p-tau217 or amyloid biomarkers but no memory complaints — potentially eligible for the PrevenTRON prevention trial.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults 55 and older with intermediate or elevated amyloid on blood screening but no dementia — candidates for the AHEAD 3-45 lecanemab prevention study.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients 40 and older with memory concerns or mild cognitive impairment — appropriate for PrecivityAD2 blood testing as part of a specialist workup.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Primary care physicians and patients should understand that a positive Lumipulse ratio in a general (low-prevalence) population has a high false-positive rate and does not equal a diagnosis.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ask your neurologist or memory specialist: &#x27;Do I qualify for a prevention trial like PrevenTRON or AHEAD 3-45 based on my age, family history, and biomarker status?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have memory concerns, request a formal cognitive evaluation and discuss whether a blood biomarker test (PrecivityAD2 or p-tau217) is appropriate before pursuing a PET scan or spinal tap.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If a blood test comes back positive for amyloid, ask: &#x27;What is the positive predictive value in my clinical setting? Do I need confirmatory PET or spinal fluid testing before starting treatment?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Track and treat vascular risk factors (blood pressure, cholesterol, diabetes, smoking) — they account for up to 45% of dementia risk and are modifiable today regardless of trial eligibility.</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [2] Phase III Prevention Trials (PrevenTRON, AHEAD 3-45)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [FDA Clearance] PrecivityAD2 blood test (August 20, 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Major Sponsors] Roche, Eisai/Biogen, NIH/Alzheimer&#x27;s Clinical Trials Consortium
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [6] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Prevention trials represent the first serious attempt to stop Alzheimer&#x27;s before symptoms start; blood tests make screening feasible at scale; trontinemab&#x27;s brain delivery may outperform current drugs.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Prevention trials take 4–6 years for results; most screened individuals will be ineligible (low amyloid); current anti-amyloid drugs slow decline modestly (about 30%) but don&#x27;t stop or reverse it; ARIA risk requires regular MRI monitoring.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Cost/Access: IV infusions every 2–4 weeks, PET/MRI surveillance, and specialist-only prescribing limit reach; blood tests not yet broadly covered by insurance for asymptomatic screening; health equity gaps in trial recruitment persist (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Uncertainty: Whether amyloid removal in the preclinical stage truly delays symptom onset — or merely clears plaque without changing the course of the disease — remains unproven. Long-term safety of chronic anti-amyloid therapy is unknown.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Trontinemab (Roche): Phase 3 PrevenTRON (prevention) and TRONTIER 1/2 (early symptomatic AD); Brainshuttle technology enhances brain penetration; cleared amyloid in 91% of participants at the higher dose within 28 weeks, with ARIA [brain swelling/bleeding side effects] in fewer than 5% — substantially lower than lecanemab (13%) or donanemab (24%).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lecanemab (Leqembi, Eisai/Biogen): FDA-approved for early symptomatic AD; now in the phase 3 AHEAD 3-45 prevention trial; slows clinical decline by about 30%; requires biweekly IV infusions and ARIA monitoring.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Donanemab (Kisunla, Eli Lilly): FDA-approved for early symptomatic AD; targets deposited amyloid plaques; some patients completed an 18-month treatment course after clearing amyloid; similar ARIA risk profile to lecanemab.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PrecivityAD2 (C2N Diagnostics): FDA-cleared blood test (mass spectrometry); helps rule amyloid in or out in symptomatic adults 40 and older; not a screening test and not a standalone diagnostic.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PrevenTRON: Phase 1b/2a (Brainshuttle AD study) showed 91% amyloid clearance at 28 weeks at the higher dose (n=54 in the 3.6 mg/kg cohort, 149 total across both dose cohorts); phase 3 enrolling 1,600 participants over 4–6 years; primary endpoint is time to cognitive impairment onset — results are years away.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">AHEAD 3-45: Blood algorithm validated in 1,080 AHEAD participants plus an independent Wisconsin Registry cohort; reduced PET-ineligible rate from 71% to 31%. But only about 30% of cognitively healthy adults 65 and older have amyloid levels high enough to qualify.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PrecivityAD2: Validation study n=1,142; 97.6% PPV, 93.1% NPV vs. amyloid PET/CSF; but only 17.3% of the tested cohort had a &#x27;likely positive&#x27; result — real-world performance in diverse populations is unknown.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lumipulse p-tau217/Aβ42: Cleared based on enriched (high-prevalence) cohorts. At 10% disease prevalence, even with 90% sensitivity/specificity, the PPV drops to about 50%. At 1–5% prevalence (typical primary care), PPV drops to 8–32%. Pre-analytical variability for Aβ42 is up to 25%.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PrevenTRON enrollment progress and interim safety data (ARIA rates with enhanced brain penetration).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">AHEAD 3-45 biomarker-guided enrollment efficiency and whether earlier lecanemab treatment yields greater benefit than treatment after symptoms develop.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">FDA/EMA decisions on blood biomarker qualifications for trial enrichment and clinical use beyond PrecivityAD2.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Long-term follow-up of Kisunla/Leqembi &#x27;completers&#x27; who cleared amyloid — does cognitive benefit persist after stopping treatment?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Development of next-generation tau blood tests and multivariable prediction models to replace simple ratio-based blood tests.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://pharmaphorum.com/news/major-trial-roche-alzheimers-drug-kicks-europe" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Major trial of Roche Alzheimer&#x27;s drug kicks off in Europe</a>
+<a href="https://informat.ro/en/health/study-tests-experimental-drug-to-prevent-alzheimers-137654" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Alzheimer&#x27;s drug tested on people without symptoms. Researchers want to find out whether the disease can be prevented</a>
+<a href="https://medicalxpress.com/news/2026-09-algorithmic-tool-screening-patients-alzheimer.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Algorithmic tool may improve screening of patients for an Alzheimer&#x27;s clinical trial</a>
+<a href="https://www.news-medical.net/news/20260909/New-blood-screening-algorithm-reduces-unnecessary-Alzheimers-PET-scans.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New blood screening algorithm reduces unnecessary Alzheimer&#x27;s PET scans</a>
+<a href="https://www.ophthalmologyadvisor.com/news/fda-clears-blood-test-for-alzheimer-disease/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>FDA Clears Blood Test for Alzheimer Disease</a>
+<a href="https://bioengineer.org/plasma-p-tau217-to-a%CE%B242-ratio-shows-flaws-for-alzheimers-diagnosis/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Plasma p-tau217 to Aβ42 ratio shows flaws for Alzheimer&#x27;s diagnosis</a>
+</div></details>
+</div></section>
+
+    <section id="content-theme-1" class="theme-section hidden anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-1" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/Alz-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Alzheimer&#x27;s Biology Expands Beyond Brain Amyloid — Vascular, Immune, Gut, and Tau Origins</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #7c3aed">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Converging research reveals Alzheimer&#x27;s is driven by systemic biology — vascular damage, peripheral immune activation, gut-derived metabolites, and a newly discovered origin of toxic tau in nerve cell branches (dendrites) — helping explain why amyloid removal alone yields modest benefits and opening new therapeutic avenues."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-violet-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-1-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-1-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-1-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-1-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-1-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A protein-wide association study (analyzing 1,300 proteins using genetic data from over 9,000 people) identified 4 new Alzheimer&#x27;s risk genes — LILRB1, SIRPA, CD55, and SCARA5 — that regulate immune checkpoints [molecular switches that control immune cell activity] outside the brain. This suggests immune dysfunction in the body, not just the brain, may drive the disease.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Mouse studies showed that conventional dendritic cells [a type of immune cell] in lymph nodes outside the brain activate T cells that then infiltrate the brain and cause damage — even without reducing tau tangles — pointing to a body-to-brain immune pathway.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Vascular risk factors (high blood pressure, diabetes, high LDL cholesterol, obesity, smoking) now account for an estimated 45% of dementia cases. White matter damage and blood–brain barrier leakage appear decades before symptoms.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Tau protein is made in dendrites [the receiving branches of nerve cells], not in axons [the sending cables], and is immediately checked by a local quality-control system called the neuroproteasome. When this surveillance fails, misfolded tau can seed the tangles characteristic of Alzheimer&#x27;s — a fundamental rewrite of tau biology.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A gut bacterial metabolite called imidazole propionate (ImP) was linked to lower cognition and higher AD biomarkers in 1,196 cognitively normal adults; in mice, dietary ImP drove amyloid and tau buildup via a specific enzyme pathway (GSK-3β) — implicating the gut microbiome.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The TMEM106B gene variant (rs3173615) selectively increases TDP-43 pathology [a protein deposit found in about 40% of Alzheimer&#x27;s brains] linked to faster cognitive decline, but does not affect Lewy body or vascular pathology — a potential precision-medicine target.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">An HIV-Alzheimer&#x27;s mouse model showed that antiretroviral drugs (NRTIs) suppress brain inflammation and amyloid buildup — suggesting shared inflammatory pathways between the two diseases.</span>
+                        </div>
+</div>
+<div id="sub-1-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Amyloid plaques may be a downstream consequence (the &#x27;rust&#x27;) of upstream vascular, immune, and metabolic damage (the &#x27;leaky pipes&#x27;) — which helps explain why anti-amyloid drugs only modestly slow decline.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The newly identified immune checkpoint genes (LILRB1, SIRPA) are already targeted by cancer drugs — enabling rapid repurposing trials rather than decade-long new drug development (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The discovery that tau is made and quality-checked locally in dendrites offers a completely new intervention point: boosting this quality control could prevent misfolding before tangles ever form.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Vascular risk modification is actionable today — controlling blood pressure, blood sugar, cholesterol, and quitting smoking could prevent nearly half of dementia cases.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Gut-derived ImP is a potentially druggable metabolite — blocking its production could be a broadly applicable strategy, though this is still in early research (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">TDP-43 co-pathology explains why Alzheimer&#x27;s patients decline at different rates; TMEM106B-based patient selection could enrich clinical trials for fast progressors, making it easier to detect treatment effects.</span>
+                        </div>
+</div>
+<div id="sub-1-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults with vascular risk factors (high blood pressure, diabetes, high LDL cholesterol, obesity, smoking) — the largest modifiable risk group. Midlife control matters most.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Women with early natural menopause (before age 45–50) — research links each 5 years of earlier menopause to about 15% more white matter damage. Perimenopause is a critical window for vascular brain health.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">People with a family history of Alzheimer&#x27;s but no ApoE4 gene — the new immune genes (LILRB1, SIRPA) may explain some of the &#x27;missing heritability&#x27; and identify at-risk individuals missed by current genetic testing.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients with rapid cognitive decline — may harbor TDP-43 co-pathology (TMEM106B-related). Future trials may select patients based on this marker.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Long COVID patients with persistent brain fog (longer than 6 months) — elevated p-tau and smell dysfunction raise concern for accelerated neurodegeneration. Neuropsychological monitoring may be warranted (general medical guidance).</span>
+                        </div>
+</div>
+<div id="sub-1-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Get vascular risk factors measured and treated to target: blood pressure below 130/80, LDL cholesterol below 70 mg/dL, HbA1c below 7%, BMI below 25, zero smoking — this is the single most evidence-based prevention step today.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Women in perimenopause (40s–early 50s): discuss brain health with your clinician. Consider vascular screening, hormone therapy risk/benefit assessment, and aggressive risk factor control (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have a family history of AD but test negative for ApoE4, ask a genetics counselor about broader panel testing for immune-risk genes like LILRB1/SIRPA when clinically available.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For persistent post-COVID brain fog (longer than 6 months): request referral to a neuropsychologist for baseline cognitive testing and smell assessment; ask about p-tau217 testing if clinically available (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Support gut health: eat a diverse range of fiber, limit processed foods — while ImP-blocking drugs are in development, microbiome diversity is linked to lower systemic inflammation (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Human Genetic Study] Protein-wide association study (Science Translational Medicine, July 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Mouse Mechanistic Studies] Dendritic tau synthesis, neuroproteasome quality control (Nature Neuroscience)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Human Observational Data] Menopause timing, white matter hyperintensities (JAMA Network Open, n=2,603)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [6] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Multiple druggable pathways outside amyloid — immune checkpoints, vascular risk, gut metabolites, tau quality control, TDP-43 modifiers — diversify the research pipeline beyond a single target.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Most of these discoveries are from mouse models or human observational studies. Translating them to safe, effective human therapies typically takes 10–15 years. Repurposing cancer drugs still requires Alzheimer&#x27;s-specific dosing and safety trials (general medical guidance).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Complexity: Alzheimer&#x27;s is biologically heterogeneous — a single &#x27;magic bullet&#x27; is unlikely. Combination therapies targeting amyloid + tau + inflammation + vascular health will likely be needed (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Equity: Genetic studies remain heavily Eurocentric. Vascular risk modification requires healthcare access. Gut-brain interventions need dietary and cultural personalization.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lenalidomide (a cancer drug, BMS): Phase 2 proof-of-mechanism trial in Alzheimer&#x27;s (MCLENA-1, TTUHSC); targets inflammation. The trial was very small (only 6 patients completed treatment) and was underpowered for efficacy conclusions, but the researcher reported brain shrinkage rates appeared to slow. A second Phase 2 trial (MCLENA-2) is now enrolling at a lower dose. Phase 3 is estimated to be 5–6 years away if Phase 2 results are positive.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Cancer immunotherapy repurposing: SIRPA (part of the CD47-SIRPα &#x27;don&#x27;t eat me&#x27; signal) and CD55 are both AD risk genes with existing cancer drugs targeting them. Preclinical AD studies are underway.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Neuroproteasome enhancers: Columbia University is screening compounds to boost the quality-control system that prevents tau misfolding in dendrites; preclinical only.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ImP pathway inhibitors: University of Wisconsin is identifying the microbial enzymes that produce ImP; GSK-3β inhibitors block ImP&#x27;s toxic effects in mice. Human drugs are years away.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Antiretrovirals (NRTIs): Population data suggest lower AD risk in HIV-positive people on antiretroviral therapy. A mouse model confirms suppression of brain inflammation and amyloid buildup. Prevention trials in aging HIV-positive cohorts are plausible but not yet launched.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CD14 inhibitors: A molecular network (circRNA_13083/miR-298-5p/CD14) activates inflammatory pathways in microglia [the brain&#x27;s immune cells]; blocking CD14 rescues neurons in lab dishes. RNA-based therapeutics are in development.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Immune genes: The protein-wide study used genetic data from over 9,000 participants (about 20% African American) and found 4 novel genes in European Americans but only 1 signal (APOE) in African Americans — reflecting underrepresentation in the data, not necessarily differences in biology. The direction of cause (does the protein change cause AD, or vice versa?) is unproven.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Dendritic T cells: Mouse data only. Whether human lymph node dendritic cells play the same role in Alzheimer&#x27;s is unconfirmed. What triggers dendritic cell activation (tau? amyloid? aging?) is unknown.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Vascular hypothesis: Strong epidemiological link (45% population attributable fraction per the Lancet Commission). But mechanistic proof in humans is incomplete — white matter damage correlates with but doesn&#x27;t prove it causes Alzheimer&#x27;s.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Dendritic tau synthesis: Published in Nature Neuroscience (2026); used STARFISH imaging in mouse neurons. Human validation is pending. How the neuroproteasome functions in aging human brains is unknown.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ImP: Published in Nature Communications; 1,196 cognitively normal adults (cross-sectional + longitudinal); mouse dietary ImP raised amyloid/tau. No human intervention data exist.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TMEM106B/TDP-43: 2,604 autopsy-confirmed AD brains; rs3173615 variant associated with widespread TDP-43 pathology; odds ratio adjusted for age, sex, APOE, severity. The proposed mechanism (lysosomal dysfunction) is hypothetical.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">HIV-AD model: APP-KI mice with HIV-1 infection; NRTIs reduced inflammation and amyloid. Human cognitive outcomes in aging HIV-positive people on antiretroviral therapy are still observational.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Human validation of dendritic tau synthesis and neuroproteasome function (using postmortem brain tissue and lab-grown neurons).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Phase 2 lenalidomide results (MCLENA-2, TTUHSC) — does an oral anti-inflammatory drug slow brain shrinkage or cognitive decline in Alzheimer&#x27;s patients?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TMEM106B-stratified clinical trials — selecting for TDP-43-positive fast progressors to detect treatment effects more quickly.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ImP-lowering interventions (diet, prebiotics, enzyme inhibitors) entering early-phase trials.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Longitudinal Long COVID studies with serial p-tau217, brain imaging, and cognitive testing — does SARS-CoV-2 accelerate Alzheimer&#x27;s pathology?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Vascular biomarker qualification (blood–brain barrier permeability, white matter damage progression) as endpoints for prevention trials.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://beingpatient.com/scientists-discover-four-new-alzheimers-risk-genes/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Scientists Discover Four New Alzheimer&#x27;s Risk Genes</a>
+<a href="https://ana.ir/en/news/11189/alzheimers-triggers-may-originate-outside-the-brain" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Alzheimer&#x27;s triggers may originate outside the brain</a>
+<a href="https://theconversation.com/inside-the-brain-rethinking-the-mechanisms-of-alzheimers-disease-290095" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Inside the brain: Rethinking the mechanisms of Alzheimer&#x27;s disease</a>
+<a href="https://www.technologynetworks.com/tn/news/toxic-tau-origins-could-help-scientists-target-alzheimers-before-tangles-form-416272" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Toxic Tau Origins Could Help Scientists Target Alzheimer&#x27;s Before Tangles Form</a>
+<a href="https://medicalxpress.com/news/2026-09-women-menopause-early-faster-brain.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Women who hit menopause early see faster brain aging and earlier Alzheimer&#x27;s diagnosis</a>
+<a href="https://www.physiciansweekly.com/post/gut-metabolite-tied-to-alzheimers-risk-progression" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Gut Metabolite Tied to Alzheimer&#x27;s Risk &amp; Progression</a>
+<a href="https://news.med.miami.edu/tmem106b-tdp-43-alzheimers-disease/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>TMEM106B Variant Linked to TDP-43 Pathology in Alzheimer&#x27;s Disease</a>
+<a href="https://medicalxpress.com/news/2026-09-avenue-explore-relationship-alzheimer-hiv.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New research offers avenue to explore relationship between Alzheimer&#x27;s and HIV</a>
+</div></details>
+</div></section>
+
+    <section id="content-theme-2" class="theme-section hidden anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-2" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/Alz-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Diagnostic Landscape Transforms — Blood Tests, Tau PET, Retinal AI, but Caveats Abound</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #7c3aed">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"A wave of new diagnostics — an FDA-cleared blood test (PrecivityAD2), FDA-approved tau PET imaging (Tauklarify), AI-powered retinal screening, and algorithmic trial enrichment — promises earlier, cheaper, less invasive Alzheimer&#x27;s detection. Yet significant limitations in accuracy, generalizability across populations, and clinical interpretation remain unresolved."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-violet-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-2-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-2-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-2-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-2-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-2-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">FDA cleared PrecivityAD2 (C2N Diagnostics) on August 20, 2026: a blood test using mass spectrometry that measures amyloid-beta 42/40 ratio and p-tau217. It is for adults 40 and older with cognitive symptoms. In a 1,142-person validation study, it showed 97.6% positive predictive value and 93.1% negative predictive value compared to amyloid PET or spinal fluid. It is not intended for screening or as a standalone diagnosis.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">FDA approved Tauklarify (Lantheus, formerly MK-6240) on August 14, 2026: a tau PET radiotracer [an imaging agent that binds to tau tangles in the brain] for adults with cognitive impairment being evaluated for Alzheimer&#x27;s. Two studies (500+ participants) showed 68–88% positive scan agreement and 93–99% negative scan agreement compared to amyloid PET plus cognitive evaluation. Side effects were minimal (headache/nausea in fewer than 1%).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The AHEAD 3-45 trial deployed a blood algorithm combining p-tau217, amyloid-beta ratio, age, and APOE4 status that cut PET-ineligible screen failures from 71% to 31% — a major efficiency gain for prevention trials.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A critical review in the Journal of Molecular Medicine identified significant problems with the Lumipulse p-tau217/Aβ42 blood ratio: unstable protein fragments, contamination from platelets, variability driven by the denominator, and poor accuracy in low-prevalence settings.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A deep learning model trained on 62,876 retinal photos (UK Biobank, 44,501 participants) predicted 12 AD risk factors (age, sex, blood pressure, HbA1c, smoking, etc.) and could distinguish future AD cases (8.5 years before diagnosis) from controls — but this is a research tool, not a diagnostic test.</span>
+                        </div>
+</div>
+<div id="sub-2-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Blood tests can replace invasive and expensive PET scans and lumbar punctures for many patients — enabling wider access, faster diagnosis, and earlier treatment within the narrow window for anti-amyloid drug eligibility.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Tau PET (Tauklarify) fills a critical gap: amyloid PET shows plaque burden but not tangle spread. Tau correlates more closely with cognitive stage. It helps confirm Alzheimer&#x27;s vs. other dementias and gauge how far the disease has progressed.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Algorithmic screening makes prevention trials financially viable — without blood pre-screening, over 70% of PET scans were wasted on amyloid-negative volunteers.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Retinal AI could eventually turn routine eye exams into brain health risk assessments — capturing cumulative vascular and metabolic exposure without relying on patient recall (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The Lumipulse critique is a cautionary tale: regulatory clearance does not equal clinical readiness. Biomarkers need rigorous standardization and context-specific validation before broad use.</span>
+                        </div>
+</div>
+<div id="sub-2-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients 40 and older with memory concerns or mild cognitive impairment — appropriate for PrecivityAD2 as part of a specialist workup to rule amyloid in or out before PET or spinal fluid testing.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Clinicians evaluating atypical or complex cognitive syndromes — Tauklarify tau PET helps distinguish Alzheimer&#x27;s from non-AD dementias (such as frontotemporal dementia or Lewy body disease) when amyloid PET is positive but the clinical picture is unclear.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Cognitively healthy adults 55 and older considering prevention trial enrollment — the blood algorithm determines who needs a confirmatory PET scan.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Primary care physicians — should NOT order the Lumipulse p-tau217/Aβ42 ratio to screen asymptomatic patients. At 5% disease prevalence, the positive predictive value is under 32%. Refer to a specialist for biomarker interpretation.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Eye care providers — retinal AI remains research-only. It should not be marketed as AD risk screening. Prospective validation in diverse populations is needed first.</span>
+                        </div>
+</div>
+<div id="sub-2-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have memory concerns: ask your doctor for a cognitive screen (MoCA or MMSE) and referral to a memory specialist — do not self-refer for blood tests, as they require clinical context to interpret.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If a specialist orders amyloid confirmation: ask &#x27;Can we start with a blood test (PrecivityAD2 or p-tau217) to avoid a spinal tap or PET scan if the result is negative?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If your amyloid PET is positive but the diagnosis is uncertain: ask &#x27;Would a tau PET scan (Tauklarify) help clarify whether my symptoms are from Alzheimer&#x27;s or another condition?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you&#x27;re 55 or older with a family history and interested in prevention trials: ask &#x27;Do you use blood-based pre-screening (p-tau217) to determine if I need a PET scan for trial eligibility?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">At your next routine eye exam: ask your optometrist or ophthalmologist &#x27;Do you participate in any retinal imaging research for brain health? Can I opt in to contribute my images?&#x27;</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [FDA Clearance] PrecivityAD2 blood test (August 20, 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [FDA Approval] Tauklarify (MK-6240) tau PET radiotracer (August 14, 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Phase 3 Trial Integration] AHEAD 3-45 blood screening algorithm
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [5] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Blood-first diagnostics could make Alzheimer&#x27;s evaluation as routine as cholesterol testing; tau PET adds staging precision; retinal AI leverages existing eye care infrastructure for population-level risk assessment.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Blood tests are not yet validated for screening asymptomatic people. Tau PET costs $3,000–$5,000, is available at limited centers, and involves radiation exposure. Retinal AI is years from clinical use. The Lumipulse ratio may mislead in primary care.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Interpretation Gap: A positive blood biomarker does not equal an Alzheimer&#x27;s diagnosis — it requires clinical correlation. False positives cause anxiety; false negatives delay care. The specialist workforce is insufficient for the volume these tests could generate (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Equity: Biomarker performance varies by race and ethnicity (the ApoE4 effect differs across populations, and p-tau217 distributions differ). Retinal AI was trained on a 94% White UK Biobank cohort. Trial algorithms may exclude underrepresented groups.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PrecivityAD2 (C2N): FDA-cleared; mass spectrometry; measures plasma Aβ42/40 and p-tau217; intended as an add-on to clinical evaluation in symptomatic adults 40 and older; available through specialized labs (CLIA); insurance coverage for Anthem Blue Cross members beginning October 2026, broader coverage still developing.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Tauklarify (Lantheus): FDA-approved tau PET tracer; binds paired helical filaments [the building blocks of tau tangles]; 30-minute uptake; complements amyloid PET; indicated for adults with cognitive impairment being evaluated for AD. Limitation: safety and effectiveness have not been established for non-Alzheimer&#x27;s tauopathies.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">AHEAD 3-45 Algorithm: Mixture-of-Experts model combining p-tau217, Aβ42/40 ratio, age, and APOE4 status; validated in AHEAD (n=1,080) plus an independent WRAP cohort; reduces PET scans 2.3-fold.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lumipulse G p-tau217/Aβ1-42 (Fujirebio): FDA-cleared immunoassay ratio; the first blood test cleared for AD evaluation. However, an independent review identified molecular instability, pre-analytical fragility, and statistical problems with the ratio format.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Retinal AI (UK Biobank/Deep Learning): Research tool only; predicts risk factors from retinal photos; highlight maps show the optic nerve head and retinal blood vessels as key features. Not diagnostic. Needs prospective multi-ethnic validation.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PrecivityAD2: n=1,142 symptomatic patients; 97.6% PPV, 93.1% NPV; but only 17.3% received a &#x27;likely positive&#x27; result — spectrum bias is possible. Performance in diverse ethnicities, patients with multiple other conditions, and primary care settings is unknown.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Tauklarify: 2 studies, 500+ total participants; 68–88% positive scan agreement, 93–99% negative scan agreement. Head-to-head comparison with Tauvid (the other approved tau PET tracer) showed mixed results on which performs better. Clinical utility for treatment selection remains unproven. Cost ($3,000–$5,000) and access are limited.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">AHEAD Algorithm: Reduced PET-ineligible rate from 71% to 31%; but only about 30% of adults 65 and older have qualifying amyloid levels. The algorithm handles uncertainty well but is not a diagnostic tool.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lumipulse Ratio: Cleared based on enriched cohorts. At 10% prevalence with 90% sensitivity/specificity, PPV is about 50%. At 1–5% prevalence (primary care), PPV drops to 8–32%. Aβ42 variability ranges from 15–25%. Platelet and hemolysis effects are large.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Retinal AI: Cross-sectional from UK Biobank (94% White participants); predicts risk factors rather than disease itself. Number of incident AD cases was small (8.5 years pre-diagnosis). No causal link established. Generalizability to non-European populations is unproven.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CMS coverage decisions for PrecivityAD2 and p-tau217 blood tests — will Medicare reimburse for specialist use? For primary care?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Tauklarify real-world adoption: Will tau PET become standard for selecting patients for anti-amyloid treatment (patients with limited tau may respond better)?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Next-generation blood assays: fragment-aware p-tau217 (mass spectrometry), multivariable prediction models replacing simple ratios, plasma tau measured at other sites (p-tau181, p-tau231).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Retinal AI prospective studies: multi-ethnic cohorts with longitudinal design linking retinal scores to cognitive decline and biomarker conversion.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Blood biomarker qualification by FDA/EMA for trial enrichment — could eventually replace PET screening entirely in prevention studies.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.ophthalmologyadvisor.com/news/fda-clears-blood-test-for-alzheimer-disease/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>FDA Clears Blood Test for Alzheimer Disease</a>
+<a href="https://beingpatient.com/fda-approved-tau-pet-scan-alzheimers-diagnosis/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>FDA-Approved Tau PET Scan Could Help Clarify Complex Alzheimer&#x27;s Cases</a>
+<a href="https://medicalxpress.com/news/2026-09-algorithmic-tool-screening-patients-alzheimer.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Algorithmic tool may improve screening of patients for an Alzheimer&#x27;s clinical trial</a>
+<a href="https://www.news-medical.net/news/20260909/New-blood-screening-algorithm-reduces-unnecessary-Alzheimers-PET-scans.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New blood screening algorithm reduces unnecessary Alzheimer&#x27;s PET scans</a>
+<a href="https://bioengineer.org/plasma-p-tau217-to-a%CE%B242-ratio-shows-flaws-for-alzheimers-diagnosis/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Plasma p-tau217 to Aβ42 ratio shows flaws for Alzheimer&#x27;s diagnosis</a>
+<a href="https://glance.eyesoneyecare.com/stories/2026-09-09/deep-learning-ties-retinal-features-to-alzheimer-s-risk-factors/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Deep learning ties retinal features to Alzheimer&#x27;s risk factors</a>
+</div></details>
+</div></section>
+
+    <section id="content-theme-3" class="theme-section hidden anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-3" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/Alz-sep13.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Next-Generation Therapeutic Pipeline Diversifies Beyond Anti-Amyloid Monoclonals</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #7c3aed">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"The Alzheimer&#x27;s pipeline is expanding beyond amyloid-clearing antibodies to include brain-penetrant next-generation anti-amyloid therapy (trontinemab), repurposed cancer immunotherapies (lenalidomide, SIRPA/CD55), mitochondrial and cell-cleanup targets, neuroprotective nasal vesicles, biodegradable nanoparticles, and membrane transporter modulators — addressing inflammation, tau, energy failure, and protein clearance."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-violet-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-3-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-3-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-3-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-3-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-3-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Trontinemab (Roche): A Brainshuttle-engineered anti-amyloid antibody designed for about 50 times better blood–brain barrier penetration than current drugs. In the phase 1b/2a study, it cleared amyloid in 91% of participants at the higher dose within 28 weeks, with ARIA-E [brain swelling] in fewer than 5% of participants (4 out of 149 across both dose groups). Now in phase 3: PrevenTRON (prevention, about 1,600 participants) and TRONTIER 1/2 (early symptomatic AD).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Lenalidomide (Revlimid, BMS): An immunomodulatory cancer drug being tested in Alzheimer&#x27;s. The first Phase 2 proof-of-mechanism trial (MCLENA-1) enrolled 15 patients but only 6 completed treatment, making it underpowered for efficacy conclusions. The lead researcher reported that brain shrinkage rates appeared to slow, but this finding is preliminary given the very small sample. A second Phase 2 trial (MCLENA-2) is now enrolling at a lower dose. Phase 3 would be 5–6 years away if Phase 2 results are positive.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">An AI platform (Insilico Medicine/Oslo/Akershus) identified 5 mitochondrial/cell-cleanup genes (ULK1, OPA1, LAMP2, MFN1, ATP6V0E1) as novel AD targets; validated in roundworms (C. elegans) and human APOE4/4 neurons grown in the lab. These genes affect both tau clumping and mitochondrial function [the cell&#x27;s energy supply].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Nasal spray of amniotic membrane extracellular vesicles [tiny packets of healing molecules from birth tissue]: In a mouse Alzheimer&#x27;s model, the vesicles reached the hippocampus [the brain&#x27;s memory center], entered neurons and microglia [the brain&#x27;s immune cells], reprogrammed inflammation, protected synapses [the connections between nerve cells], and improved memory. Worked both preventively and as treatment.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">PLGA nanoparticles [biodegradable microscopic spheres already FDA-approved for drug delivery in other uses]: In Alzheimer&#x27;s model mice, direct brain delivery reduced amyloid production and clumping and improved cognition — with no drug payload needed. The mechanism is unknown but appears to act on multiple pathways.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">SLC transporters (464 human solute carriers) [proteins that move molecules across cell membranes]: A Nature Reviews Drug Discovery article highlights their untapped potential. Current brain drugs (like SSRIs and tiagabine) target only a tiny fraction. New strategies aim to activate or restore deficient transporters, or use gene therapy for loss-of-function conditions.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Cancer drug repurposing: SIRPA (part of the CD47-SIRPα &#x27;don&#x27;t eat me&#x27; signal that cancer cells use to hide from the immune system) and CD55 (a complement regulator [part of the immune defense system]) are both newly identified AD risk genes with existing cancer drugs already in trials — offering a faster path to Alzheimer&#x27;s studies.</span>
+                        </div>
+</div>
+<div id="sub-3-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Current anti-amyloid antibodies (lecanemab, donanemab) slow decline by about 30%, carry ARIA risk, require IV infusions, and are expensive — they are not a complete solution. Pipeline diversification is essential (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Trontinemab&#x27;s enhanced brain delivery could mean lower doses, less ARIA, and faster amyloid clearance — potentially expanding both the treatment window and tolerability.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Targeting inflammation (lenalidomide, SIRPA/CD55) attacks a pathway that drives both amyloid and tau pathology — and may work across Alzheimer&#x27;s subtypes (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Mitochondrial failure [when nerve cells can&#x27;t produce enough energy] is upstream of neurodegeneration. Restoring energy balance could slow multiple types of brain protein buildup simultaneously (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Nasal vesicles and PLGA nanoparticles offer non-invasive (nasal spray) or drug-free (nanoparticle-only) neuroprotection — completely novel approaches beyond antibodies.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">SLC transporters regulate neurotransmission, energy, and ion balance. Correcting transport defects could address root causes in Alzheimer&#x27;s, Parkinson&#x27;s, epilepsy, and autism (general medical guidance).</span>
+                        </div>
+</div>
+<div id="sub-3-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Early symptomatic AD patients (mild cognitive impairment or mild dementia, amyloid-positive) — candidates for TRONTIER 1/2 (trontinemab) or currently approved lecanemab/donanemab. Discuss ARIA risk, infusion logistics, and cost with your care team.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Cognitively healthy high-risk adults (elevated p-tau217, family history) — the PrevenTRON prevention trial (trontinemab) requires a long commitment (4–6 years), regular infusions, and MRI monitoring.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients with rapid decline or atypical features — may benefit from future anti-inflammatory (lenalidomide) or TDP-43-targeted trials.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">ApoE4/4 carriers [people with two copies of the highest-risk Alzheimer&#x27;s gene variant] — mitochondrial dysfunction is prominent in this group; the 5 AI-identified gene targets were specifically validated in APOE4/4 neurons.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients unable to tolerate IV infusions or ARIA monitoring — intranasal vesicles or oral SLC modulators (future) could offer alternatives (general medical guidance).</span>
+                        </div>
+</div>
+<div id="sub-3-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If diagnosed with early AD: ask your neurologist &#x27;Am I eligible for TRONTIER 1/2 (trontinemab) or other anti-amyloid trials? How does the ARIA risk compare to lecanemab or donanemab?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If cognitively normal but high risk (family history, ApoE4): ask &#x27;Is PrevenTRON enrolling at a site near me? What does the 4–6 year commitment involve?&#x27;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have a cancer history or are on immunotherapy: tell your neurologist — SIRPA/CD55 pathways overlap between cancer and Alzheimer&#x27;s. Future AD trials may exclude or adjust for prior checkpoint inhibitor use.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For mitochondrial health: discuss with your doctor whether coenzyme Q10, NAD+ precursors (NR/NMN), or structured exercise have evidence for your situation — while ULK1/OPA1 drugs are still preclinical (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Stay informed about intranasal and non-IV trials: ask your memory clinic &#x27;Do you have any studies testing nasal delivery or nanoparticle approaches for Alzheimer&#x27;s?&#x27;</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Phase 3] Trontinemab (PrevenTRON, TRONTIER 1/2)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Phase 2] Lenalidomide (MCLENA-1/MCLENA-2, TTUHSC)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Preclinical] Nasal amniotic vesicles, PLGA nanoparticles, AI-identified mitochondrial targets, SLC transporters
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [7] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: The pipeline is finally diversifying — multiple mechanisms (amyloid, tau, inflammation, mitochondria, vesicles, transporters) increase the odds of meaningful combination therapies.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Only trontinemab and lenalidomide are currently in human Alzheimer&#x27;s trials. Everything else is preclinical. More than 90% of preclinical drug candidates fail in human testing. Combination trials add complexity and cost (general medical guidance).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Access: Trontinemab and lenalidomide will likely be specialist-only, require IV or oral dosing with monitoring, and be expensive. Nasal vesicles, nanoparticles, and SLC drugs are a decade away if they succeed (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Safety: Chronic immunomodulation (lenalidomide, SIRPA inhibitors) in elderly patients carries infection and malignancy risk. Mitochondrial activators carry a theoretical cancer risk. Gene therapy is irreversible (general medical guidance).</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Trontinemab (Roche): Phase 3 (PrevenTRON prevention and TRONTIER 1/2 early AD); IV every 4 weeks; Brainshuttle transferrin receptor engagement enables brain entry; amyloid clearance in weeks vs. months with current drugs; ARIA-E rate fewer than 5% in phase 1b/2a (4/149 participants).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lenalidomide (BMS): Phase 2 (MCLENA-1 completed with 6 evaluable patients; MCLENA-2 enrolling at 5 mg dose); oral; immunomodulatory. Brain atrophy finding is preliminary and from an underpowered study. Phase 2 will assess dose optimization and safety in the Alzheimer&#x27;s population.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mitochondrial targets (Insilico/Oslo): ULK1 (starts cell cleanup), OPA1 (mitochondrial fusion), LAMP2 (lysosomal membrane), MFN1 (mitochondrial fusion), ATP6V0E1 (energy pump). Validated in APOE4/4 lab-grown neurons. Reduce tau clumping. IND-enabling studies are the next step.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Amniotic extracellular vesicles (Università Cattolica): Intranasal delivery; preclinical (mouse AD model plus human lab-grown neurons). Reprogrammed microglia, protected synapses, improved memory. GMP manufacturing for first-in-human study is planned.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PLGA nanoparticles (U Alberta): Drug-free, biodegradable; direct brain delivery in mice; reduced amyloid production and clumping; improved cognition. The mechanism is unknown but appears to involve anti-inflammatory, anti-clumping, and nerve-supporting effects.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SLC transporters (Solgate/CeMM): Gene therapy trials ongoing for rare conditions (SLC6A1, GLUT1 deficiency, SLC13A5). Small molecule activators being developed for epilepsy, autism, and pain. Alzheimer&#x27;s programs are in early discovery.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SIRPA/CD55 inhibitors (oncology repurposing): Anti-SIRPα antibodies (such as evorpacept) and CD55 blockers are in cancer trials. Alzheimer&#x27;s preclinical validation is underway.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Trontinemab: Phase 1b/2a enrolled about 149 participants across dose groups; 91% amyloid clearance at the higher dose within 28 weeks; ARIA-E in fewer than 5% (4/149). But the prevention trial (n=1,600, 4–6 years) has a clinical primary endpoint — biomarker success does not guarantee cognitive benefit.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lenalidomide: MCLENA-1 was a Phase 2 proof-of-mechanism trial; only 6 patients completed treatment. It was underpowered for efficacy conclusions. The brain atrophy finding is preliminary. MCLENA-2 (randomized, placebo-controlled) is ongoing. Known toxicities (low blood counts, blood clots, birth defects) require careful management in an elderly Alzheimer&#x27;s population.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mitochondrial targets: Identified by AI, validated in roundworms and human lab-grown neurons (APOE4/4). No in vivo mammal efficacy or safety data. Boosting mitophagy [cell cleanup] could theoretically promote cancer, since cancer cells also use this process (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Amniotic vesicles: Tested in 5xFAD mice and human neurons in lab dishes. No pharmacokinetic or distribution data in humans. Whether intranasal delivery can actually reach the human hippocampus is unproven. Batch-to-batch consistency of vesicles is unknown.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PLGA nanoparticles: Tested in 5xFAD mice via direct intracranial injection (not a translatable delivery route for patients). The mechanism is described as &#x27;unknown.&#x27; No dose-response, long-term safety, or human data. IV delivery across the blood–brain barrier is unproven.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SLC transporters: 464 potential targets, most poorly understood. Getting drugs into the brain remains challenging. Gene therapy is currently limited to rare single-gene disorders. Alzheimer&#x27;s applications are speculative.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SIRPA/CD55: Identified through genetic association only. The direction of effect (should these pathways be blocked or activated?) is unclear. Cancer drug doses may not be appropriate for chronic Alzheimer&#x27;s use. Immune-related adverse events are possible (general medical guidance).</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TRONTIER 1/2 top-line results (expected 2027–2028) — trontinemab efficacy and safety in early symptomatic AD compared to lecanemab/donanemab benchmarks.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lenalidomide Phase 2 readout (MCLENA-2, TTUHSC) — does an oral anti-inflammatory drug slow brain shrinkage or cognitive decline in Alzheimer&#x27;s patients?</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">First-in-human trials for amniotic extracellular vesicles (intranasal) and PLGA nanoparticles (IV or intranasal).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Insilico/Oslo mitochondrial target validation in primate models and IND filing for ULK1/OPA1 modulators.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SLC transporter Alzheimer&#x27;s-specific programs entering preclinical development (Solgate/CeMM pipeline updates).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Cancer immunotherapy repurposing for Alzheimer&#x27;s: SIRPA/CD55 inhibitor trials launching in AD (biomarker-selected patients).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Combination trial designs: anti-amyloid + anti-tau + anti-inflammatory (such as trontinemab + lenalidomide + tau antisense oligonucleotide) — adaptive platform trial frameworks are emerging (general medical guidance).</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://pharmaphorum.com/news/major-trial-roche-alzheimers-drug-kicks-europe" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Major trial of Roche Alzheimer&#x27;s drug kicks off in Europe</a>
+<a href="https://informat.ro/en/health/study-tests-experimental-drug-to-prevent-alzheimers-137654" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Alzheimer&#x27;s drug tested on people without symptoms</a>
+<a href="https://www.kcbd.com/2026/09/07/ttuhsc-researcher-part-study-cancer-drugs-potential-positive-effects-alzheimers-disease/?outputType=amp" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>TTUHSC researcher part of study on cancer drug&#x27;s potential positive effects on Alzheimer&#x27;s disease</a>
+<a href="https://www.labroots.com/trending/genetics/31011/ai-platform-identifies-potential-alzheimer-s-drug-targets" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>AI platform identifies potential Alzheimer&#x27;s drug targets</a>
+<a href="https://medicalxpress.com/news/2026-09-nasal-spray-neurons-memory-alzheimer.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Nasal spray protects neurons and memory in Alzheimer&#x27;s mouse model</a>
+<a href="https://medicalxpress.com/news/2026-09-biodegradable-drug-delivery-nanoparticles-curb.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Biodegradable drug-delivery nanoparticles curb brain plaque proteins and improve memory in Alzheimer&#x27;s mice</a>
+<a href="https://medicalxpress.com/news/2026-09-autism-alzheimer-membrane-avenues-brain.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>From autism to Alzheimer&#x27;s: Membrane transporters open new avenues for treating brain disorders</a>
+<a href="https://beingpatient.com/scientists-discover-four-new-alzheimers-risk-genes/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Scientists Discover Four New Alzheimer&#x27;s Risk Genes</a>
+</div></details>
+</div></section>
+
+    </main>
+
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-violet-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+        <button onclick="window.print()" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+            <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+        </button>
+        <div class="h-4 w-px bg-violet-200"></div>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+            <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+        </button>
+    </div>
+
+    <script>
+    let currentThemeIdx = 0;
+
+    function switchTheme(idx) {
+        currentThemeIdx = parseInt(idx, 10);
+
+        document.querySelectorAll('.theme-section').forEach(s => s.classList.add('hidden'));
+        const target = document.getElementById('content-theme-' + idx);
+        if (target) target.classList.remove('hidden');
+        
+        // Stop any playing audio when switching themes
+        document.querySelectorAll('audio').forEach(a => a.pause());
+        updateHeaderAudioUI();
+        
+        // Update URL hash silently
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, '#theme-' + idx);
+        } else {
+            window.location.hash = '#theme-' + idx;
+        }
+        
+        lucide.createIcons();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function switchSubTab(btn, id) {
+        const c = btn.closest('section');
+        c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+        c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+        btn.classList.add('active');
+        document.getElementById(id).classList.remove('hidden');
+        lucide.createIcons();
+    }
+
+    function formatTime(seconds) {
+        if (isNaN(seconds) || seconds < 0) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return mins + ":" + (secs < 10 ? "0" : "") + secs;
+    }
+    
+    // Header Audio Player Logic
+    function toggleActiveAudio() {
+        toggleAudio(currentThemeIdx);
+    }
+
+    function skipActiveAudio(seconds) {
+        skipAudio(currentThemeIdx, seconds);
+    }
+
+    function toggleAudio(id) {
+        const audio = document.getElementById('audio-' + id);
+        if (!audio) return;
+        
+        // Pause all other audios on the page
+        document.querySelectorAll('audio').forEach(a => {
+            if (a.id !== 'audio-' + id) a.pause();
+        });
+
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+
+        attachAudioListeners(id);
+        updateHeaderAudioUI();
+    }
+
+    function updateHeaderAudioUI() {
+        const audio = document.getElementById('audio-' + currentThemeIdx);
+        const playIcon = document.getElementById('header-play-icon');
+        const pauseIcon = document.getElementById('header-pause-icon');
+        const timeEl = document.getElementById('header-audio-time');
+
+        if (!audio) return;
+
+        if (!audio.paused) {
+            if (playIcon) playIcon.classList.add('hidden');
+            if (pauseIcon) pauseIcon.classList.remove('hidden');
+        } else {
+            if (playIcon) playIcon.classList.remove('hidden');
+            if (pauseIcon) pauseIcon.classList.add('hidden');
+        }
+
+        if (timeEl) {
+            timeEl.innerText = formatTime(audio.currentTime);
+        }
+    }
+
+    function attachAudioListeners(id) {
+        const audio = document.getElementById('audio-' + id);
+        if (!audio || audio.dataset.listenersAttached) return;
+
+        audio.addEventListener('timeupdate', () => {
+            if (id == currentThemeIdx) updateHeaderAudioUI();
+        });
+
+        audio.addEventListener('ended', () => {
+            if (id == currentThemeIdx) updateHeaderAudioUI();
+        });
+
+        audio.dataset.listenersAttached = "true";
+    }
+
+    function skipAudio(id, seconds) {
+        const audio = document.getElementById('audio-' + id);
+        if (audio && !isNaN(audio.duration)) {
+            audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+            if (id == currentThemeIdx) updateHeaderAudioUI();
+        }
+    }
+
+    window.onload = () => {
+        lucide.createIcons();
+
+        document.querySelectorAll('audio').forEach(audio => {
+            const id = audio.id.replace('audio-', '');
+            attachAudioListeners(id);
+        });
+
+        updateHeaderAudioUI();
+        
+        // Hash auto-activate logic
+        setTimeout(() => {
+            const hash = window.location.hash;
+            const match = hash.match(/^#theme-(\d+)$/);
+            if (match) {
+                const idx = match[1];
+                switchTheme(idx);
+            }
+        }, 600);
+    };
+    </script>
+</body>
+</html>
