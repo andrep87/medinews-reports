@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #db277708; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #db2777 !important;
+            color: #db2777 !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER WITH COMPACT AUDIO CONTROLS -->
+    <header class="glass border-b border-rose-100 px-6 py-5 sticky top-0 z-40 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #db2777">
+                    <i data-lucide="ribbon"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Breast Cancer</h1>
+                    <p class="text-[10px] text-rose-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+            <!-- Right: Small Audio Controls -->
+            <div class="flex items-center gap-1.5 md:gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-full shadow-sm">
+                <span class="text-[9px] font-black uppercase tracking-wider text-slate-400 mr-1 hidden sm:inline">Audio</span>
+                
+                <!-- Back 10s -->
+                <button onclick="skipActiveAudio(-10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Back 10 seconds">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button id="header-play-btn" onclick="toggleActiveAudio()" class="w-8 h-8 rounded-full text-white shadow-md hover:scale-105 transition-all flex items-center justify-center shrink-0" style="background-color: #db2777" aria-label="Play podcast">
+                    <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5" id="header-play-icon"></i>
+                    <i data-lucide="pause" class="w-4 h-4 fill-current hidden" id="header-pause-icon"></i>
+                </button>
+
+                <!-- Forward 10s -->
+                <button onclick="skipActiveAudio(10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Forward 10 seconds">
+                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Audio Time Display -->
+                <span id="header-audio-time" class="text-[10px] font-bold text-slate-500 ml-1 min-w-[28px] text-right">0:00</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-0" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/breast-sep%2020.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Persistent Disparities Demand Action — High-Risk Groups Identified, Unnecessary Procedures Continue</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #db2777">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"New research reveals stark breast cancer inequities: Native Hawaiian women have the highest US breast cancer incidence (27% above White women), historically redlined neighborhoods have persistently lower screening rates, and over 80% of older female veterans receive unnecessary axillary surgery [lymph node removal in the armpit] despite decades-old evidence against it. Sexual recovery after treatment is near-universally neglected. And BRCA-mutated triple-negative breast cancer shows worse outcomes than non-BRCA TNBC even with adjuvant capecitabine — highlighting the urgency of early genetic testing."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-rose-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Native Hawaiian women: SEER data (2000–2022) shows 27% higher breast cancer incidence vs. White women — the highest among all Asian American and NHPI groups. Aggregated &#x27;Asian American&#x27; data masks this disparity; disaggregation of Native Hawaiian and Pacific Islander data is essential.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Redlining legacy: In 1,152 urban Census tracts (Kansas/Missouri), historically redlined areas (HOLC grade C/D) had about 6% lower screening odds vs. grade A, even after adjusting for current poverty, education, and distance. 84% of tracts fell below the Healthy People 2030 screening target (80.3%). Poverty mediates about 45% of the redlining effect.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Female veterans: 83% of 204 veterans aged 70 and older with early ER+/HER2- breast cancer received axillary surgery (62% sentinel node biopsy, 21% full dissection) despite Choosing Wisely guidelines against routine nodal surgery in this group. Full axillary dissection carries about a 30% lifetime lymphedema risk.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Sexual recovery: A qualitative study of 31 breast cancer survivors identified a 3-layer model of sexual disruption (physical changes, relationship dynamics, cultural and healthcare influences). Clinicians rarely initiate conversations about sexuality; partner support is the strongest predictor of positive adjustment.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">BRCA-mutated TNBC: A real-world study of 882 patients found that BRCA1/2 mutation carriers (53 patients, or about 6% of the cohort — all of whom had documented BRCA testing) had worse 3-year outcomes despite adjuvant capecitabine: invasive disease-free survival 59% vs. 72%, distant disease-free survival 59% vs. 73%, overall survival 67% vs. 80%. This highlights the need for early BRCA testing to enable adjuvant olaparib [a PARP inhibitor shown in the OlympiA trial to benefit BRCA-mutated patients].</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Disaggregated data reveals hidden crises: Native Hawaiian women&#x27;s high incidence rates were invisible when grouped under the broad &#x27;Asian American&#x27; category. Accurate population-level data is essential for tailored prevention and screening.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Redlining&#x27;s long shadow: 1930s mortgage discrimination maps still predict 2020s screening rates. The link runs through poverty and education gaps — notably, distance to screening facilities was not a significant barrier.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Overtreatment harms real people: Unnecessary axillary surgery causes chronic lymphedema [permanent arm swelling], pain, mobility loss, and added cost. Guidelines against routine nodal surgery in older low-risk patients (Z0011, AMAROS, Choosing Wisely) exist but de-implementation has failed in both VA and civilian systems.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Survivorship gaps are real: Sexual health, body image, fear of recurrence — these are the unseen burdens beyond survival statistics. Clinician silence on sexuality reinforces shame.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Native Hawaiian and Pacific Islander women: Highest breast cancer incidence in the US. Need disaggregated data and culturally appropriate screening and outreach.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Residents of historically redlined neighborhoods: Lower screening despite similar facility proximity. Benefit from place-based strategies addressing poverty and education barriers.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Older female veterans (70+) with early ER+/HER2- breast cancer: 83% receive more axillary surgery than guidelines recommend. Need systems to ensure de-escalated surgical pathways. Experts recommend fellowship-trained breast surgeons for this population.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">All breast cancer survivors: Sexual recovery challenges are common but unaddressed. Partner involvement matters. Providers should initiate conversations about sexuality (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">BRCA1/2 mutation carriers with early TNBC: All patients with TNBC should receive germline BRCA1/2 testing at diagnosis. If a mutation is found, adjuvant olaparib (per the OlympiA trial) should be considered rather than relying on capecitabine alone.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you are Native Hawaiian or Pacific Islander: Ask that your ethnicity be recorded accurately in your medical records. Discuss screening with your doctor, noting that NHPI women have the highest breast cancer incidence in the US (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you live in a historically disadvantaged area: Ask your clinic about local screening navigation resources and community outreach programs. The key barrier is socioeconomic, not geographic — distance to facilities was not a significant factor in the redlining study.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you&#x27;re a veteran aged 70+ with early ER+/HER2- breast cancer: Before surgery, ask: &#x27;Do I need axillary surgery? Guidelines (Choosing Wisely, Z0011) suggest I may not.&#x27; Request a fellowship-trained breast surgeon.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For sexual health after cancer treatment: Initiate the conversation with your care team — clinicians rarely bring it up first. Ask about available options and consider involving your partner if possible. Partner support is the strongest predictor of positive adjustment.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If newly diagnosed with TNBC: Request germline BRCA1/2 testing before making adjuvant treatment decisions. If a BRCA mutation is found, discuss olaparib eligibility per the OlympiA trial. Do not rely on capecitabine alone without understanding your genetic profile.</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Population-Based Registry Study (SEER, 2000-2022, Cancer 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Longitudinal Ecological Study (1,152 Census tracts, 2016-2024, JAMA)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Retrospective VA Cohort (204 veterans, 2013-2024, AVAHO 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [5] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Disparities are being measured and named — the first step to fixing them. NHPI disaggregation reveals a hidden crisis. Redlining research informs place-based policy. The VA study prompts surgical quality improvement.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality — Structural inertia: Redlining effects persist 90 years later. VA surgical de-implementation fails despite decades of evidence. As one expert noted, &#x27;Guidelines are already outdated by the time we present on them.&#x27;</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality — Survivorship neglect: Sexual health, fertility, lymphedema, fear of recurrence — these are burdens that go beyond survival statistics. The Breast Cancer Network Australia film &#x27;The Whole Story&#x27; highlights the gap between survival numbers and lived experience.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality — Access to innovation: GLP-1 survival signals, PEMF immune therapy, AI risk prediction — all are early or retrospective. Underserved populations are typically last to benefit from new advances (general medical guidance).</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Elinzanetant (Lynkuet): Non-hormonal drug for hot flushes from endocrine therapy. EU approved November 2025. OASIS-4 trial: 6.5 fewer moderate-severe flushes per day vs. placebo at week 4. Not yet US-approved.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Pulsed Electromagnetic Fields (PEMF): NUS preclinical research — reprograms tumor-associated immune cells. 75% tumor eradication in mice after 4 sessions. Phase I safety completed; seeking Phase II partners.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">GLP-1 agonists [drugs used for diabetes/weight loss]: A retrospective study of 840,000 patients found lower mortality and recurrence in breast cancer patients with obesity or Type 2 diabetes on GLP-1 drugs. Mechanism unclear. Randomized trials needed before clinical use (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Assisted reproduction: A 31-study review (7.1 million women) found no overall breast cancer risk increase from assisted reproductive technology. Some subgroup signals (high cycle number, age over 40) warrant monitoring but are unconfounded (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Early-adult BMI: Higher BMI at age 20 was linked to lower postmenopausal breast density and 15% lower risk per 5 BMI units. This reflects the breast development window — it is NOT a recommendation to gain weight.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Native Hawaiian data: SEER registry (22 years, gold standard), with disaggregated NHPI analysis. Limitation: ecological data — cannot separate individual risk factors from population-level social determinants.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Redlining study: Longitudinal, 9 years, 1,152 tracts, mediation analysis. Limitation: Census-tract level (ecological, not individual behavior), straight-line distance measurement, model-based screening estimates.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">VA surgery study: Retrospective, 204 patients, 46 centers. Limitation: small sample, no preoperative ultrasound data, surgeon and patient factors unmeasured. General surgeons (not breast specialists) performed most procedures.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Sexual recovery study: Qualitative, 31 women, 3-layer model. Strength: centers patient voice. Limitation: not generalizable and no intervention was tested.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">BRCA-TNBC study: Real-world Flatiron data, 882 patients, 53 BRCA-mutated. Limitation: retrospective, unadjusted, no untreated control, small BRCA subgroup, industry-funded (AstraZeneca/Merck).</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">NHPI cancer data infrastructure: Continued disaggregated reporting in SEER and ACS data. Community-partnered interventions.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Redlining-informed policy: Whether CMS/HRSA funding incorporates historical disinvestment data for screening resource allocation (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">VA surgical quality: Whether fellowship-trained breast surgeon mandates or surgical oncology consultation pathways are implemented.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Sexual health integration: Whether survivorship guidelines give sexual health the same attention as physical rehabilitation (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">BRCA testing in all TNBC: Whether NCCN/ASCO guidelines strengthen recommendations for universal germline testing at TNBC diagnosis (general medical guidance).</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.uclahealth.org/news/release/ucla-study-finds-native-hawaiian-women-us-have-highest" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>UCLA study finds Native Hawaiian women in U.S. have highest breast cancer incidence of any group</a>
+<a href="https://www.2minutemedicine.com/historical-redlining-associated-with-lower-breast-cancer-screening-across-urban-neighborhoods/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Historical redlining associated with lower breast cancer screening across urban neighborhoods</a>
+<a href="https://www.medscape.com/viewarticle/many-female-veterans-breast-cancer-undergoing-unnecessary-2026a1000yfi" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Female Vets With Breast Cancer Having Unnecessary Surgery</a>
+<a href="https://www.news-medical.net/news/20260917/Study-identifies-key-factors-in-breast-cancer-survivors-sexual-recovery.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Study identifies key factors in breast cancer survivors&#x27; sexual recovery</a>
+<a href="https://oncodaily.com/oncolibrary/breast-oncology/brca-mutated-early-tnbc" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>BRCA-Mutated Early TNBC Shows Worse Outcomes Despite Adjuvant Capecitabine in Real-World Study</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-rose-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-rose-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-rose-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-rose-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        let currentThemeIdx = 0;
+
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds < 0) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ":" + (secs < 10 ? "0" : "") + secs;
+        }
+        
+        // Header Audio Player Logic
+        function toggleActiveAudio() {
+            toggleAudio(currentThemeIdx);
+        }
+
+        function skipActiveAudio(seconds) {
+            skipAudio(currentThemeIdx, seconds);
+        }
+
+        function toggleAudio(id) {
+            const audio = document.getElementById('audio-' + id);
+            if (!audio) return;
+            
+            // Pause all other audios on the page
+            document.querySelectorAll('audio').forEach(a => {
+                if (a.id !== 'audio-' + id) a.pause();
+            });
+
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+
+            attachAudioListeners(id);
+            updateHeaderAudioUI();
+        }
+
+        function updateHeaderAudioUI() {
+            const audio = document.getElementById('audio-' + currentThemeIdx);
+            const playIcon = document.getElementById('header-play-icon');
+            const pauseIcon = document.getElementById('header-pause-icon');
+            const timeEl = document.getElementById('header-audio-time');
+
+            if (!audio) return;
+
+            if (!audio.paused) {
+                if (playIcon) playIcon.classList.add('hidden');
+                if (pauseIcon) pauseIcon.classList.remove('hidden');
+            } else {
+                if (playIcon) playIcon.classList.remove('hidden');
+                if (pauseIcon) pauseIcon.classList.add('hidden');
+            }
+
+            if (timeEl) {
+                timeEl.innerText = formatTime(audio.currentTime);
+            }
+        }
+
+        function attachAudioListeners(id) {
+            const audio = document.getElementById('audio-' + id);
+            if (!audio || audio.dataset.listenersAttached) return;
+
+            audio.addEventListener('timeupdate', () => {
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            });
+
+            audio.addEventListener('ended', () => {
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            });
+
+            audio.dataset.listenersAttached = "true";
+        }
+
+        function skipAudio(id, seconds) {
+            const audio = document.getElementById('audio-' + id);
+            if (audio && !isNaN(audio.duration)) {
+                audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            }
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+
+            document.querySelectorAll('audio').forEach(audio => {
+                const id = audio.id.replace('audio-', '');
+                attachAudioListeners(id);
+            });
+
+            updateHeaderAudioUI();
+        };
+        </script>
+    </body>
+    </html>
