@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Park | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #64748b08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #64748b !important;
+            color: #64748b !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER WITH COMPACT AUDIO CONTROLS -->
+    <header class="glass border-b border-slate-100 px-6 py-5 sticky top-0 z-40 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #64748b">
+                    <i data-lucide="brain-circuit"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Park</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+            <!-- Right: Small Audio Controls -->
+            <div class="flex items-center gap-1.5 md:gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-full shadow-sm">
+                <span class="text-[9px] font-black uppercase tracking-wider text-slate-400 mr-1 hidden sm:inline">Audio</span>
+                
+                <!-- Back 10s -->
+                <button onclick="skipActiveAudio(-10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Back 10 seconds">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button id="header-play-btn" onclick="toggleActiveAudio()" class="w-8 h-8 rounded-full text-white shadow-md hover:scale-105 transition-all flex items-center justify-center shrink-0" style="background-color: #64748b" aria-label="Play podcast">
+                    <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5" id="header-play-icon"></i>
+                    <i data-lucide="pause" class="w-4 h-4 fill-current hidden" id="header-pause-icon"></i>
+                </button>
+
+                <!-- Forward 10s -->
+                <button onclick="skipActiveAudio(10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Forward 10 seconds">
+                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Audio Time Display -->
+                <span id="header-audio-time" class="text-[10px] font-bold text-slate-500 ml-1 min-w-[28px] text-right">0:00</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-0" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/park-%20sep%2020.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Environmental Risks, Genetics, and Daily Habits Reshape Prevention and Symptom Management</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #64748b">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Large population studies confirm paraquat pesticide exposure worsens Parkinson’s severity and incidence, while exhaled carbon monoxide (not nicotine) correlates with lower risk—challenging old assumptions. Coffee’s effect depends on CYP1A2 genotype and sex. High-intensity exercise (2.5 hrs/week) remains the only proven progression-slowing intervention, and motivation-enhanced rehabilitation (OPTIMAL model) improves lung function in PD."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-slate-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">JAMA Neurology study (512k Chinese adults, 12 years): Higher exhaled carbon monoxide (CO) linked to lower Parkinson’s risk even in never-smokers (dose-dependent, HR 0.65 at ≥11.5 ppm vs. &lt;2 ppm), suggesting CO—not nicotine—may mediate smoking’s paradoxical neuroprotection.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">UK Biobank study (435k participants): Coffee ≤4 cups/day lowers PD risk by 17–27% in CYP1A2 AA genotype (fast caffeine metabolizers), especially women; but ≥5 cups/day increases risk 43–137% in AC/CC genotypes (slow metabolizers), mainly men.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Iowa study (Axios report): Pesticide exposure correlated with more severe motor and non-motor symptoms in PD patients; paraquat specifically linked to Parkinson’s in dozens of studies, used on 35% of US soy/corn/cotton acres.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">California DPR and EPA now phasing out/reviewing paraquat; Vermont banned it 2024; New York/Michigan legislation pending.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">OPTIMAL motivation framework (autonomy, enhanced expectations, external focus) significantly improved peak expiratory flow in PD patients (n=14) and healthy controls (n=33) vs. neutral therapy in a single-session respiratory rehab trial.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Paraquat is a widely used herbicide with strong epidemiological links to Parkinson&#x27;s disease across dozens of studies. Note: while the newsletter originally described paraquat as a &#x27;mitochondrial toxin used to create Parkinson&#x27;s in lab animals,&#x27; the source attributes that specific mechanism to rotenone (a different pesticide). Paraquat&#x27;s exact neurotoxic mechanism in humans is still being clarified. Regulatory action is accelerating.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">CO finding reframes “smoking protects against PD” from nicotine to carbon monoxide—a gas with known cytoprotective [cell-protecting] signaling at low doses; may inspire safe CO-based therapeutics (inhaled, donors).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Coffee-genotype interaction explains decades of conflicting epidemiology; enables personalized dietary advice based on a $100 genetic test (CYP1A2).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Consistent exercise has strong evidence for slowing clinical progression of Parkinson&#x27;s — one source describes it as &#x27;the one approach that has clearly shown to help slow down the progression of the disease.&#x27; The OPTIMAL model shows how targeting motivation can amplify rehabilitation effectiveness.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Rural residents, farmworkers, and families near agricultural fields using paraquat (soy, corn, cotton, orchards); well-water testing advised in high-use areas.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Anyone considering high-dose coffee (&gt;4 cups/day) for “neuroprotection”—should know CYP1A2 genotype first (23andMe, Ancestry, or clinical panel).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">All PD patients: exercise prescription should be specific (type, intensity, frequency) not generic; those with breathlessness, quiet voice, or recurrent pneumonia may benefit from motivational respiratory rehab.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Clinicians: screen for environmental exposures (occupational, residential) at diagnosis; document for future cluster investigations.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you drink coffee, consider your CYP1A2 genotype: the study showed benefit at 1-4 cups/day in fast metabolizers (AA genotype) but increased risk at 5+ cups/day in slow metabolizers (AC/CC). Genotyping is available through consumer and clinical genetic tests (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Support paraquat regulatory action: the EPA is reviewing paraquat; several states have moved toward restrictions or bans. If you live near agricultural areas using paraquat, discuss exposure concerns with your doctor (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Exercise regularly: consistent physical activity is the best-supported intervention for slowing Parkinson&#x27;s progression. Ask your doctor or physical therapist about a program suited to your abilities (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have voice or breathing difficulties: request a speech-language pathology referral for respiratory muscle training. The OPTIMAL approach (giving patients choices, building confidence, focusing attention outward) improved lung function in a small study.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Do NOT self-expose to carbon monoxide — it is toxic at high doses. The CO finding is observational and does not support any self-treatment (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #64748b20; color: #64748b;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #64748b">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Massive Prospective Cohort (China Kadoorie Biobank, 512,724 participants, 12-year follow-up, JAMA Neurology 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #64748b">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Genetic Epidemiology Study (UK Biobank, 435,551 participants, 15.7-year median follow-up, npj Parkinson’s Disease)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #64748b">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [2] Mechanistic/Intervention Studies (Iowa pesticide severity cohort; OPTIMAL respiratory rehab RCT, n=47)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #64748b">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [4] Independent Sources (Clinical opinion, advocacy, regulatory action)
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Paraquat restrictions are accelerating; if the CO mechanism is validated, it could inspire new neuroprotective approaches.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Paraquat is still used on roughly 35% of US soybean, corn, and cotton acres. CO-based therapeutics face major safety challenges. Coffee advice remains nuanced until genotype-guided studies are completed (general medical guidance).</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Exercise is accessible and is the best-supported intervention for slowing progression — the most empowering action a patient can take today.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Fatigue, apathy, and motor impairment create real barriers to exercise adherence. Motivation-enhanced rehabilitation shows promise but is not yet standard of care (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Hope: Personalized prevention (combining genetics, environmental exposure data, and lifestyle) is becoming scientifically grounded.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Most patients lack access to genetic counseling or specialized PD physical therapy programs (general medical guidance).</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #64748b20; color: #64748b;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Paraquat regulation: Vermont banned paraquat (2024); California pursuing voluntary cancellation (2026); EPA conducting review; New York and Michigan legislation pending.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Carbon monoxide research: The JAMA Neurology finding that exhaled CO correlates with lower PD risk opens a new research direction. Low-dose CO-based therapeutics are being explored in other conditions but no PD-specific trials exist yet (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Exercise trials: Multiple studies are testing the optimal type and intensity of exercise for slowing Parkinson&#x27;s progression — results expected in coming years (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">OPTIMAL motivation framework: Being adapted for speech therapy (LSVT LOUD) and other rehabilitation domains. The initial study was small (n=47, single session) and longer trials are needed.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #64748b20; color: #64748b;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CO study: Large prospective cohort (512,000 adults, 12 years, JAMA Neurology); dose-dependent relationship even in never-smokers. Limitations: observational; residual confounding from pollution and other sources of CO exposure; reverse causation possible; mechanism speculative.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Coffee/genetics: Large cohort (435,000 participants, UK Biobank, 15.7-year follow-up); gene-stratified analysis is a strength. Limitations: UK Biobank volunteers may be healthier than the general population; coffee preparation method not captured; CYP1A2 explains only part of caffeine metabolism (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Paraquat: Strong epidemiological evidence across multiple studies. Limitations: most studies use ecological exposure estimates rather than individual measurements; long latency period (10-30 years) makes causal attribution difficult (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">OPTIMAL rehabilitation: Single session, n=47 total (33 healthy + 14 PD), no long-term outcomes; cognitive engagement was lower in the PD group despite motivation gains; cough strength did not improve.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #64748b20; color: #64748b;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">EPA paraquat review outcome and state-level regulatory developments.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Follow-up studies on the CO-Parkinson&#x27;s association — particularly studies using genetic approaches to strengthen the causal case.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Gene-stratified coffee studies: whether CYP1A2 genotype-guided recommendations are validated in prospective research.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Exercise trial results: definitive evidence on optimal type and intensity for Parkinson&#x27;s progression.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">OPTIMAL motivation framework: whether larger and longer trials confirm the single-session respiratory findings.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://gazettenet.com/2026/09/13/columnist-dr-david-gottsegen-a-portrayal-of-parkinsons-and-problem-with-paraquat/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Columnist Dr. David Gottsegen: A portrayal of Parkinson’s and problem with paraquat</a>
+<a href="https://capitolweekly.net/my-husband-has-parkinsons-thats-why-i-started-asking-questions-about-paraquat/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>My husband has Parkinson’s. That’s why I started asking questions about paraquat.</a>
+<a href="https://www.axios.com/local/des-moines/2026/09/14/parkinsons-pesticide-exposure-iowa-study" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Pesticide exposure tied to more severe Parkinson&#x27;s symptoms</a>
+<a href="https://medicaldialogues.in/neurology-neurosurgery/news/carbon-monoxide-not-nicotine-emerges-as-a-potential-parkinsons-protective-factor-jama-179152" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Carbon Monoxide not nicotine Emerges as a Potential Parkinson’s Protective Factor: JAMA</a>
+<a href="https://parkinsonsnewstoday.com/news/genes-determine-coffee-affects-parkinsons-risk/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Genes may determine how coffee affects Parkinson’s risk</a>
+<a href="https://www.foxnews.com/opinion/parkinsons-becoming-more-common-5-things-everyone-should-know" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Parkinson&#x27;s is becoming more common. Here are 5 things everyone should know</a>
+<a href="https://parkinsonsnewstoday.com/news/motivation-strategies-boost-lung-rehabilitation-parkinsons/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Motivation strategies may boost lung rehabilitation in Parkinson’s</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-slate-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-slate-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        let currentThemeIdx = 0;
+
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds < 0) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ":" + (secs < 10 ? "0" : "") + secs;
+        }
+        
+        // Header Audio Player Logic
+        function toggleActiveAudio() {
+            toggleAudio(currentThemeIdx);
+        }
+
+        function skipActiveAudio(seconds) {
+            skipAudio(currentThemeIdx, seconds);
+        }
+
+        function toggleAudio(id) {
+            const audio = document.getElementById('audio-' + id);
+            if (!audio) return;
+            
+            // Pause all other audios on the page
+            document.querySelectorAll('audio').forEach(a => {
+                if (a.id !== 'audio-' + id) a.pause();
+            });
+
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+
+            attachAudioListeners(id);
+            updateHeaderAudioUI();
+        }
+
+        function updateHeaderAudioUI() {
+            const audio = document.getElementById('audio-' + currentThemeIdx);
+            const playIcon = document.getElementById('header-play-icon');
+            const pauseIcon = document.getElementById('header-pause-icon');
+            const timeEl = document.getElementById('header-audio-time');
+
+            if (!audio) return;
+
+            if (!audio.paused) {
+                if (playIcon) playIcon.classList.add('hidden');
+                if (pauseIcon) pauseIcon.classList.remove('hidden');
+            } else {
+                if (playIcon) playIcon.classList.remove('hidden');
+                if (pauseIcon) pauseIcon.classList.add('hidden');
+            }
+
+            if (timeEl) {
+                timeEl.innerText = formatTime(audio.currentTime);
+            }
+        }
+
+        function attachAudioListeners(id) {
+            const audio = document.getElementById('audio-' + id);
+            if (!audio || audio.dataset.listenersAttached) return;
+
+            audio.addEventListener('timeupdate', () => {
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            });
+
+            audio.addEventListener('ended', () => {
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            });
+
+            audio.dataset.listenersAttached = "true";
+        }
+
+        function skipAudio(id, seconds) {
+            const audio = document.getElementById('audio-' + id);
+            if (audio && !isNaN(audio.duration)) {
+                audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            }
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+
+            document.querySelectorAll('audio').forEach(audio => {
+                const id = audio.id.replace('audio-', '');
+                attachAudioListeners(id);
+            });
+
+            updateHeaderAudioUI();
+        };
+        </script>
+    </body>
+    </html>

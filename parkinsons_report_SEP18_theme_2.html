@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Park | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #64748b08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #64748b !important;
+            color: #64748b !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER WITH COMPACT AUDIO CONTROLS -->
+    <header class="glass border-b border-slate-100 px-6 py-5 sticky top-0 z-40 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #64748b">
+                    <i data-lucide="brain-circuit"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Park</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+            <!-- Right: Small Audio Controls -->
+            <div class="flex items-center gap-1.5 md:gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-full shadow-sm">
+                <span class="text-[9px] font-black uppercase tracking-wider text-slate-400 mr-1 hidden sm:inline">Audio</span>
+                
+                <!-- Back 10s -->
+                <button onclick="skipActiveAudio(-10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Back 10 seconds">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button id="header-play-btn" onclick="toggleActiveAudio()" class="w-8 h-8 rounded-full text-white shadow-md hover:scale-105 transition-all flex items-center justify-center shrink-0" style="background-color: #64748b" aria-label="Play podcast">
+                    <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5" id="header-play-icon"></i>
+                    <i data-lucide="pause" class="w-4 h-4 fill-current hidden" id="header-pause-icon"></i>
+                </button>
+
+                <!-- Forward 10s -->
+                <button onclick="skipActiveAudio(10)" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition flex items-center justify-center shadow-sm" title="Forward 10 seconds">
+                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Audio Time Display -->
+                <span id="header-audio-time" class="text-[10px] font-bold text-slate-500 ml-1 min-w-[28px] text-right">0:00</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+        <!-- Audio Source Element for Active Theme -->
+        <audio id="audio-0" src="https://raw.githubusercontent.com/andrep87/medinews-audio/main/park-%20sep%2020.m4a" preload="metadata"></audio>
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">First Disease-Modifying Therapies Enter Human Testing with Novel Targets</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #64748b">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Three first-in-class disease-modifying candidates have advanced: TT-P34 (a lysosomal/mitochondrial enhancer) completed Phase 1, AB-300 (a non-hallucinogenic serotonin 2A agonist for apathy [loss of motivation]) is entering Phase 1b, and MTX325 (a mitophagy-restoring drug [boosts cleanup of damaged mitochondria]) is in Phase 1b. A fourth candidate, 1ST-104 (a dual LRRK2/c-Abl inhibitor), secured a $314.8 million licensing deal but remains preclinical. This marks a shift from symptom management toward targeting root biology."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-slate-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">TT-P34 (Teitur Trophics): Phase 1 trial (55 healthy, 12 early PD) showed weekly subcutaneous injection is safe, crosses blood-brain barrier [protective filter around brain], engages lysosomal [waste clearance] pathway in CSF, and supports weekly dosing; Phase 2 planned 2027.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">1ST-104 (1ST Biotherapeutics/SK Biopharma): Preclinical oral dual inhibitor of LRRK2 [a kinase linked to genetic Parkinson&#x27;s] and c-Abl [a kinase involved in alpha-synuclein clearance]; uses a Type 2 LRRK2 binding approach designed to avoid the lung toxicity seen with earlier Type 1 inhibitors; SK Biopharma acquired global license for $314.8 million. IND filing timeline has not been disclosed.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">AB-300 (Ariadne Bio/Palomar Labs): Non-hallucinogenic serotonin 2A receptor agonist [activates motivation circuits without psychedelic effects]; restored effort-based behavior by 89% in dopamine-depleted rat model; MJFF-funded Phase 1b starting H2 2026 in Israel/Austria for apathy [loss of motivation, affects ~40% of PD patients].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">MTX325 (Mission Therapeutics): USP30 inhibitor [blocks a brake on mitophagy, the mitochondrial cleanup process]; Phase 1b in PD patients reported as ongoing; the company has partnered with NeuraLight for AI eye-tracking to detect subtle brain function changes as a biomarker.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Current drugs (levodopa, dopamine agonists) only replace missing dopamine; they do not slow neuron loss. These four programs target distinct root mechanisms: protein clearance (TT-P34, 1ST-104), mitochondrial quality control (MTX325), and motivational circuitry (AB-300).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">TT-P34’s dual lysosomal/mitochondrial action addresses two core drivers of neuron death simultaneously—unlike most single-target candidates.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">1ST-104&#x27;s Type 2 LRRK2 inhibition is designed to avoid the lung toxicity seen with earlier Type 1 inhibitors, while adding c-Abl inhibition to boost alpha-synuclein clearance. Earlier LRRK2 programs have had setbacks (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">AB-300 tackles apathy, a devastating non-motor symptom with zero approved treatments, distinct from depression (SSRIs often worsen apathy).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">NeuraLight’s eye-tracking offers objective, scalable biomarker for early trials, replacing subjective clinician ratings.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">TT-P34: Phase 2 will likely enroll early-stage PD patients — specific eligibility criteria not yet announced.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">1ST-104: Future trials will likely focus on LRRK2 mutation carriers or patients with lysosomal dysfunction biomarkers; not yet recruiting.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">AB-300: PD patients with clinically significant apathy — specific eligibility for Phase 1b not yet publicly detailed.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">MTX325: PD patients — Phase 1b eligibility criteria not publicly disclosed.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ask your neurologist: “Am I a candidate for any disease-modifying clinical trials based on my stage, genetics, or biomarkers?”</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Get genetic testing (e.g., PD GENEration by MJFF, or commercial panel) to learn your LRRK2, GBA, SNCA status—this determines eligibility for 1ST-104 and other genotype-stratified trials.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If apathy is your main struggle (lack of drive, not sadness), discuss with your doctor whether AB-300 trials are recruiting near you; do not start SSRIs without screening for apathy vs. depression.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #64748b">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Register on Fox Trial Finder (foxtrialfinder.michaeljfox.org) and ClinicalTrials.gov alerts for “disease-modifying,” “LRRK2,” “apathy,” or “mitophagy” Parkinson’s studies.</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #64748b20; color: #64748b;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #64748b">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [3] Phase 1/1b Trials (TT-P34 Phase 1 complete, n=67; AB-300 Phase 1b starting H2 2026; MTX325 Phase 1b ongoing)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #64748b">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Major Licensing Deal (SK Biopharma/1ST Biotherapeutics, $314.8M for 1ST-104)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #64748b">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [2] Foundation Awards (MJFF funding for AB-300 Phase 1b; Marcus Foundation/NIA for PRISMS)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #64748b">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [5] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: First time multiple distinct disease-modifying mechanisms (lysosomal, mitochondrial, LRRK2, motivation) are in clinic simultaneously—probability of at least one success higher than ever.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Phase 1/1b only prove safety/target engagement; Phase 2/3 for clinical benefit take 5–7 years; &gt;90% of neurodegenerative candidates fail in Phase 2.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Hope: AB-300 could deliver first-ever treatment for apathy, transforming quality of life for patients and caregivers.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Apathy overlaps with depression, cognitive decline, and medication side effects; isolating drug effect will be difficult; SSRIs are cheap/generic, new drug must show clear superiority.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #64748b20; color: #64748b;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TT-P34 (Teitur Trophics): Peptide from SorCS2 receptor, activates CREB → lysosomal + mitochondrial genes; Phase 1 safe, CNS penetration confirmed; Series B fundraising for Phase 2 2027.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">1ST-104 (1ST Biotherapeutics/SK Biopharma): Oral Type 2 LRRK2 + c-Abl inhibitor; preclinical; blood-brain barrier penetration and selectivity demonstrated in animal models; SK Life Science (US commercial arm) to lead development. IND filing timeline not disclosed.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">AB-300 (Ariadne Bio): Serotonin 2A agonist, non-hallucinogenic; Phase 1b H2 2026 (Israel/Austria); MJFF Pipeline Program award; pre-IND Type B meeting completed 2026.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">MTX325 (Mission Therapeutics): USP30 inhibitor, restores mitophagy; Phase Ia healthy volunteers showed brain penetration; Phase Ib PD ongoing (UK/EU/AU); NeuraLight oculometric [eye movement] endpoints.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #64748b20; color: #64748b;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TT-P34: Phase 1 enrolled 67 participants (55 healthy volunteers, 12 early PD) in a randomized, double-blind, placebo-controlled study; primary endpoint was safety and pharmacokinetics; CSF lysosomal protein shifts are supportive biomarker signals but not clinical endpoints; weekly dosing is convenient but requires subcutaneous injection.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">1ST-104: Zero human data yet; Type 2 LRRK2 differentiation unproven in humans; c-Abl inhibition may have off-target effects (c-Abl regulates DNA repair); Biogen/Denali Type 1 failure raises class concerns.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">AB-300: Preclinical only (TBZ rat model); serotonin 2A agonism historically linked to hallucinations (though AB-300 claims non-hallucinogenic); apathy measurement in trials relies on caregiver-reported scales.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">MTX325: Phase 1b design details not publicly disclosed; NeuraLight eye-tracking partnership reported but the biomarker&#x27;s regulatory qualification status and correlation with clinical outcomes are unknown.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #64748b20; color: #64748b;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TT-P34 detailed Phase 1 data presentation at MDS Congress (Seoul, October 5, 2026); Phase 2 protocol design and site selection.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">1ST-104: IND submission timeline not yet disclosed; watch for first-in-human study announcement.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">AB-300 Phase 1b launch in H2 2026 (Israel/Austria); potential expansion to other apathy indications such as Alzheimer&#x27;s disease.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">MTX325 Phase 1b progress — design details and biomarker correlation data not yet publicly available.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PRISMS prevention trial recruitment pace and interim biomarker data.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://parkinsonsnewstoday.com/news/novel-parkinsons-treatment-safe-shows-remarkable-results-early-trial/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>First-in-class treatment for Parkinson&#x27;s safe, fares well in early trial</a>
+<a href="https://pharmatimes.com/news/teitur-reports-positive-early-data-for-parkinsons-peptide-tt-p34/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Teitur reports positive early data for Parkinson’s peptide TT‑P34</a>
+<a href="https://www.bioxconomy.com/modalities/peptide-therapy-triumphs-in-phase-i-parkinson-s-trials" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Peptide therapy triumphs in Phase I Parkinson’s trials</a>
+<a href="https://www.koreabiomed.com/news/articleView.html?idxno=33226" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>SK biopharmaceuticals bets on Parkinson’s drug with ₩430.8 bil. FirstBio deal</a>
+<a href="https://www.contractpharma.com/breaking-news/sk-biopharma-1stbio-sign-parkinsons-drug-deal/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>SK Biopharma, 1STBIO Sign Parkinson’s Drug Deal</a>
+<a href="https://allsci.com/news/licensing-and-partnerships/parkinsons-drug-sk-biopharmaceuticals-licenses/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>SK Bio licenses Parkinson’s candidate 1ST-104 in USD 314.8m deal</a>
+<a href="https://www.biospace.com/press-releases/palomar-labs-spins-out-ariadne-bio-to-target-apathy-in-parkinsons-disease-where-no-approved-therapy-exists" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Palomar Labs Spins Out Ariadne Bio to Target Apathy in Parkinson&#x27;s Disease</a>
+<a href="https://www.statnews.com/2026/09/17/biotech-news-ariadne-testing-psychedelic-like-drug-parkinsons-apathy/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New startup to test psychedelic-like drug against Parkinson’s symptom</a>
+<a href="https://longevity.technology/news/tracking-eye-movement-to-fight-parkinsons/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Tracking eye movement to fight Parkinson’s</a>
+<a href="https://www.newswise.com/articles/new-trial-aims-to-halt-parkinson-s-disease-before-its-onset" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New Trial Aims to Halt Parkinson’s Disease Before Its Onset</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-slate-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-slate-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        let currentThemeIdx = 0;
+
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds < 0) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ":" + (secs < 10 ? "0" : "") + secs;
+        }
+        
+        // Header Audio Player Logic
+        function toggleActiveAudio() {
+            toggleAudio(currentThemeIdx);
+        }
+
+        function skipActiveAudio(seconds) {
+            skipAudio(currentThemeIdx, seconds);
+        }
+
+        function toggleAudio(id) {
+            const audio = document.getElementById('audio-' + id);
+            if (!audio) return;
+            
+            // Pause all other audios on the page
+            document.querySelectorAll('audio').forEach(a => {
+                if (a.id !== 'audio-' + id) a.pause();
+            });
+
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+
+            attachAudioListeners(id);
+            updateHeaderAudioUI();
+        }
+
+        function updateHeaderAudioUI() {
+            const audio = document.getElementById('audio-' + currentThemeIdx);
+            const playIcon = document.getElementById('header-play-icon');
+            const pauseIcon = document.getElementById('header-pause-icon');
+            const timeEl = document.getElementById('header-audio-time');
+
+            if (!audio) return;
+
+            if (!audio.paused) {
+                if (playIcon) playIcon.classList.add('hidden');
+                if (pauseIcon) pauseIcon.classList.remove('hidden');
+            } else {
+                if (playIcon) playIcon.classList.remove('hidden');
+                if (pauseIcon) pauseIcon.classList.add('hidden');
+            }
+
+            if (timeEl) {
+                timeEl.innerText = formatTime(audio.currentTime);
+            }
+        }
+
+        function attachAudioListeners(id) {
+            const audio = document.getElementById('audio-' + id);
+            if (!audio || audio.dataset.listenersAttached) return;
+
+            audio.addEventListener('timeupdate', () => {
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            });
+
+            audio.addEventListener('ended', () => {
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            });
+
+            audio.dataset.listenersAttached = "true";
+        }
+
+        function skipAudio(id, seconds) {
+            const audio = document.getElementById('audio-' + id);
+            if (audio && !isNaN(audio.duration)) {
+                audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+                if (id == currentThemeIdx) updateHeaderAudioUI();
+            }
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+
+            document.querySelectorAll('audio').forEach(audio => {
+                const id = audio.id.replace('audio-', '');
+                attachAudioListeners(id);
+            });
+
+            updateHeaderAudioUI();
+        };
+        </script>
+    </body>
+    </html>
