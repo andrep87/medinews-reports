@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediNews — Medical Research, Explained.</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a2332; background: #fff; }
+
+    /* NAV */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: #fff; border-bottom: 1px solid #eef0f3; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 21px; font-weight: 700; color: #1a2332; }
+    .logo-icon { width: 34px; height: 34px; background: #2563eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 17px; font-weight: 900; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    /* Nav adjustments: text-sm (14px), font-medium (500), slate-600 (#475569) */
+    .nav-links a { text-decoration: none; color: #475569; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a.active { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
+    .nav-links a:hover { color: #2563eb; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .btn-nav { background: #2563eb; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; }
+    .btn-nav:hover { background: #1d4ed8; }
+
+    /* HERO */
+    .hero { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      background: linear-gradient(135deg, #f0f7ff 0%, #dbeafe 100%); 
+      align-items: center; /* Vertically centers the text column relative to the image */
+    }
+    
+    /* Reduced top/bottom padding and aligned items to the left for a cleaner look */
+    .hero-content { 
+      padding: 64px; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: flex-start; 
+      text-align: left; 
+    }
+    
+    /* Reduced margin from 16px to 8px */
+    .hero-label { font-size: 11px; font-weight: 800; letter-spacing: .12em; color: #2563eb; text-transform: uppercase; margin-bottom: 8px; }
+    
+    /* Reduced margin from 20px to 12px */
+    .hero-title { font-size: 46px; font-weight: 800; line-height: 1.15; color: #1a2332; margin-bottom: 12px; }
+    .hero-title .accent { color: #2563eb; }
+    
+    /* Removed margin-left/right auto so text aligns properly to the left */
+    .hero-subtitle { 
+      font-size: 16px; 
+      color: #4b5563; 
+      line-height: 1.7; 
+      max-width: 460px; 
+      margin-bottom: 10px; 
+    }
+
+    .hero-disclaimer {
+      font-size: 13px;
+      color: #6b7280;
+      max-width: 460px;
+      margin-bottom: 20px;
+    }
+    
+    .btn-hero { display: inline-flex; align-items: center; gap: 8px; background: #2563eb; color: white; padding: 14px 28px; border-radius: 50px; text-decoration: none; font-size: 15px; font-weight: 600; width: fit-content; }
+    .btn-hero:hover { background: #1d4ed8; transform: translateY(-1px); }
+    
+    /* Sets a rigid max-height so the image column doesn't stretch out the container */
+    .hero-image { height: 100%; max-height: 400px; overflow: hidden; }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* BRIEFS */
+    .briefs { padding: 64px 48px; }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; }
+    .section-title { font-size: 26px; font-weight: 800; color: #1a2332; margin-bottom: 6px; }
+    .section-subtitle { font-size: 15px; color: #6b7280; }
+    .view-all { color: #2563eb; text-decoration: none; font-size: 14px; font-weight: 600; white-space: nowrap; }
+    .view-all:hover { text-decoration: underline; }
+
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .card { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #e5e7eb; transition: box-shadow .2s, transform .2s; }
+    .card:hover { box-shadow: 0 8px 30px rgba(37,99,235,.12); transform: translateY(-3px); }
+    .card img { width: 100%; height: 155px; object-fit: cover; }
+    .card-body { padding: 20px; }
+    .card-cat { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .cat-icon { width: 40px; height: 40px; border-radius: 50%; background: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+    /* Category titles: text-base (16px), font-semibold (600) */
+    .cat-name { font-size: 16px; font-weight: 600; color: #1a2332; }
+    /* Card copy: text-sm (14px), leading-relaxed (1.625) */
+    .card-desc { font-size: 14px; color: #6b7280; line-height: 1.625; margin-bottom: 16px; }
+    .card-link { color: #2563eb; text-decoration: none; font-size: 14px; font-weight: 600; }
+    .card-link:hover { text-decoration: underline; }
+
+    /* FEATURES */
+    .features { background: #f8f9fb; border-top: 1px solid #e5e7eb; padding: 40px 48px; }
+    .features-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+    .feat { display: flex; align-items: flex-start; gap: 16px; padding: 0 32px; border-right: 1px solid #e5e7eb; }
+    .feat:first-child { padding-left: 0; }
+    .feat:last-child { border-right: none; padding-right: 0; }
+    .feat-icon { font-size: 26px; flex-shrink: 0; }
+    .feat h4 { font-size: 14px; font-weight: 700; color: #1a2332; margin-bottom: 4px; }
+    .feat p { font-size: 13px; color: #6b7280; line-height: 1.5; }
+
+    /* FOOTER */
+    .site-footer { background: #f8f9fb; border-top: 1px solid #e5e7eb; padding: 24px 48px; }
+    .site-footer p { font-size: 12px; color: #6b7280; line-height: 1.6; max-width: 900px; margin: 0 auto; text-align: center; }
+    .site-footer a { color: #2563eb; text-decoration: none; font-weight: 600; }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .cards { grid-template-columns: repeat(2,1fr); }
+      .features-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
+      .feat { border-right: none; padding: 0; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; height: auto; min-height: auto; }
+      .hero-content { padding: 48px 20px; }
+      .hero-title { font-size: 30px; }
+      .hero-image { height: 250px; }
+      .briefs { padding: 40px 20px; }
+      .cards { grid-template-columns: 1fr; }
+      .features { padding: 32px 20px; }
+      .features-grid { grid-template-columns: 1fr; gap: 20px; }
+      .site-footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">✚</div>MediNews
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="https://medinews.circle.so/c/disease-summaries">Research Briefs</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://medinews.circle.so" class="btn-nav">Join the Community</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-label">Welcome to MediNews</p>
+    <h1 class="hero-title">Medical Research,<br>Explained. <span class="accent">Understood.</span></h1>
+    <p class="hero-subtitle">We turn the latest medical research into clear, plain-language briefings — so you can stay current on what's being studied and bring better questions to your doctor.</p>
+    <p class="hero-disclaimer">Not medical advice. AI-assisted, human-reviewed, for general information only.</p>
+    <a href="https://medinews.circle.so/c/disease-summaries" class="btn-hero">Explore This Week's Briefs →</a>
+  </div>
+  <div class="hero-image">
+    <!-- Replace with your hosted hero image URL -->
+    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=900&q=85" alt="Medical research" />
+  </div>
+</section>
+
+<section class="briefs">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">This Week's Research Briefs</h2>
+      <p class="section-subtitle">Short, clear summaries of the most important new studies.</p>
+    </div>
+    <a href="https://medinews.circle.so/c/disease-summaries" class="view-all">View All Briefs →</a>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1643780668909-580822430155?auto=format&fit=crop&w=400&q=80" alt="Metabolic Health" />
+      <div class="card-body">
+        <div class="card-cat">
+          <div class="cat-icon">🫁</div>
+          <span class="cat-name">Metabolic Health</span>
+        </div>
+        <p class="card-desc">New research on lifestyle and medication approaches being studied for MASLD and liver health.</p>
+        <a href="https://medinews.circle.so/c/disease-summaries" class="card-link">Read Brief →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1576086639808-ddfd21aa668c?auto=format&fit=crop&w=400&q=80" alt="Cancer" />
+      <div class="card-body">
+        <div class="card-cat">
+          <div class="cat-icon">🎗️</div>
+          <span class="cat-name">Cancer</span>
+        </div>
+        <p class="card-desc">Latest updates on prostate, breast and other cancer research and diagnostics developments.</p>
+        <a href="https://medinews.circle.so/c/disease-summaries" class="card-link">Read Brief →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1682706841289-9d7ddf5eb999?auto=format&fit=crop&w=400&q=80" alt="Heart & Vascular" />
+      <div class="card-body">
+        <div class="card-cat">
+          <div class="cat-icon">❤️</div>
+          <span class="cat-name">Heart & Vascular</span>
+        </div>
+        <p class="card-desc">Research updates in heart health, prevention and treatment.</p>
+        <a href="https://medinews.circle.so/c/disease-summaries" class="card-link">Read Brief →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=400&q=80" alt="Other Research" />
+      <div class="card-body">
+        <div class="card-cat">
+          <div class="cat-icon">🔬</div>
+          <span class="cat-name">Other Research</span>
+        </div>
+        <p class="card-desc">Additional studies on infection, neurology, and more.</p>
+        <a href="https://medinews.circle.so/c/disease-summaries" class="card-link">Read Brief →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-grid">
+    <div class="feat">
+      <span class="feat-icon">🛡️</span>
+      <div><h4>Editorially Reviewed</h4><p>Sourced from published research, trials, and official health news, reviewed by a human editor before you see it.</p></div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">💡</span>
+      <div><h4>Plain Language</h4><p>Complex science, made simple.</p></div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">👥</span>
+      <div><h4>Community Focused</h4><p>Discuss the research with others — not a source of personal medical guidance.</p></div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🎧</span>
+      <div><h4>Audio Summaries</h4><p>Prefer to listen? Get a quick 1–3 minute summary.</p></div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🤖</span>
+      <div><h4>AI-Assisted</h4><p>Drafted with AI, checked by human editors — always.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>Not medical advice. MediNews summarizes health and medical news using AI with human editorial review, for general information only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always talk to your doctor, and never delay or disregard their advice because of something you read here. In an emergency, call 911 (US) or 112 (EU/UK). <a href="#">Full Terms →</a></p>
+</footer>
+
+<script>
+  if (window.self !== window.top) {
+    document.addEventListener('DOMContentLoaded', function() {
+      var nav = document.querySelector('nav');
+      if (nav) nav.style.display = 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
