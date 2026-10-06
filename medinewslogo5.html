@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediNews Pulse Logo</title>
+  <style>
+    @import url('https://googleapis.com');
+
+    :root {
+      --text-main: #0c2340;      /* Dark Navy */
+      --text-blue: #2b82c9;      /* Sky Blue */
+      /* Logo gradient colors from top-left to bottom-right */
+      --gradient-start: #2a68df; 
+      --gradient-end: #61b1ff;   
+    }
+
+    body {
+      background-color: #ffffff;
+      font-family: 'Inter', system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Logo Container Layout */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    /* ---- FIXED PULSE CROSS ICON ---- */
+    .icon-wrapper {
+      position: relative;
+      width: 68px;   /* Adjusted to span from cap-height of 'M' down to the subtitle baseline */
+      height: 68px;  
+    }
+
+    /* The outer medical cross outline */
+    .medical-cross-outline {
+      position: absolute;
+      inset: 0;
+      border: 4.5px solid transparent;
+      border-image: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)) 1;
+      border-radius: 16px; /* Note: border-image natively ignores border-radius, so we use clip-path to shape it */
+      clip-path: polygon(
+        30% 0%, 70% 0%, 70% 30%, 100% 30%, 100% 70%, 
+        70% 70%, 70% 100%, 30% 100%, 30% 70%, 0% 70%, 0% 30%, 30% 30%
+      );
+    }
+
+    /* To get smooth rounded corners on the cross, an SVG overlay is much more reliable */
+    .pulse-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .cross-path {
+      fill: none;
+      stroke: url(#logoGradient);
+      stroke-width: 4.5; /* Kept slimmed stroke weight */
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ---- TYPOGRAPHY ---- */
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 0.95;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .title-dark {
+      color: var(--text-main);
+    }
+
+    .title-blue {
+      color: var(--text-blue);
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.138em; /* Exact tracking adjustment to align flush with 'MediNews' wordmark width */
+      margin-top: 8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    
+    <!-- Pulse Wave Cross Icon -->
+    <div class="icon-wrapper">
+      <svg class="pulse-svg" viewBox="0 0 100 100" xmlns="http://w3.org">
+        <defs>
+          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e5bf2" />
+            <stop offset="100%" stop-color="#6baeff" />
+          </linearGradient>
+        </defs>
+        
+        <!-- Perfected geometry for the medical cross outline -->
+        <path class="cross-path" d="
+          M 35,8 
+          L 65,8 
+          A 6,6 0 0 1 71,14 
+          L 71,35 
+          L 92,35 
+          A 6,6 0 0 1 98,41 
+          L 98,59 
+          A 6,6 0 0 1 92,65 
+          L 71,65 
+          L 71,86 
+          A 6,6 0 0 1 65,92 
+          L 35,92 
+          A 6,6 0 0 1 29,86 
+          L 29,65 
+          L 8,65 
+          A 6,6 0 0 1 2,59 
+          L 2,41 
+          A 6,6 0 0 1 8,35 
+          L 29,35 
+          L 29,14 
+          A 6,6 0 0 1 35,8 Z
+        " />
+        
+        <!-- Clean, sharp heartbeat EKG line directly cutting through the center -->
+        <path class="cross-path" d="
+          M 2,50 
+          L 32,50 
+          L 38,50 
+          L 43,62 
+          L 50,26 
+          L 57,74 
+          L 62,44 
+          L 66,50 
+          L 98,50
+        " />
+      </svg>
+    </div>
+
+    <!-- Text Component -->
+    <div class="brand-text">
+      <h1 class="brand-title">
+        <span class="title-dark">Medi</span><span class="title-blue">News</span>
+      </h1>
+      <div class="brand-subtitle">MEDICAL NEWS. SUMMARIZED. EXPLAINED.</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
