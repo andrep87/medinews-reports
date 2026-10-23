@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorectal Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #0f172a !important;
+            color: #0f172a !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-slate-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #0f172a">
+                    <i data-lucide="stethoscope"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Colorectal Cancer</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Liquid Biopsy Comes of Age: ctDNA and Metabolic Biomarkers Guide Treatment Decisions and Predict Recurrence</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #0f172a">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Circulating tumor DNA (ctDNA) [tiny fragments of cancer DNA in the blood] and a new metabolic blood signature are moving toward clinical decision-making. ctDNA is being studied to guide adjuvant therapy, to detect molecular relapse months before scans, and to select patients for targeted retreatment. A separate study found that a network of circulating amino acids from a single pre-surgery blood sample may help predict recurrence risk. Most of these uses are still being validated in trials."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-slate-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">An international molecular tumor board (October 2026) brought together experts to discuss real-world use of ctDNA for monitoring, treatment selection, and detecting residual disease (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">MD Anderson&#x27;s new colorectal medical oncology department highlighted ctDNA as part of its disease-specific strategy (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The PARERE study (GONO) is comparing ctDNA-guided panitumumab retreatment vs regorafenib sequencing in chemorefractory mCRC — using ctDNA to decide which later-line therapy.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">BRICKET trial (ESMO 2026): ctDNA-guided retreatment with encorafenib + cetuximab in BRAF V600E mCRC — only patients with BRAF V600E detected in ctDNA without resistance mutations are retreated.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A KAIST-led study (Advanced Science, June 2026) used a single pre-surgery blood sample to analyze 18 circulating amino acids by a specialized method (19F NMR). It found a glycine-centered metabolic &#x27;network&#x27; that shifts as colorectal cancer advances; a model combining this network with the standard CEA marker predicted recurrence better than CEA alone (independent fact-check: verified against the primary publication).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">DIOPTRA protein biomarker study (Theme 3) also uses blood for early detection — complementary to ctDNA&#x27;s strength in monitoring established disease.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">ctDNA can detect molecular residual disease (MRD) [tiny amounts of cancer left after surgery] weeks to months before it shows up on scans, potentially allowing earlier action (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Dynamic monitoring: ctDNA changes during therapy predict response/resistance earlier than imaging — e.g., KRAS mutant allele fraction rise signals anti-EGFR resistance.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Retreatment selection: BRAF V600E ctDNA clearance predicts durable benefit from encorafenib/cetuximab; re-emergence without resistance mutations suggests retreatment may work (BRICKET).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Amino acid network adds a metabolic layer: Reflects systemic host-tumor interaction (cachexia, anabolism), not just tumor DNA; may identify high-risk patients missed by ctDNA (e.g., low shed tumors).</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Stage II/III colon cancer patients post-surgery: ctDNA (MRD) status guides adjuvant chemotherapy decision (DYNAMIC trial paradigm: ctDNA-negative → omit chemo; ctDNA-positive → intensify).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Metastatic CRC patients on targeted therapy (anti-EGFR, BRAF/EGFR inhibitors): Serial ctDNA for early resistance detection and retreatment decisions.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients with &quot;indeterminate&quot; imaging findings: ctDNA can clarify true progression vs pseudoprogression.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients where tissue biopsy is infeasible: Liquid biopsy provides molecular profiling (MSI, RAS, BRAF, HER2, NTRK) from blood.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">All newly diagnosed CRC patients: Preoperative amino acid network profiling (if validated) could stratify recurrence risk beyond stage.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have stage II/III colon cancer after surgery, you may wish to ask whether ctDNA (MRD) testing could help inform decisions about adjuvant chemotherapy (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have metastatic colorectal cancer on targeted therapy, you may wish to ask whether serial ctDNA monitoring could help detect resistance earlier than scans alone (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you progressed on encorafenib/cetuximab for BRAF V600E disease, you may wish to ask whether ctDNA testing could identify you for a retreatment trial (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask whether a tumor-informed ctDNA test (designed from your own tumor&#x27;s sequencing) is appropriate, since assays differ in sensitivity (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask your team how a ctDNA result would actually change your management before testing (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Prospective ctDNA-Guided Trials (PARERE, BRICKET, DYNAMIC)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Metabolic Biomarker Discovery Study (KAIST, Advanced Science 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] International Liquid Biopsy Society Guidance (ISLB Global MTB 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [4] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: a simple blood test could detect relapse months before scans, spare some patients unnecessary chemotherapy, and help match others to the right targeted therapy at the right time (general medical guidance).</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: ctDNA is powerful for monitoring but not perfect — false negatives occur in low-shedding tumors, assays are not standardized across labs, and acting on a positive result does not always have a proven treatment to offer (general medical guidance).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: insurance coverage and cost vary, and the best testing intervals and action thresholds are still being defined (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: the metabolic (amino-acid) approach is promising but early — it is years from routine use and would need prospective validation before changing care (general medical guidance).</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ctDNA assays: both tumor-informed (designed from a patient&#x27;s tumor) and tumor-naive tests are in use, with differing sensitivity; examples include several commercial MRD assays (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PARERE (GONO): a trial using ctDNA to guide anti-EGFR (panitumumab) retreatment versus regorafenib sequencing in chemorefractory metastatic disease.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">BRICKET (GONO): a trial using ctDNA to guide encorafenib/cetuximab retreatment in BRAF V600E metastatic disease, with data at ESMO 2026.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Established ctDNA-guided adjuvant trials (such as DYNAMIC and GALAXY) support using MRD status to guide chemotherapy decisions in earlier-stage colon cancer, with further trials ongoing (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Amino-acid network assay (KAIST): a research-stage metabolic blood test combining 18 amino acids with CEA to predict recurrence risk.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ctDNA assays vary: tumor-informed tests are generally more sensitive than tumor-naive ones, and detection depends on how much DNA a tumor sheds, so a negative result does not fully rule out residual disease (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The adjuvant ctDNA strategy (acting on MRD status) is supported by trials like DYNAMIC in stage II colon cancer, but its role in stage III and in guiding treatment escalation is still being established (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Retreatment trials (PARERE, BRICKET) are ongoing; they test whether ctDNA can reliably select patients for targeted retreatment, but results are not yet mature.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The KAIST amino-acid study is a single research report using pre-surgery samples; it shows an association with recurrence risk, not a validated clinical test, and needs confirmation in larger, independent groups.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Results from ctDNA-guided retreatment trials (PARERE, BRICKET) and whether they establish ctDNA as a decision-making tool (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Head-to-head comparisons of tumor-informed versus tumor-naive ctDNA assays and moves toward standardization (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Whether ctDNA-guided adjuvant strategies extend from stage II into stage III colon cancer in ongoing trials (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Independent validation of the KAIST amino-acid network signature in larger, multi-center cohorts (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Guideline incorporation of ctDNA/MRD testing as evidence matures (general medical guidance).</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://oncodaily.com/societies/islb-610936" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Unlocking the Potential of ctDNA in Colorectal Cancer Care – ISLB</a>
+<a href="https://oncodaily.com/industry/scott-kopetz-colorectal-cancer-611429" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Scott Kopetz: A New Era for Colorectal Cancer Care at MD Anderson</a>
+<a href="https://oncodaily.com/drug/regorafenib-stivarga-2026" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Regorafenib (Stivarga): Understanding Its Mechanism, Dosing, Clinical Uses, and Role in Colorectal Cancer, GIST, and Hepatocellular Carcinoma</a>
+<a href="https://oncodaily.com/gastrointestinal-oncology/esmo-2026-congress" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>11 Colorectal Cancer Trials to Watch at ESMO 2026</a>
+<a href="https://medicaldialogues.in/oncology/news/a-single-blood-sample-may-improve-the-prediction-of-colorectal-cancer-recurrence-or-metastasis-kaist-study-finds-180665" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>A single blood sample may improve the prediction of colorectal cancer recurrence or metastasis, kaist study finds</a>
+<a href="https://www.emjreviews.com/gastroenterology/news/blood-based-biomarkers-improve-colorectal-cancer-detection-uegw-2026/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Blood-Based Biomarkers Improve Colorectal Cancer Detection: UEGW 2026</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-slate-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-slate-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>

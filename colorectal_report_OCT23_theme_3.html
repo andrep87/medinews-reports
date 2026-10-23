@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorectal Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #0f172a !important;
+            color: #0f172a !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-slate-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #0f172a">
+                    <i data-lucide="stethoscope"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Colorectal Cancer</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Breaking the Immunotherapy-Resistant Barrier in MSS Metastatic Colorectal Cancer: Novel Combinations and Targets</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #0f172a">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Most metastatic colorectal cancers are microsatellite stable (MSS) [the common type that does not respond well to standard immunotherapy]. New strategies — a TGF-beta/PD-1 bispecific (INCA33890), IL-1-alpha blockade (vilamakitug), a KRAS G12D inhibitor (QTX3034), and a PD-1/IL-15 fusion (SAR445877) — are being tested to make these &#x27;cold&#x27; tumors respond, with early signals of activity. Most are early-stage, though one (INCA33890) has a phase III trial underway."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-slate-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">INCA33890 (a TGF-beta/PD-1 bispecific antibody [a single molecule that hits two targets at once to switch the immune system back on]): an early-phase study showed a 15% response rate in heavily pretreated MSS metastatic colorectal cancer. A phase III trial (NEXERA-303) is now enrolling first-line patients.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Vilamakitug (anti-IL-1α antibody): TASKIN phase II (refractory mCRC, n=159) met primary efficacy criterion — 61% alive at 12 months vs 56% control. Striking benefit in right-sided tumors: 62% reduction in death risk (HR 0.38), linked to high baseline IL-1α expression.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">QTX3034 (KRAS G12D inhibitor): FDA Fast Track granted for QTX3034 + cetuximab ± FOLFOX in KRAS G12D-mutated CRC. Phase I: 40% ORR in CRC cohort (n=5) at 1200 mg BID + cetuximab; &gt;90% ctDNA reduction in 57% of patients at that dose.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">SAR445877 (PD-1/IL-15 fusion): First-in-class molecule designed to activate T cells via PD-1 blockade and IL-15 cytokine stimulation — targeting &quot;cold&quot; MSS tumors; early-phase trials ongoing.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Regorafenib (Stivarga) remains standard later-line oral therapy for refractory mCRC (CORRECT: OS 6.4 vs 5.0 mo, HR 0.77); tolerability managed via dose modulation (160→120→80 mg).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">3D models (organoids, bioprinting, tumor-on-chip) now incorporate stroma/immune components to better predict chemo/immunotherapy resistance — but not yet clinically validated for individual prediction.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Hidden antigen discovery: MSS tumors present comparable numbers of tumor antigens as MSI tumors, but from different sources (non-canonical reading frames); could enable vaccines/personalized immunotherapy for MSS.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">MSS mCRC represents ~85% of metastatic cases and has historically derived minimal benefit from PD-1/PD-L1 inhibitors alone — these novel agents target distinct resistance mechanisms (TGF-β immunosuppression, IL-1α inflammation, KRAS signaling, T-cell exhaustion).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Right-sided tumors (historically worse prognosis, less responsive to EGFR inhibitors) show particular sensitivity to IL-1α blockade — a biomarker-defined subset for the first time.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">KRAS G12D is a common KRAS mutation in colorectal cancer; QTX3034 plus cetuximab offers a targeted combination for a group that has lacked a mutation-directed option (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Combining immunotherapy with chemotherapy/bevacizumab (NEXERA-303) tests whether &quot;priming&quot; the microenvironment converts cold tumors to hot — a rational combinatorial strategy.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients with metastatic colorectal cancer that is MSS/pMMR (microsatellite stable/proficient mismatch repair) — the majority of mCRC.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Specifically: Right-sided primary tumor patients (vilamakitug benefit); KRAS G12D-mutated patients (QTX3034 trials); heavily pretreated patients progressing on standard chemo/biologics (regorafenib, TAS-102, clinical trials).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">First-line MSS mCRC patients eligible for NEXERA-303: Stage IV, measurable disease, ECOG 0–1, no prior metastatic treatment, no BRAF V600E mutation, no MSI-H/dMMR.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients interested in novel mechanisms: Those who have exhausted standard options and seek trials targeting TGF-β, IL-1α, KRAS G12D, or T-cell activation pathways.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask your oncologist whether your tumor is MSS or MSI-H, and what clinical trials are open for your tumor&#x27;s molecular profile (right-sided, KRAS G12D, BRAF status) (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to request comprehensive molecular profiling (an NGS panel) including KRAS/NRAS/BRAF, MSI/MMR, HER2, and tumor sidedness, since these determine trial eligibility (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have a KRAS G12D mutation, you may wish to ask specifically about QTX3034-plus-cetuximab trials (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If progressing on standard later-line therapy, you may wish to ask about vilamakitug (IL-1-alpha) trials or other immune-modulating options (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to discuss regorafenib dosing and side-effect management with your team to help you stay on treatment (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Phase I/III Trial Program (INCA33890 NEXERA-303, Phase III)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] Phase II Randomized Trial (Vilamakitug TASKIN, Primary Endpoint Met)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] FDA Fast Track Designation (QTX3034 + Cetuximab, KRAS G12D)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [7] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Multiple novel mechanisms (TGF-β, IL-1α, KRAS G12D, IL-15) simultaneously in late-stage development — unprecedented for MSS mCRC.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Right-sided tumor benefit with vilamakitug addresses a historically poor-prognosis subset with a biologically rational target.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: most are early-phase (though INCA33890 has a phase III trial); phase III success rates in MSS CRC have been low (many failed immunotherapy combinations).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Toxicity of combinations (e.g., INCA33890 + chemo/bevacizumab, QTX3034 + cetuximab anaphylaxis risk) may limit tolerability in frail, heavily pretreated patients.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Biomarker-driven subsets (right-sided, KRAS G12D) fragment an already small population — trial enrollment and commercial viability challenging.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">INCA33890 (Incyte): TGF-β/PD-1 bispecific; NEXERA-303 phase III (first-line + FOLFOX/bevacizumab) enrolling; monotherapy ORR 15% in pretreated MSS.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Vilamakitug (XBiotech/Natrunix): Anti-IL-1α mAb; TASKIN phase II positive in refractory mCRC + TAS-102/bevacizumab; right-sided biomarker signal; advancing to registrational trials.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">QTX3034 (Quanta Therapeutics): Oral KRAS G12D inhibitor; phase I + cetuximab ± mFOLFOX6; FDA Fast Track; ESMO 2026 data presentation (Abstract 790RO).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SAR445877 (Sanofi): PD-1/IL-15 fusion protein; phase I in MSS CRC; novel dual immune-activation mechanism.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Regorafenib (Stivarga, Bayer): Approved 3rd-line+ mCRC; standard dose 160 mg days 1–21/28; dose reduction to 120/80 mg for toxicity; monitor LFTs, BP, skin, bleeding.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">BRICKET (ESMO 2026): ctDNA-guided retreatment with encorafenib/cetuximab in BRAF V600E mCRC after prior benefit.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ECLYPse/TRIDENTE (ESMO 2026): Continuation/rechallenge strategies for BRAF V600E mCRC on encorafenib/cetuximab.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">INCA33890: Phase I n=105, ORR 15% (monotherapy); NEXERA-303 phase III ongoing — no efficacy data yet for combination; exclusion of BRAF V600E limits generalizability.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Vilamakitug (TASKIN): 159 patients, a phase II trial that met its primary survival criterion (patients alive at 12 months); other endpoints were less clear-cut, and a larger confirmatory trial is needed.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">QTX3034: Phase I n=71 total, CRC combination cohort n=5 at target dose — very small; ORR 40% but unconfirmed responses included; ctDNA reduction promising but surrogate.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SAR445877: Preclinical/early clinical rationale only; no human efficacy data yet in CRC.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">3D models: Organoids showed 100% sensitivity/93% specificity for targeted therapy prediction in 21-patient study (Vlachogiannis 2018) — small, selected cohort; bioprinted models used cell lines, not patient-derived.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">NEXERA-303 enrollment completion and PFS readout (first-line MSS + INCA33890).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Vilamakitug registrational trial design and launch (likely right-sided enriched).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">QTX3034 phase II expansion data (ESMO 2026 Abstract 790RO; further cohorts with mFOLFOX6).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SAR445877 phase I dose escalation/expansion results in MSS CRC.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CheckMate 8HW final OS (ESMO 2026 LBA32): Nivolumab + ipilimumab vs chemo/nivo in MSI-H mCRC — sets benchmark for immunotherapy combinations.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">IROCAS adjuvant mFOLFIRINOX vs mFOLFOX6 in high-risk stage III (ESMO 2026 LBA29) — may influence early-stage MSS treatment intensity.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">3D model clinical validation studies: Can PDO/bioprinted drug screening prospectively guide patient therapy?</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.onclive.com/view/early-phase-inca33890-data-lay-the-foundation-for-phase-3-combination-research-in-mss-crc" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Early-Phase INCA33890 Data Lay the Foundation for Phase 3 Combination Research in MSS CRC</a>
+<a href="https://www.cancernetwork.com/view/vilamakitug-plus-chemo-meets-survival-threshold-in-refractory-metastatic-crc" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Vilamakitug Plus Chemo Meets Survival Threshold in Refractory Metastatic CRC</a>
+<a href="https://www.targetedonc.com/view/vilamakitug-meets-primary-efficacy-criterion-refractory-mcrc" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Vilamakitug Meets Phase 2 Efficacy Criterion in Refractory Metastatic Colorectal Cancer</a>
+<a href="https://www.onclive.com/view/qtx3034-plus-cetuximab-receives-fda-fast-track-designation-in-kras-g12d-mutated-crc" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>QTX3034 Plus Cetuximab Receives FDA Fast Track Designation in KRAS G12D–Mutated CRC</a>
+<a href="https://www.onclive.com/view/dr-oberstein-on-the-rationale-for-evaluating-the-pd-1-il-15-fusion-protein-sar445877-in-mss-crc" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Dr Oberstein on the Rationale for Evaluating the PD-1/IL-15 Fusion Protein SAR445877 in MSS CRC</a>
+<a href="https://oncodaily.com/drug/regorafenib-stivarga-2026" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Regorafenib (Stivarga): Understanding Its Mechanism, Dosing, Clinical Uses, and Role in Colorectal Cancer, GIST, and Hepatocellular Carcinoma</a>
+<a href="https://oncodaily.com/gastrointestinal-oncology/colorectal-cancer-3" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>3D Models and Tissue Engineering for Colorectal Cancer Drug Screening</a>
+<a href="https://www.asbmb.org/asbmb-today/science/102226/tumor-antigens-colorectal-cancer-immunotherapy" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Hidden tumor antigens could expand colorectal cancer immunotherapy</a>
+<a href="https://wire.auburn.edu/content/philanthropy/2026/10/191055-endowed-pharmacy-faculty-research-cancer-ras-inhibitor.php?utm_source=Office-of-Communications-and-Marketing&utm_medium=web" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Endowed faculty bring novel approach to fight against colon cancer</a>
+<a href="https://oncodaily.com/gastrointestinal-oncology/esmo-2026-congress" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>11 Colorectal Cancer Trials to Watch at ESMO 2026</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-slate-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-slate-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>
