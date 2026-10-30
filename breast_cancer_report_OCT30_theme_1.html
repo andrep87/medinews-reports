@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #db277708; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #db2777 !important;
+            color: #db2777 !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-rose-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #db2777">
+                    <i data-lucide="ribbon"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Breast Cancer</h1>
+                    <p class="text-[10px] text-rose-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Antibody-Drug Conjugates Are Reshaping Treatment Across Breast Cancer Subtypes</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #db2777">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"New antibody-drug conjugate (ADC) trial results are changing the standard of care for HER2-positive early breast cancer, HER2-low metastatic disease, and triple-negative breast cancer. These &quot;guided missile&quot; drugs link cancer-targeting antibodies to potent chemotherapy, delivering treatment directly to tumor cells while sparing more healthy tissue."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-rose-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Trastuzumab deruxtecan (T-DXd, Enhertu) won European approval for HER2-positive early breast cancer with residual disease after neoadjuvant therapy, cutting recurrence risk by 53% versus T-DM1 (Kadcyla) in the DESTINY-Breast05 trial.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Trastuzumab rezetecan (Hengrui) showed a 73% reduction in progression risk in HER2-low metastatic breast cancer in the China-only HORIZON-Breast06 trial, with median progression-free survival of 16.4 months versus 6.8 months for chemotherapy.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Trastuzumab pamirtecan (BioNTech/DualityBio) met its primary endpoint in the DYNASTY-Breast02 trial but with only a modest PFS improvement and higher rates of interstitial lung disease, leading developers to question its clinical value in HER2-low disease.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Sacituzumab tirumotecan (Sac-TMT) reduced death risk by 40% in heavily pretreated triple-negative breast cancer in the OptiTROP-Breast01 trial, while datopotamab deruxtecan showed overall survival of 23.7 months versus 18.7 months for chemotherapy in untreated advanced TNBC.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">ADCs work like guided missiles: an antibody finds cancer cells (via HER2, TROP2, or other targets), enters the cell, and releases chemotherapy inside, sparing more healthy tissue than traditional IV chemotherapy.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For HER2-positive early breast cancer, T-DXd now offers a more effective post-surgery option than T-DM1 for patients with residual disease, directly impacting curative-intent treatment.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">In HER2-low metastatic disease (previously untreatable with HER2-targeted drugs), multiple ADCs now provide meaningful progression-free survival gains, though toxicity profiles differ significantly.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For triple-negative breast cancer, new ADCs are extending survival in settings where options were historically limited to chemotherapy alone.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">HER2-positive early breast cancer patients with residual invasive disease in breast or lymph nodes after neoadjuvant chemotherapy plus HER2-targeted therapy.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Metastatic breast cancer patients with HER2-low tumors (IHC 1+ or 2+/ISH-negative); HORIZON-Breast06 included patients who had received prior therapy as well as some who were chemotherapy-naive in the advanced setting.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Triple-negative breast cancer patients in advanced or metastatic settings, including those who have received prior chemotherapy and immunotherapy.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients with hormone receptor-positive, HER2-negative metastatic disease may benefit from newer bispecific ADCs targeting EGFR/HER3 (izalontamab brengitecan) after CDK4/6 inhibitor and chemotherapy failure.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ask your oncologist: &quot;Is my tumor HER2-low (IHC 1+ or 2+/ISH-negative)? If so, am I eligible for an ADC like trastuzumab deruxtecan or trastuzumab rezetecan?&quot;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have HER2-positive early breast cancer and had neoadjuvant therapy, ask: &quot;Did I achieve a pathologic complete response? If not, should I receive T-DXd instead of T-DM1 after surgery?&quot;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For triple-negative breast cancer, ask: &quot;Have I received or am I eligible for sacituzumab govitecan or datopotamab deruxtecan? What line of therapy are they approved for in my situation?&quot;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Request testing for HER2 expression level (including &quot;ultralow&quot; categories) and TROP2 status if considering ADC options, as these biomarkers guide eligibility.</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        5 Phase III breast cancer trials (DESTINY-Breast05, HORIZON-Breast06, DYNASTY-Breast02, OptiTROP-Breast01, PANKU-Breast01)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        FDA and European Commission approvals
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        ESMO 2026 late-breaking data
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        10 Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: ADCs are converting previously untreatable subtypes (HER2-low, TNBC) into diseases with multiple effective options; some patients achieve years of disease control.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: These drugs are not cures for metastatic disease; median PFS gains range from 4-10 months. ILD risk requires vigilant monitoring and can force treatment discontinuation.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Cost and access: ADCs are expensive, and insurance prior authorizations and co-pay assistance programs vary; global access is uneven (general medical guidance).</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Not all patients respond: Biomarkers like HER2-low, TROP2, or EGFR/HER3 expression are imperfect predictors; some patients derive little benefit despite target expression.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Trastuzumab deruxtecan (Enhertu, AstraZeneca/Daiichi Sankyo): Approved for HER2+ early BC with residual disease (EU), HER2-low metastatic BC, HER2-ultralow metastatic BC; multiple ongoing trials in earlier lines.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Trastuzumab rezetecan (SHR-A1811, Hengrui): Phase III HORIZON-Breast06 positive in HER2-low metastatic breast cancer, conducted in China; published in JAMA (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Sacituzumab tirumotecan (Sac-TMT, Kelun-Biotech/MSD): Phase III OptiTROP-Breast01 positive in pretreated TNBC; trials ongoing in HR+/HER2- MBC (TroFuse-010) and TNBC (TroFuse-011).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Datopotamab deruxtecan (Dato-DXd, AstraZeneca/Daiichi Sankyo): TROP2 ADC showing OS benefit in untreated advanced TNBC; not yet approved.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Izalontamab brengitecan (Iza-bren): First-in-class bispecific EGFR/HER3 ADC; Phase III PANKU-Breast01 positive in heavily pretreated HR+/HER2- MBC.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Strongest evidence: DESTINY-Breast05 (T-DXd vs T-DM1 in residual HER2+ early BC) — HR 0.47 for IDFS, 3-year IDFS 92.4% vs 83.7%, n=1,635. HORIZON-Breast06 (trastuzumab rezetecan vs chemo in HER2-low MBC) — HR 0.27 for PFS, median PFS 16.4 vs 6.8 months, n=551.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Key uncertainty: Overall survival data immature for most new ADCs; long-term benefit versus chemotherapy not yet proven.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Safety: interstitial lung disease (ILD/pneumonitis) is a recognized class effect of HER2-directed ADCs such as trastuzumab deruxtecan, which can rarely be fatal and requires monitoring (chest imaging and prompt evaluation of new respiratory symptoms) (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Trastuzumab pamirtecan met its primary endpoint in DYNASTY-Breast02 but with a more modest progression-free survival benefit and immature overall survival data, raising questions about its place in a crowded HER2-low landscape.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mature overall survival data for the newer HER2-low and TNBC ADCs (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Head-to-head ADC comparisons (currently none exist; experts call for trials comparing Enhertu vs newer ADCs).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">T-DXd in adjuvant HER2+ early BC without residual disease (DESTINY-Breast05 only studied residual disease population).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Sac-TMT and datopotamab deruxtecan regulatory filings in US/EU for TNBC indications.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Bispecific ADCs (iza-bren, zanidatamab combinations) expanding into breast cancer after gastroesophageal success.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.onclive.com/view/t-dxd-gains-eu-approval-in-residual-her2-early-breast-cancer" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>T-DXd Gains EU Approval in Residual HER2+ Early Breast Cancer</a>
+<a href="https://medicalxpress.com/news/2026-10-drug-significantly-delays-advanced-breast.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Targeted drug significantly delays advanced breast cancer progression but increases toxicity, phase III trial reports</a>
+<a href="https://insights.citeline.com/scrip/conferences/esmo/esmo-2026-hengrui-adc-meets-pfs-endpoints-in-her2-low-breast-cancer-JOZOFQUOMJHFVLQRL746OR227U/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>ESMO 2026: Hengrui ADC Meets PFS Endpoints In HER2-Low Breast Cancer</a>
+<a href="https://www.onclive.com/view/trastuzumab-pamirtecan-improves-pfs-in-hr-her2-low-metastatic-breast-cancer" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Trastuzumab pamirtecan improves PFS in HR+, HER2-Low Metastatic Breast Cancer</a>
+<a href="https://www.biopharmadive.com/news/biontech-dualitybio-modest-results-adc-breast-cancer/839574/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>BioNTech, DualityBio say ADC had &#x27;modest&#x27; benefit in breast cancer study</a>
+<a href="https://www.targetedonc.com/view/esmo-2026-breast-cancer-late-breaking-adcs-ribociclib" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Late-Breaking Breast Cancer Data at ESMO 2026 Highlight ADCs and Ribociclib</a>
+<a href="https://www.clinicaltrialsarena.com/news/esmo26-breast-cancer-treatment-landscape-continues-to-be-redefined/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>ESMO26: Breast cancer treatment landscape continues to be redefined</a>
+<a href="https://www.biospace.com/press-releases/beone-medicines-reports-sustained-survival-benefit-with-tevimbra-ziihera-combination-in-first-line-her2-gastroesophageal-cancer" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>BeOne Medicines Reports Sustained Survival Benefit with TEVIMBRA-ZIIHERA Combination</a>
+<a href="https://www.oncologynewscentral.com/breast-cancer/neoadjuvant-t-dxd-falls-short-in-hr-positive-her2-low-early-breast-cancer" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Neoadjuvant T-DXd Falls Short in HR-Positive, HER2-Low Early Breast Cancer</a>
+<a href="https://www.cancernursingtoday.com/post/beyond-the-negatives-changing-the-conversation-in-triple-negative-breast-cancer" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Beyond the Negatives: Changing the Conversation in Triple-Negative Breast Cancer</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-rose-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-rose-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-rose-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-rose-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>

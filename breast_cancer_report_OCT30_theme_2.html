@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #db277708; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #db2777 !important;
+            color: #db2777 !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-rose-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #db2777">
+                    <i data-lucide="ribbon"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Breast Cancer</h1>
+                    <p class="text-[10px] text-rose-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">CDK4/6 Inhibitors and Oral SERDs Are Redefining Adjuvant Therapy for HR+/HER2- Early Breast Cancer</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #db2777">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Long-term data confirm that adding ribociclib to endocrine therapy for three years significantly improves survival in high-risk HR+/HER2- early breast cancer, with benefits growing years after treatment stops. Meanwhile, oral SERDs like giredestrant are emerging as better-tolerated endocrine backbones, and ctDNA-guided treatment may soon spare some patients from unnecessary therapy."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-rose-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-rose-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The NATALEE trial&#x27;s 6-year follow-up showed ribociclib (Kisqali) plus a nonsteroidal aromatase inhibitor reduced death risk by 19% versus endocrine therapy alone in stage II/III HR+/HER2- early breast cancer, with absolute survival benefit growing from 1.2% at 5 years to 2.1% at 6 years — even though patients stopped ribociclib after 3 years.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The monarchE trial&#x27;s 7-year update confirmed abemaciclib&#x27;s invasive disease-free survival benefit (HR 0.73, 6.5% absolute improvement) regardless of Oncotype DX recurrence score.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The lidERA trial is the first positive adjuvant oral SERD study: giredestrant beat standard endocrine therapy for invasive disease-free survival (HR 0.70; 95% CI 0.57-0.87; P=0.0014), with fewer joint-pain-related discontinuations (independent fact-check: the primary iDFS results were presented at SABCS 2025; ESMO 2026 added patient-reported outcomes).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A step-up dosing strategy for abemaciclib (TRADE study) kept 71% of patients at target dose by week 12 versus ~60% with standard dosing, potentially improving tolerability.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">CDK4/6 inhibitors (ribociclib, abemaciclib) block proteins that drive cancer cell division; adding them to endocrine therapy for just 3 years creates a lasting survival advantage that persists years after stopping.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Oral SERDs (like giredestrant) degrade the estrogen receptor more completely than older drugs (tamoxifen, aromatase inhibitors) and work even when tumors have ESR1 mutations that cause resistance to standard endocrine therapy.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">ctDNA (circulating tumor DNA) monitoring after surgery may identify which patients truly need intensive therapy versus those who can safely receive less — the AFT-70 NAVIGATE trial is testing this now.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">This shifts adjuvant therapy from &quot;one size fits most&quot; to biology-driven, time-limited, and potentially de-escalated treatment.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Women and men with stage II or III HR+/HER2- early breast cancer at high risk of recurrence (node-positive or high-risk node-negative features like large tumors, high grade, or high genomic risk scores).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Premenopausal patients: ovarian suppression plus aromatase inhibitor plus ribociclib is now a standard option.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients who cannot tolerate CDK4/6 inhibitors due to side effects, access issues, or contraindications may have giredestrant (if approved) as a better-tolerated alternative backbone.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients with ESR1 mutations detected in ctDNA after progression on aromatase inhibitors may benefit more from oral SERDs than from switching to another aromatase inhibitor.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ask your oncologist: &quot;Based on my tumor stage, grade, nodal status, and genomic test (Oncotype DX, MammaPrint, etc.), do I meet criteria for adjuvant ribociclib or abemaciclib?&quot;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If starting a CDK4/6 inhibitor, you may wish to ask whether a step-up (gradual dose-escalation) schedule is appropriate to improve tolerability; your oncologist will set the exact doses per the prescribing information (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ask: &quot;Should I have ctDNA testing after surgery to help decide if I need CDK4/6 inhibitor therapy? Is the AFT-70 NAVIGATE trial or similar ctDNA-guided study available at my center?&quot;</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-rose-50/30 border border-rose-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #db2777">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Request baseline and regular monitoring: CBC with differential every 2 weeks for first 2 cycles, then every 4 cycles; liver function tests; ECG at baseline and day 14 of cycle 1; electrolytes before each of first 6 cycles.</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        3 Phase III Trials (NATALEE, monarchE, lidERA)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        FDA Approval (Ribociclib + AI for Adjuvant HR+/HER2- Early BC)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        ESMO 2026 6-Year NATALEE Update &amp; lidERA Patient-Reported Outcomes
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-rose-100 shadow-sm transition-transform" style="color: #db2777">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        5 Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: A 3-year course of ribociclib provides a survival advantage that keeps growing after treatment ends — a true &quot;tail of the curve&quot; benefit. Oral SERDs offer effective endocrine therapy with fewer joint pains and better quality of life.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: CDK4/6 inhibitors cause significant side effects (neutropenia, fatigue, diarrhea, liver enzyme elevations) requiring frequent blood draws and dose modifications. ~20% stop early.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Ribociclib&#x27;s absolute OS benefit at 6 years is 2.1% — meaningful at population level but modest for an individual. Patients must weigh 3 years of treatment burden against this gain.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Giredestrant not yet approved for adjuvant use; cost and insurance coverage unknown. Sequential SERD after CDK4/6i strategy unproven until 2027+ trial readouts.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Ribociclib (Kisqali, Novartis): FDA approved with AI for adjuvant HR+/HER2- early BC at high recurrence risk; 400mg daily 3 weeks on/1 week off for 3 years.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Abemaciclib (Verzenio, Eli Lilly): FDA approved for adjuvant HR+/HER2- early BC with high-risk features; continuous daily dosing with step-up option.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Giredestrant (Roche/Genentech): Oral SERD; positive lidERA adjuvant trial (iDFS HR 0.70); regulatory filing anticipated; sequential trials after CDK4/6i (CAMBRIA-1, EMBER-4, ELEGANT) read out 2027+.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Elacestrant (Orserdu, Stemline/Menarini): First approved oral SERD for metastatic ESR1-mutated HR+/HER2- BC; adjuvant trials ongoing.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PIKTOR (Faeth Therapeutics): an oral combination of serabelisib (a PI3K-alpha inhibitor) and sapanisertib (an mTORC1/2 inhibitor), being studied in HR+/HER2- advanced breast cancer, including in combination strategies (general medical guidance).</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">NATALEE: 5,101 patients; 6-year OS HR 0.809 (95% CI 0.661-0.989); iDFS HR 0.741 (95% CI 0.646-0.849); benefit consistent across subgroups including age ≤40. No new safety signals at 6 years; secondary primary malignancies similar between arms (3.0% vs 3.3%).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">monarchE: 5,637 patients; 7-year iDFS HR 0.73; benefit regardless of Oncotype score. ~20% discontinued early due to toxicity (mainly diarrhea).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">lidERA: ~3,300 patients; early readout, median follow-up ~30 months; giredestrant iDFS HR 0.70; fewer arthralgia discontinuations vs standard ET. Uncertainties: no CDK4/6i in control arm, few ESR1 mutations, premenopausal management varied, cost unknown.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Key gap: no biomarker yet identifies who will NOT benefit from CDK4/6 inhibitors; a substantial share of high-risk patients still recur despite endocrine therapy, which is why intensified adjuvant approaches are being studied (general medical guidance).</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #db277720; color: #db2777;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">AFT-70 NAVIGATE trial results (ctDNA-guided de-escalation: ctDNA-negative patients randomized to AI/tamoxifen + CDK4/6i vs giredestrant alone, adding CDK4/6i only if ctDNA turns positive).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CAMBRIA-1, EMBER-4, ELEGANT trials testing SERD after CDK4/6 inhibitor in adjuvant setting (readouts 2027+).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Extended NATALEE follow-up (Roche committed to 10-year total monitoring).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PIKTOR Phase 1b/2 FTH-PIK-101 interim data in HR+/HER2- advanced BC (2027) — testing multi-node PI3K/AKT/mTOR inhibition with CDK4/6i + SERD backbone.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Real-world adherence and quality-of-life data for adjuvant CDK4/6i as uptake increases globally.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.targetedonc.com/view/esmo-2026-breast-cancer-late-breaking-adcs-ribociclib" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Late-Breaking Breast Cancer Data at ESMO 2026 Highlight ADCs and Ribociclib</a>
+<a href="https://www.pharmacytimes.com/view/ribociclib-shows-overall-survival-benefit-at-6-years-in-natalee-breast-cancer-trial" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Ribociclib Shows Overall Survival Benefit at 6 Years in NATALEE Breast Cancer Trial</a>
+<a href="https://oncodaily.com/voices/komal-jhaveri-619063" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Komal Jhaveri: Three Strategies Reshaping Adjuvant ER+ Breast Cancer Treatment</a>
+<a href="https://www.clinicaltrialsarena.com/news/esmo26-breast-cancer-treatment-landscape-continues-to-be-redefined/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>ESMO26: Breast cancer treatment landscape continues to be redefined</a>
+<a href="https://oncodaily.com/breast-oncology/endocrine-therapy-in-algeria" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>HR-Positive, HER2-Negative Breast Cancer in Algeria: Beyond Endocrine Therapy Alone</a>
+<a href="https://www.biospace.com/press-releases/faeth-presents-updated-preclinical-data-at-esmo-including-first-ever-head-to-head-characterization-of-piktor-against-gedatolisib" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-rose-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Faeth Presents Updated Preclinical Data at ESMO</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-rose-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-rose-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-rose-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-rose-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>
