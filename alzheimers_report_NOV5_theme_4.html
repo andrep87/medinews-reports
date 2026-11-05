@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alz | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #7c3aed08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #7c3aed !important;
+            color: #7c3aed !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-violet-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #7c3aed">
+                    <i data-lucide="brain"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Alz</h1>
+                    <p class="text-[10px] text-violet-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Care Quality Crisis—Antipsychotic Overuse, Racial Disparities, and the Push for Person-Centered Alternatives</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #7c3aed">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Despite decades of warnings, antipsychotic drugs are still widely used as &quot;chemical restraints&quot; in US nursing homes—often without trying non-drug approaches first. Black and Hispanic dementia patients are significantly less likely to access specialized dementia care units. New federal reports expose hidden prescribing, while the DICE framework and caregiver-support research offer practical, evidence-based alternatives that treat behaviors as communication of unmet needs."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-violet-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Two 2026 federal OIG reports found US nursing homes still routinely use antipsychotics as &quot;chemical restraints&quot; for dementia behaviors (agitation, aggression) without first attempting required non-pharmacological interventions; some facilities hide true rates by misdiagnosing residents with schizophrenia (excluded from quality metrics). (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">National prescribing data: Antipsychotic use in adults 65+ increased 52% (2015–2024); long-term use (&gt;4 months) rose 65%; &gt;8 million older Americans received at least one prescription. FDA black-box warning (2005) and Five-Star rating penalties reduced use temporarily, but it rebounded during COVID and remains high (~17% of long-stay residents).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">JAMA Network Open study (1.4M Medicare beneficiaries with dementia, 2018–2020): Only 17.9% accessed Alzheimer&#x27;s Special Care Units (ASCUs); Black patients (1.01%) and Hispanic patients (0.71%) were half as likely as White patients (1.46%) to be admitted to ASCUs—hospital discharge planning explained much of the disparity. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Mizzou researchers launched three NIH-funded projects: (1) Online CBT-I for spousal caregivers&#x27; insomnia (40–60% affected); (2) Couple-level sleep analysis (2,800+ couples, 8 years) linking shared sleep problems to cognitive decline; (3) Only-child vs. sibling caregiver comparison measuring stress, inflammation, cardiovascular markers. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">State funding advances: Louisiana ($1.2M Dementia Care Specialist program), Arizona ($700k dementia services), Virginia ($300k/yr Memory Project registry), Alaska ($500k mini-grants + $1.25M respite grants)—tying dementia support to state budgets.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Antipsychotics in dementia: Marginal benefit (barely better than placebo for agitation), serious risks (death, stroke, falls, accelerated decline). They sedate but don&#x27;t address root causes—pain, infection, hunger, fear, boredom, sensory overload.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">&quot;Behaviors are communication&quot;: Wandering may mean hunger; resisting bath may mean pain or cold; shouting may mean fear. The DICE approach (Describe, Investigate, Create, Evaluate) teaches caregivers to decode this language. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">ASCU disparity: Specialized units offer trained staff, tailored environments, structured activities—denying access to Black/Hispanic patients perpetuates inequity in care quality and outcomes. Hospital discharge planners are key gatekeepers. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Caregiver health = patient health: 40–60% of spousal caregivers have insomnia; only children lack sibling support; couple sleep is bidirectional. Supporting caregivers reduces nursing home placement, hospitalizations, and mortality for patients. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">State funding creates infrastructure: Dementia Care Specialists, registries, respite grants, rural first-responder training—scalable models for other states.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Families with a loved one in a nursing home or assisted living—especially if antipsychotics have been prescribed or suggested for &quot;agitation,&quot; &quot;aggression,&quot; or &quot;behavioral issues.&quot; (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Black and Hispanic families navigating nursing home placement—ask specifically about Alzheimer&#x27;s Special Care Unit (ASCU) availability and request it during hospital discharge planning. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Spousal caregivers (any setting) struggling with sleep—Mizzou&#x27;s online CBT-I program is designed for you. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adult children caring for a parent with dementia, particularly only children—your support network dynamics and long-term health risks are distinct.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Clinicians and discharge planners—you are the equity checkpoint for ASCU access and the first line for non-drug behavioral management.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If a nursing home proposes an antipsychotic for your loved one, ask: &quot;What non-drug approaches have been tried first? Can we use the DICE method to investigate the behavior? What is the specific target symptom, and how will we know if it&#x27;s working?&quot; Demand a taper plan if started. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For nursing home admission: Ask the discharge planner: &quot;Does this facility have an Alzheimer&#x27;s Special Care Unit (ASCU)? If not, what facilities with ASCUs have beds?&quot; Advocate for ASCU placement—it&#x27;s a quality and equity issue. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you are a spousal caregiver with insomnia: Ask your doctor for a referral to CBT-I (cognitive behavioral therapy for insomnia)—gold standard, no drugs. Mention the Mizzou online program (self-paced, 20–40 min sessions). (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you are an only-child caregiver: Map your support network (friends, neighbors, paid help, community resources). Schedule a &quot;caregiver check-up&quot; with your primary care doctor—discuss stress, inflammation markers (hs-CRP), cardiovascular risk. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to use the WeCareAdvisor app (DICE-based) at home: Walks you through describing behaviors, identifying triggers, and trying 1,000+ evidence-based non-drug strategies. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to contact your state aging office: Ask what dementia programs exist (specialists, respite grants, registries, rural training)—new funding in LA, AZ, VA, AK may be replicable. (general medical guidance)</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        Federal OIG Reports (2026 nursing home antipsychotic audits)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        Large Claims Analysis (8M+ older adults, 2015–2024 prescribing trends)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        JAMA Network Open Study (1.4M Medicare beneficiaries, nursing home ASCU access)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        NIH-Funded Caregiver Intervention Trials (Mizzou sleep, family structure, support networks)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        5 Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: DICE and non-drug approaches work when implemented—some facilities achieve low antipsychotic use with good outcomes. State funding builds community infrastructure. Auvelity offers a potentially safer pharmacologic option if needed. (general medical guidance)</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Caregiver support: Online CBT-I helps but doesn&#x27;t fix 24/7 care burden. Only children have no backup. Respite grants ($3,000 max in AK) are drops in the bucket. (general medical guidance)</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Equity: ASCU disparity persists despite civil rights laws. Hospital discharge is a &quot;black box&quot; where bias operates. No federal mandate for ASCU access. (general medical guidance)</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The DICE approach (Describe, Investigate, Create, Evaluate) for behavioural symptoms was developed by Helen Kales at UC Davis (independent fact-check: the draft attributed it to UCSF/University of Toronto) (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Non-drug modalities with evidence: Sensory (music, massage, outdoor), exercise, cognitive stimulation, reminiscence therapy—reduce agitation/depression as well or better than drugs in meta-analyses.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Auvelity (dextromethorphan/bupropion): FDA-approved April 2026 for Alzheimer&#x27;s agitation; less sedating than antipsychotics, but experts warn broad &quot;agitation&quot; definition may expand medicating instead of investigating. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ASCU model: Specialized nursing home units with dementia-trained staff, secure environments, therapeutic programming—JAMA study shows access disparity; state funding (LA, AZ) supports specialist navigation roles. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mizzou trials: (1) Online CBT-I for spousal caregivers; (2) Couple sleep-cognition dyadic analysis (ELSA data); (3) Only-child vs. sibling caregiver longitudinal study with inflammatory/CV biomarkers. (general medical guidance)</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Disparity study: Observational (Medicare claims); hospital discharge planning mediates disparity—suggests systemic bias, not patient preference; ASCU definition requires state designation, not all specialized care captured. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">DICE/WeCareAdvisor: App RCT improved caregiver distress/well-being but not behavior frequency/severity at 3 months; implementation fidelity in real-world settings variable; requires staff buy-in and time. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Caregiver interventions: CBT-I gold standard for insomnia; dyadic sleep-cognition link novel but observational; only-child caregiver data scarce—Mizzou study filling gap. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Auvelity: Approved based on phase 3 trials; long-term safety in frail elderly unknown; agitation scales in trials include pacing/restlessness—may lower threshold for prescribing.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">CMS response to Project PAUSE lobbying: Will antipsychotic measure stay in Five-Star ratings? Will minimum staffing standards be reinstated? (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">DICE implementation science: Scaling from research to routine nursing home practice—training, fidelity measures, reimbursement for non-drug care time. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mizzou trial results: CBT-I efficacy for spousal caregivers; dyadic sleep-cognition findings; only-child caregiver biomarker trajectories. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">State dementia funding replication: Will more states embed dementia specialists, registries, respite in budgets? Federal Alzheimer&#x27;s Accountability Act potential.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Auvelity real-world use: Prescribing patterns, safety in frail elderly, impact on non-drug approach utilization.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Delirium-dementia link: Hospital delirium prevention programs (HELP, ABCDEF bundle) as upstream dementia risk reduction.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://nautil.us/meds-are-often-the-go-to-for-dementia-patients-is-there-a-better-way-1286263" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Meds Are Often the Go-to for Dementia Patients. Is There a Better Way?</a>
+<a href="https://www.mcknights.com/news/black-hispanic-patients-less-likely-to-be-admitted-to-nursing-homes-with-dementia-care-units-study-finds/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Black, Hispanic patients less likely to be admitted to nursing homes with dementia care units, study finds</a>
+<a href="https://showme.missouri.edu/2026/mizzou-researchers-seek-better-ways-to-support-families-affected-by-dementia/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Mizzou researchers seek better ways to support families affected by dementia</a>
+<a href="https://www.medpagetoday.com/neurology/generalneurology/123707" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Delirium during hospitalization was strongly linked with dementia</a>
+<a href="https://www.mcknightsseniorliving.com/news/states-link-dementia-program-funding-to-passed-appropriations-bills/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>States link dementia program funding to passed appropriations bills</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-violet-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-violet-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>

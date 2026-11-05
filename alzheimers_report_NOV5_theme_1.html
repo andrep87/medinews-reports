@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alz | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #7c3aed08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #7c3aed !important;
+            color: #7c3aed !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-violet-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #7c3aed">
+                    <i data-lucide="brain"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Alz</h1>
+                    <p class="text-[10px] text-violet-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Blood Tests and New Tools Are Speeding Up Alzheimer&#x27;s Diagnosis — For People Who Already Have Symptoms</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #7c3aed">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"An FDA-cleared blood test (PrecivityAD2) can now help evaluate adults as young as 40 who already have memory or thinking symptoms — replacing the need for a spinal tap or PET scan as a first step. Researchers are also developing AI tools that read retinal photos and speech patterns, and a conversation-based risk score for lower-income countries. Important: these are tools to evaluate people WITH symptoms, not screening tests for people without them (independent fact-check: the draft described the blood test as detecting Alzheimer&#x27;s years before symptoms appear; it is cleared only for symptomatic adults and is explicitly not a screening test)."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-violet-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The FDA cleared PrecivityAD2, the first Alzheimer&#x27;s blood test authorized for symptomatic adults as young as 40. It measures amyloid and tau proteins in blood to help identify amyloid pathology, and is intended to support — not replace — a clinical evaluation. It is not cleared for population screening or as a stand-alone diagnostic.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Researchers at Arizona State University and Mayo Clinic launched a $3.2 million NIH-funded project using AI to enhance routine retinal photos and combine them with blood biomarkers to flag preclinical Alzheimer&#x27;s risk years before memory loss—potentially during a standard eye exam.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">European researchers are building standardized databases of speech recordings analyzed by AI &quot;phonebots&quot; to detect subtle language changes that signal early Alzheimer&#x27;s, addressing the need for scalable screening now that disease-slowing drugs (lecanemab, donanemab) are approved for early symptomatic stages.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The FDA cleared PrecivityAD2, the first Alzheimer&#x27;s blood test authorized for symptomatic adults as young as 40. It measures amyloid and tau proteins in blood to help identify amyloid pathology, and is intended to support — not replace — a clinical evaluation. It is not cleared for population screening or as a stand-alone diagnostic.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Stanford researchers developed an &quot;ARC score&quot; from resting-state brain scans that places cognitively normal adults on a continuum between &quot;SuperAger&quot; resilience and Alzheimer&#x27;s vulnerability, predicting cognitive decline, amyloid buildup, and diagnosis up to 12 years later better than genetics or standard biomarkers.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">New anti-amyloid treatments (lecanemab/Leqembi, donanemab/Kisunla) only work in early symptomatic stages (mild cognitive impairment or mild dementia), creating urgent need to identify eligible patients before severe symptoms appear.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Current diagnosis relies on expensive, invasive tests (amyloid PET scans, lumbar punctures) or lengthy neuropsychological exams that cannot scale to screen millions of at-risk adults. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Blood tests, retinal imaging, speech analysis, and conversation-based tools are non-invasive, lower-cost, and potentially deployable in primary care, community settings, or even at home—dramatically expanding who can be screened.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The ARC score and SuperAger research reveal that brain function patterns can signal risk decades before symptoms, opening a window for prevention trials and lifestyle interventions when they may matter most.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults aged 40+ with noticeable memory or thinking changes who are being evaluated for cognitive impairment—now eligible for the FDA-cleared PrecivityAD2 blood test as part of a standard workup. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Older adults in low-resource or rural settings worldwide where specialist memory clinics, PET scanners, or lumbar puncture expertise are unavailable—the 5-question risk score and phone-based speech tools are designed for these populations. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Cognitively normal adults 55–70 who want to understand their long-term risk profile—the ARC score (still research-only) and retinal imaging studies aim to eventually serve this group.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">People with type 2 diabetes, hypertension, or cardiovascular risk factors who face elevated dementia risk and may benefit from earlier monitoring using accessible tools.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you or a family member has noticeable memory or thinking changes, you may wish to ask your doctor whether a blood-based Alzheimer&#x27;s test is appropriate as part of the evaluation (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">It helps to understand that these blood tests are for people who already have symptoms — they are not recommended as screening for people without symptoms (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask what the next step would be depending on the result, since a blood test aids diagnosis rather than confirming it on its own (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">AI-based retinal and speech tools are still research projects requiring validation; you may wish to ask your clinician whether any relevant studies are recruiting, rather than seeking them as clinical tests (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        FDA Clearance (PrecivityAD2 blood test)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        NIH-Funded Studies (retinal imaging, brain activity patterns, speech biomarkers)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        Major International Consortia (UK Biobank, Northumbria University-led LMIC risk score, Stanford SuperAger research)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        5 Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: A simple blood draw, eye photo, or phone call could someday replace months-long specialist waits and invasive tests, getting people into treatment or prevention trials years earlier.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: PrecivityAD2 is only for symptomatic people 40+—not a screening test for asymptomatic adults. Retinal AI, speech tools, and ARC score are years from clinical use. The 5-factor score is for research recruitment in specific regions. (general medical guidance)</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Cost and access: Blood tests may not be covered by insurance for all indications; retinal AI requires equipment/software not yet in standard clinics; phonebot databases need massive standardization across languages/accents. (general medical guidance)</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">False reassurance or anxiety: A &quot;negative&quot; blood test doesn&#x27;t guarantee no future dementia; &quot;elevated risk&quot; scores don&#x27;t mean you will develop it. Results must be interpreted by a clinician who knows your full picture.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PrecivityAD2 (C2N Diagnostics): FDA-cleared blood test measuring amyloid-beta and tau proteins via high-resolution mass spectrometry; indicated for symptomatic adults 40+ alongside clinical assessment—not a standalone screening test. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lecanemab (Leqembi, Eisai/Biogen) and donanemab (Kisunla, Eli Lilly): FDA-approved (US) and EC-approved (EU) IV anti-amyloid antibodies for early symptomatic Alzheimer&#x27;s; require confirmed amyloid pathology—driving demand for accessible diagnostic tools. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Retinal AI + blood biomarker combo (ASU/Mayo/NIH): 5-year research project using generative AI to fix poor-quality nondilated retinal photos, then deep learning to detect Alzheimer&#x27;s patterns combined with blood tests (amyloid, tau, p-tau217). (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ARC score (Stanford/Neuroimaging consortia): Machine learning model from resting-state fMRI distinguishing SuperAgers from Alzheimer&#x27;s patients (85% accuracy); applied to 1,300+ cognitively normal adults 55–70 predicting 12-year outcomes.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PrecivityAD2 validation: 1,142 symptomatic adults; dual cutoffs yielded 97.6% PPV (rule-in) and 93.1% NPV (rule-out) vs. amyloid PET/CSF; consistent across 12 common chronic diseases and increasing age; 17.3% &quot;likely positive&quot; zone with 77.3% PPV requires clinical judgment. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Retinal imaging: Still in research phase; nondilated photos are convenient but often blurry—AI enhancement must preserve true vascular details without inventing false signals; clinical use requires prospective validation, regulatory review. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">5-factor LMIC risk score: Built from 11,000+ older adults across 7 sites (China, Cuba, Dominican Republic, Puerto Rico, Venezuela, Mexico, Peru); AUC 0.75 (clinically useful threshold ≥0.70); designed for research recruitment, not general population screening; needs validation in South Asia, MENA, Sub-Saharan Africa. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ARC score: Derived from 180 SuperAgers (75+, memory of 45-year-olds) vs. 110 Alzheimer&#x27;s patients; predicted decline in 1,300+ unimpaired adults 55–70 over 5–12 years; outperformed demographics, amyloid, tau, genetics; not yet diagnostic—requires intervention trials to test if shifting brain patterns changes outcomes.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Results from ASU/Mayo retinal AI trial (5-year timeline) and validation of enhanced nondilated images against amyloid PET in diverse community cohorts. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Expansion of phonebot speech databases across languages and integration into telehealth platforms for remote cognitive screening. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Validation of the 5-factor LMIC risk score in South Asia, Middle East/North Africa, and Sub-Saharan Africa—critical for global equity.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Stanford ARC score intervention trial: testing whether cognitive training or transcranial magnetic stimulation can shift brain activity toward SuperAger resilience patterns in at-risk unimpaired adults.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.mpo-mag.com/breaking-news/fda-clears-first-alzheimers-blood-test-for-symptomatic-adults-as-young-as-40/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>FDA Clears First Alzheimer&#x27;s Blood Test for Symptomatic Adults as Young as 40</a>
+<a href="https://news.asu.edu/20261103-science-and-technology-what-eye-may-reveal-about-alzheimers" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>What the eye may reveal about Alzheimer&#x27;s</a>
+<a href="https://healthcare-in-europe.com/en/news/phonebots-listen-for-alzheimers.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Phonebots listen out for Alzheimer&#x27;s</a>
+<a href="https://www.news-medical.net/news/20261102/Simple-conversational-tool-identifies-dementia-risk-in-developing-countries.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Simple conversational tool identifies dementia risk in developing countries</a>
+<a href="https://medicalxpress.com/news/2026-11-brain-patterns-alzheimer-years-memory.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Brain activity patterns may predict Alzheimer&#x27;s years before memory slips</a>
+<a href="https://www.insideprecisionmedicine.com/topics/precision-medicine/superagers-offer-window-on-alzheimers-risk/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>SuperAgers Offer Window on Alzheimer&#x27;s Risk</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-violet-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-violet-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>

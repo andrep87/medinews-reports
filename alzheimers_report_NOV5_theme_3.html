@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alz | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #7c3aed08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #7c3aed !important;
+            color: #7c3aed !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-violet-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #7c3aed">
+                    <i data-lucide="brain"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Alz</h1>
+                    <p class="text-[10px] text-violet-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Heat Waves, Menopause and Ministrokes: New Dementia Risk Signals From This Year&#x27;s Research</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #7c3aed">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Several large new studies point to dementia risk factors that get less attention than diet and exercise: days of extreme heat, the menopause transition, a ministroke (TIA), and how blood sugar and cholesterol behave in midlife. These are observational findings — they identify associations worth discussing with a doctor, not proven causes or treatments."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-violet-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A 20-year US study (28,512 adults 50+) found that exposure to heat index ≥103°F (39.4°C) for just a few days per year increased dementia incidence by 14–23%; risk was 26% higher in socially vulnerable neighborhoods and 20% higher where central air conditioning is scarce—suggesting structural heat mitigation is a dementia prevention strategy.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A multi-institutional Nature Medicine study (nearly 12,000 women across 4 cohorts) identified a 16-protein blood signature that surges during the menopause transition (tracking menopausal stage, not age) and predicts poorer cognition and modestly elevated Alzheimer&#x27;s risk 16 years later—marking midlife as a pivotal intervention window for women.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Dr. Cheryl Wellington (UBC) detailed how midlife LDL cholesterol elevates Alzheimer&#x27;s risk by 7–9% by impairing amyloid-beta clearance from brain vessels and promoting microglial inflammation—especially in ApoE4 carriers; statins in midlife (40s–50s) show observational protection, but not when started after symptoms.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Purdue researchers described &#x27;asymptomatic Alzheimer&#x27;s&#x27; — brain changes without memory symptoms — linked to preserved mitochondrial (cellular energy) function. Supplement and diet approaches mentioned in this work are research directions, not proven treatments (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A UK study (250,000 adults with type 2 diabetes) showed higher blood sugar consistently raises dementia risk, but weight/blood pressure links reverse near diagnosis—timing of measurements matters for risk interpretation.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A Canadian study (113,081 people) found transient ischemic attack (TIA/ministroke) increases dementia risk by 75% in the first year and 34% overall over 20 years—dementia occurs 3x more often than stroke after TIA.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">English Longitudinal Study of Aging (7,023 adults) showed memory impairment (alone or with executive dysfunction) in physically frail adults strongly predicts 10-year dementia risk, while executive/speed impairment without memory loss does not—distinguishing &quot;cognitive frailty&quot; subtypes.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">These findings shift focus from &quot;wait for symptoms&quot; to &quot;act in midlife&quot;: heat adaptation, exercise, sleep, cholesterol, blood sugar, and menopause management are modifiable decades before dementia typically appears. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Structural factors (air conditioning access, neighborhood vulnerability) are as important as individual behavior—policy-level heat mitigation (cooling centers, urban greening, housing standards) becomes brain health infrastructure. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The menopause proteomic signature and LDL-amyloid clearance link give biological targets for midlife interventions in women and ApoE4 carriers—populations with elevated risk but also earlier intervention windows. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">TIA is not just a &quot;warning stroke&quot;—it&#x27;s a major dementia risk signal requiring cognitive monitoring, not just vascular prevention. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Distinguishing memory-driven vs. non-memory cognitive frailty helps target prevention: memory loss signals neurodegenerative trajectory; executive/speed issues may reflect vascular/psychosocial vulnerability amenable to different interventions.</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults 40–65 (midlife) with any vascular risk factor (hypertension, diabetes, high LDL, obesity, smoking)—the strongest evidence supports intervening now, not waiting for symptoms. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Women in perimenopause/early postmenopause (typically 45–55)—the 16-protein signature and accelerated aging data suggest this transition is a critical window for neuroprotective lifestyle, hormonal, or pharmacologic strategies. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Older adults in heat-vulnerable communities (low income, limited AC, urban heat islands)—cooling access is a dementia risk reducer. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">People who have had a TIA or minor stroke—dementia risk is high and sustained; cognitive screening should be standard follow-up. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Physically frail older adults with memory complaints—higher dementia trajectory warrants closer monitoring and aggressive risk factor control. (general medical guidance)</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you are 40–65, ask your primary care doctor: &quot;What is my LDL cholesterol target given my overall risk (including family history of dementia)?&quot; Request ApoE genotyping if strong family history—discuss implications with a genetic counselor. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you are a woman 45–55 experiencing menopausal symptoms, ask your clinician: &quot;Should we discuss hormone therapy, lifestyle, or other strategies for brain health during this transition?&quot; Reference the 16-protein menopause signature study. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">For heat protection: Ensure your home has working AC or access to cooling centers during heat waves (HI ≥103°F). Advocate for community cooling infrastructure. Check on vulnerable neighbors during extreme heat. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you&#x27;ve had a TIA: Request formal cognitive screening (MoCA or similar) at 6 and 12 months post-event, then annually. Aggressively manage blood pressure, cholesterol, diabetes, atrial fibrillation. (general medical guidance)</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        Large Population Cohort Studies (Health and Retirement Study, English Longitudinal Study of Aging, UK Biobank, Norway health records)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        Mechanistic Studies (mitochondrial resilience, proteomic profiling, lipid metabolism)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        NIH-Funded Intervention Research (exercise/cognitive training, sleep therapy for caregivers)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        6 Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Sustained behavior change is hard—exercise benefits vanish in weeks without maintenance. Structural barriers (food deserts, unsafe neighborhoods, work schedules, heat-vulnerable housing) limit individual agency. (general medical guidance)</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Menopause: Hormone therapy remains controversial; protein signature not yet a clinical test; &quot;modest risk&quot; means most women won&#x27;t develop AD even with elevated signature. (general medical guidance)</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">LDL: Statins have side effects (muscle, glucose); optimal target, drug choice, and ApoE interaction unresolved. &quot;Midlife start&quot; requires 20+ year commitment for uncertain individual payoff.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">TIA: No proven dementia prevention post-TIA beyond vascular risk control. Cognitive screening detects decline but doesn&#x27;t stop it yet. (general medical guidance)</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Lifestyle multidomain interventions (FINGER model: diet, exercise, cognitive training, vascular monitoring): Shown to reduce cognitive decline in at-risk older adults; being adapted globally. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Midlife LDL lowering: Statins, PCSK9 inhibitors, diet (Mediterranean/MIND), exercise—observational data support starting in 40s–50s; trials testing earlier initiation in ApoE4 carriers underway. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Menopause interventions: Hormone therapy timing hypothesis (early initiation may protect, late may harm); lifestyle trials in perimenopausal women measuring proteomic signatures; Longitudinal Menopause Project (UCSB/UCSF) recruiting.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mitochondrial resilience: NADH/nicotinamide riboside supplements, exercise, ketogenic diets—in early trials for cognitive impairment; Purdue team developing real-time brain bioenergetic imaging. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Heat mitigation: Urban planning (trees, cool roofs), housing policy (AC mandates), clinical heat-action plans for vulnerable patients—emerging as public health dementia prevention. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TIA cognitive follow-up protocols: Neurology/cardiology guidelines beginning to incorporate routine cognitive screening post-TIA.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Heat-dementia: Observational (Health and Retirement Study); census-tract heat estimates not personal exposure; AC data from 2016 only; dementia via algorithm not clinical adjudication; residual confounding possible. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Exercise: Dr. Bherer&#x27;s lab shows clinically significant improvements in MCI at 6 months (attention, speed); memory takes longer; benefits reverse in 1–1.5 months after stopping—adherence is critical.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Menopause proteomics: 16-protein signature correlates with menopausal stage, not age; predicts cognition/AD risk over 16 years in 4 cohorts (n~12,000); &quot;modestly elevated risk&quot; not deterministic; clinical utility of protein panel unproven. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">LDL-amyloid clearance: Mechanistic (animal, cell, human biomarker) data strong; observational statin data supportive for midlife start; RCTs negative when started symptomatically—timing is key unresolved question. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TIA-dementia: Large Ontario cohort (113k); 75% increased risk year 1, 34% overall; dementia 3x more frequent than stroke; no brain imaging to exclude pre-existing pathology—association, not causation. (general medical guidance)</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Longitudinal Menopause Project (UCSB/UCSF/Wellcome Leap): Real-time tracking of hormonal, proteomic, vascular, and neuroimaging changes through menopause—will define intervention targets. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">FINGER-type multidomain prevention trial results in diverse populations (US POINTER, EU MIND-AD, others)—testing scalability.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mendelian randomization and RCT data on early vs. late statin initiation by ApoE status—for precision prevention guidelines.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Climate-health policy integration: Heat action plans with cognitive health endpoints; Medicare/Medicaid cooling assistance as dementia prevention.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mitochondrial/bioenergetic biomarkers (NAD+, lactate, imaging) entering clinical trials for stratification and treatment monitoring.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">TIA cognitive follow-up guideline updates from AHA/ASA and neurology societies—standardizing post-TIA brain health surveillance.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.medscape.com/viewarticle/extreme-heat-linked-higher-dementia-risk-older-adults-2026a10015ni" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Extreme Heat Tied to Higher Dementia Risk in Adults Aged 50+</a>
+<a href="https://medicalxpress.com/news/2026-11-extreme-days-dementia-poorer-communities.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Extreme heat days may increase dementia risk, with poorer communities facing greater vulnerability</a>
+<a href="https://theconversation.com/a-neuropsychologist-explains-the-importance-of-exercise-in-fighting-dementia-274391" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>A neuropsychologist explains the importance of exercise in fighting dementia</a>
+<a href="https://neurosciencenews.com/menopause-blood-protein-dementia-32375/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Menopause Blood Protein Signature Tied to Dementia Risk</a>
+<a href="https://beingpatient.com/what-cholesterol-means-for-the-brain-and-alzheimers-risk/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>What Cholesterol Means for the Brain and Alzheimer&#x27;s Risk</a>
+<a href="https://www.purdue.edu/hhs/news/2026/11/purdue-health-sciences-researchers-discover-a-new-potential-mechanism-towards-alzheimers-resilience/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Purdue Health Sciences researchers discover a new potential mechanism towards Alzheimer&#x27;s resilience</a>
+<a href="https://www.psu.edu/news/nese-college-nursing/story/nursing-professor-receives-1m-nih-grant-study-sleep-and-dementia-risk" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Nursing professor receives $1M NIH grant to study sleep and dementia risk</a>
+<a href="https://www.diabetes.org.uk/about-us/news-and-views/vaccines-and-type-1-risk-and-dementia-risk-type-2-diabetes-october-2026" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Vaccines and type 1 risk and dementia risk in type 2 diabetes: October 2026 research highlights</a>
+<a href="https://medicaldialogues.in/neurology-neurosurgery/news/transient-ischemic-attack-associated-with-increased-risk-of-dementia-study-181702" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Transient ischemic attack associated with increased risk of dementia: Study</a>
+<a href="https://www.news-medical.net/news/20261103/Memory-problems-may-matter-more-than-slower-thinking-for-dementia-risk-in-frail-adults.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Memory problems may matter more than slower thinking for dementia risk in frail adults</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-violet-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-violet-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alz | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #7c3aed08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #7c3aed !important;
+            color: #7c3aed !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-violet-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #7c3aed">
+                    <i data-lucide="brain"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Alz</h1>
+                    <p class="text-[10px] text-violet-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">When Alzheimer&#x27;s Doesn&#x27;t Start With Memory Loss: Vision, Language and Faster-Spreading Tau in Younger Patients</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #7c3aed">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Alzheimer&#x27;s that begins before 65 often looks different: the first symptoms may involve vision, language or planning rather than memory, and new imaging shows the tau protein spreads more than twice as fast than in late-onset disease. New laboratory work also identified a protein (FAM84B) involved in passing tau between brain cells. Recognising these atypical presentations matters because they are frequently missed or misdiagnosed."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-violet-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-violet-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A UCSF-led study (Science Translational Medicine) compared 390 people with early-onset Alzheimer&#x27;s (average age 59) against 211 with late-onset disease (average 78) using tau PET scans. Early-onset patients had more extensive tau deposits and faster accumulation — more than twice the rate — which may help explain their quicker decline.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Stanford ARC score (see Theme 1): Resting fMRI patterns distinguish SuperAgers (75+, memory of 45-year-old) from AD; applied to 1,300+ unimpaired 55–70 predicts 12-year decline, amyloid, diagnosis.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A study from the University of Alicante (Brain Sciences) compared 16 people with mild-to-moderate Alzheimer&#x27;s against 20 controls and found worse binocular acuity, depth perception and eye-movement control. Nearly 60% of patients could not complete the depth-perception test — which the authors note may reflect cognitive difficulty with the task itself, not only vision (independent fact-check: the draft presented this as a pure visual deficit).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Korean researchers identified FAM84B, a protein that appears to promote the transfer of tau between brain cells and is found at higher levels in Alzheimer&#x27;s brains. Further research is needed to determine how this pathway affects disease in people (independent fact-check: the draft called it a mechanistic target to block tau spread).</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Early-onset AD (5% of cases) progresses faster, strikes in prime working/parenting years, and often misdiagnosed due to atypical presentation (vision, language, executive). Faster tau spread explains aggressive course and suggests tau-targeting therapies may be especially critical for younger patients. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Visual/oculomotor deficits: Non-invasive, scalable eye tests could detect AD years earlier, but must disentangle cognitive from true visual impairment. FAM84B offers a mechanistic target to block tau spread. (general medical guidance)</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults under 65 with cognitive changes—especially visual difficulties (judging distances, reading), language problems (word-finding, following sentences), or executive dysfunction (planning, adapting)—request evaluation for early-onset AD, not just standard memory testing. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Families with multiple affected members across generations or &quot;sporadic&quot; cases—consider genetic counseling; cryptic relatedness means negative family history doesn&#x27;t rule out genetic risk. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">ApoE4 carriers and those with high polygenic risk scores (when clinically available)—earlier, more aggressive risk factor modification and monitoring may be warranted.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If a younger adult has changes in vision, language, or planning and routine eye exams are normal, you may wish to ask whether a cognitive evaluation is appropriate — Alzheimer&#x27;s does not always begin with memory loss (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask whether the evaluation considers atypical forms of Alzheimer&#x27;s, which are more common in people under 65 and are often missed initially (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If early-onset Alzheimer&#x27;s is diagnosed, you may wish to ask about genetic counselling, since the genetic contribution differs from late-onset disease (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-violet-50/30 border border-violet-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #7c3aed">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask about clinical trials, as younger patients with atypical presentations are often under-represented in research (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        Large Multi-Cohort Tau PET Study (UCSF/ADNI, 390 early-onset, 211 late-onset)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        Landmark Genetic Meta-Analysis (Nature, ~2.8M individuals, 127 risk loci, 48 novel)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        SuperAger Neuroimaging Research (Stanford, 180 SuperAgers, 110 AD, 1,300+ unimpaired)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        Visual/Oculomotor Phenotyping Study (University of Alicante, 16 AD, 20 controls)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-violet-100 shadow-sm transition-transform" style="color: #7c3aed">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        5 Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Early-onset AD is biologically distinct—faster tau spread means tau therapies could have outsized impact. Genetic architecture clarity reveals druggable microglial/neuronal targets. SuperAger resilience proves the brain can resist pathology—interventions may boost this. (general medical guidance)</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Visual testing: Cognitive confounding is severe—60% couldn&#x27;t do depth perception test. Not a standalone diagnostic yet.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">&quot;Asymptomatic AD&quot; (30% at autopsy): We don&#x27;t know who will stay resilient vs. decline. Resilience factors (mitochondria, genetics, lifestyle) are probabilistic, not guaranteed. (general medical guidance)</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Anti-amyloid (lecanemab, donanemab): Approved for early symptomatic AD including early-onset; UCSF data suggest tau-targeting combos may be especially needed for younger patients. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mitochondrial resilience: NADH/nicotinamide riboside supplements, exercise, ketogenic metabolic therapies—Purdue team developing real-time bioenergetic imaging for trials.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">FAM84B inhibitors: Target identification stage; Korean team linking human samples with stem cell models to validate as therapeutic target.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Early-onset tau: Largest tau PET study in early-onset (390 pts); 2–3 year follow-up; amyloid-positive only; excluded known mutation carriers; tau spread rate &gt;2x late-onset; non-memory presentation 20% vs. &lt;1% late-onset. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Genetics: 91% European ancestry in effective sample; non-European estimates imprecise (African ancestry not significant); PGS prediction weaker in non-Europeans; proxy cases (parent report) boost power but add noise; clinical utility of PGS not established.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SuperAger/ARC: 180 SuperAgers (75+, memory of 45yo); 110 AD; 85% classification accuracy; predicted outcomes in 1,300+ unimpaired 55–70 over 5–12 years; outperformed amyloid, tau, genetics; not yet tested for intervention modification. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Visual/oculomotor: Small (16 AD, 20 controls); cross-sectional; moderate AD only (GDS 4–5); 60% couldn&#x27;t complete stereopsis due to cognitive demand; no refraction/cataract control; eye-tracking feasibility only.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">FAM84B: Postmortem tissue + stem cell models; correlation with AD pathology; mechanistic in cells; no animal model or human therapeutic data yet.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #7c3aed20; color: #7c3aed;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">UCSF early-onset tau longitudinal data: Longer follow-up, correlation with clinical progression rates, response to anti-amyloid in early-onset subgroup. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">FAM84B validation: Animal models, human CSF/blood biomarker correlation, inhibitor development.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Diverse ancestry genetics: NIH All of Us, ADSP, international consortia expanding non-European GWAS—critical for equitable PGS. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Eye-tracking biomarkers: Standardized protocols controlling for cognitive load; longitudinal studies linking oculomotor deficits to tau/PET and conversion. (general medical guidance)</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.news-medical.net/news/20261105/Tau-spreads-more-rapidly-in-early-onset-Alzheimers-disease.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Tau spreads more rapidly in early-onset Alzheimer&#x27;s disease</a>
+<a href="https://www.news-medical.net/news/20261102/Scientists-may-have-underestimated-how-much-genes-contribute-to-Alzheimers-risk.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Scientists may have underestimated how much genes contribute to Alzheimer&#x27;s risk</a>
+<a href="https://medicalxpress.com/news/2026-11-brain-patterns-alzheimer-years-memory.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Brain activity patterns may predict Alzheimer&#x27;s years before memory slips</a>
+<a href="https://www.insideprecisionmedicine.com/topics/precision-medicine/superagers-offer-window-on-alzheimers-risk/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>SuperAgers Offer Window on Alzheimer&#x27;s Risk</a>
+<a href="https://www.reviewofoptometry.com/news/article/alzheimers-linked-to-differences-in-visual-and-oculomotor-function" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Alzheimer&#x27;s Linked to Differences in Visual and Oculomotor Function</a>
+<a href="https://beingpatient.com/event/living-with-a-genetic-risk-for-younger-onset-alzheimers/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Living With a Genetic Risk for Younger-Onset Alzheimer&#x27;s</a>
+<a href="https://www.koreaherald.com/article/10925506" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Korea identifies protein that helps spread Alzheimer&#x27;s-linked tau</a>
+<a href="https://medicalxpress.com/news/2026-11-hidden-ancestral-links-motor-neuron.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Hidden ancestral links found in motor neuron disease and dementia could speed up gene discovery</a>
+<a href="https://medicalxpress.com/news/2026-11-cell-natural-recycling-center-alzheimer.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-violet-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Enhancing the cell&#x27;s natural recycling center improves Alzheimer&#x27;s features in animal models</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-violet-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-violet-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-violet-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>
