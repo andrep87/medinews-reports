@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorectal Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #0f172a !important;
+            color: #0f172a !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-slate-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #0f172a">
+                    <i data-lucide="stethoscope"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Colorectal Cancer</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">New First-Line Option in Development for RAS-Mutated Metastatic Colorectal Cancer: Onvansertib Earns FDA Fast Track</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #0f172a">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Multiple innovative strategies are advancing for treatment-refractory metastatic colorectal cancer (mCRC): Onvansertib (PLK1 inhibitor) earned FDA Fast Track with a 72% response rate in RAS-mutated first-line disease; City of Hope launched a bispecific immunotherapy trial (ivonescimab + ADG126); a curcumin analogue (FLLL32) triggers ferroptosis in resistant models; and highly selected patients with liver-only metastases are achieving long-term survival after liver transplant."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-slate-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-slate-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Onvansertib (an oral PLK1 inhibitor from Cardiff Oncology) with FOLFIRI and bevacizumab received FDA Fast Track designation on 16 November 2026 for first-line RAS-mutated metastatic colorectal cancer, based on the randomised PHASE 2 CRDF-004 trial (110 patients), where the 30 mg dose achieved a 72.2% response rate. A registrational phase 3 trial is planned for 2027 (independent fact-check: the draft described this as a Phase III fast-track with enrolment beginning in 2027; CRDF-004 is phase 2, and the phase 3 is only planned). (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ivonescimab + ADG126 (muzastotug): City of Hope/Adagene Phase I trial (n=36) for advanced MSS mCRC. Ivonescimab = PD-1/VEGF bispecific; ADG126 = CTLA-4 bispecific (tumor-activated). Combo + chemo (5-FU → +irinotecan) planned as maintenance then 1L. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">FLLL32 (curcumin analogue): Synthetic STAT3 inhibitor triggers ferroptosis (iron-dependent lipid peroxidation death) in CRC organoids and xenografts. IC50 0.33-0.44 µM; suppresses pSTAT3 → downregulates GPX4 (lipid peroxide detox) and SLC40A1 (iron export) → lethal iron/ROS accumulation. Wide therapeutic window (spares normal intestinal cells at 5 µM).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Mirvetuximab soravtansine (MIRV, anti-FOLR1 ADC): Preclinical (mouse/in vitro) shows FOLR1 drives immunotherapy resistance via AARS1-STAT1-MHC-I axis; MIRV + anti-PD-1 restores CD8+ T-cell killing in MSS CRC models. MIRV FDA-approved for ovarian cancer.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Liver transplant for mCRC: Mayo Clinic performed first liver transplant for colon cancer with liver-only metastases (Shannon Jones, cancer-free 2 years). Iowa patient also cancer-free post-transplant. Criteria: liver-only disease, no extrahepatic spread, primary tumor controlled, response to systemic therapy.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patient stories: Multiple stage IV patients (Bianca Harvey 3.5 years, Winston-Salem father, Iowa dad) achieving long-term remission via clinical trials, transplant, or novel combinations—real-world proof of progress.</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">RAS-mutated mCRC (50-60% of cases): No targeted therapy exists; standard 1L is chemo + bevacizumab (ORR ~40%, PFS ~11 mo). Onvansertib&#x27;s 30% ORR improvement is unprecedented—targets PLK1 (mitotic kinase) to enhance chemo efficacy independent of RAS status. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">MSS mCRC (85% of cases): Immunotherapy fails; bispecifics (ivonescimab PD-1/VEGF, ADG126 CTLA-4) engage T-cells and normalize vasculature simultaneously—rational combo for &quot;cold&quot; tumors. (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Ferroptosis (FLLL32): Bypasses apoptosis resistance (common in CRC); targets STAT3-GPX4/SLC40A1 axis—novel death mechanism for refractory tumors; curcumin derivative solves bioavailability issues.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">FOLR1/MIRV: Identifies a druggable resistance mechanism; MIRV already approved—rapid repurposing path for MSS CRC immunotherapy combinations.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Liver transplantation is being explored for highly selected patients with liver-only metastatic colorectal cancer; the sources do not provide survival figures, so specific outcomes should not be assumed (general medical guidance).</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Onvansertib (an oral PLK1 inhibitor from Cardiff Oncology) with FOLFIRI and bevacizumab received FDA Fast Track designation on 16 November 2026 for first-line RAS-mutated metastatic colorectal cancer, based on the randomised PHASE 2 CRDF-004 trial (110 patients), where the 30 mg dose achieved a 72.2% response rate. A registrational phase 3 trial is planned for 2027 (independent fact-check: the draft described this as a Phase III fast-track with enrolment beginning in 2027; CRDF-004 is phase 2, and the phase 3 is only planned). (general medical guidance)</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">FLLL32: Preclinical only—no human trials yet. Future: refractory CRC with STAT3 activation, ferroptosis sensitivity.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">MIRV + anti-PD-1: Future trials for FOLR1+ MSS mCRC—FOLR1 testing not routine; discuss with trial team.</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Liver transplant: Extremely select: liver-only mets, no lymph node/lung/bone involvement, primary resected/controlled, sustained response to chemo, no extrahepatic disease, at expert transplant oncology center (Mayo, few others).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">SCN4A variant carriers: Japanese patients with rs2302237 variant have less oxaliplatin neuropathy—future pharmacogenomic dosing.</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have RAS-mutated (KRAS or NRAS) metastatic colorectal cancer, you may wish to ask your oncologist about clinical trials of onvansertib-based first-line therapy, since RAS mutations rule out standard anti-EGFR drugs (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to confirm your tumour&#x27;s RAS mutation status, as it determines which targeted options and trials apply (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask whether any of the novel immunotherapy combinations in development are available to you through a trial (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-slate-50/30 border border-slate-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0f172a">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask what the standard first-line options are for your specific tumour profile while these investigational approaches are still being tested (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [1] FDA Fast Track Designation (Onvansertib, Nov 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [2] Phase I/II Trials Launched (City of Hope ivonescimab/ADG126; Onvansertib CRDF-004 Phase II)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [Preclinical Breakthroughs (FLLL32 ferroptosis; FOLR1 ADC; Liver transplant oncology)]
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-slate-100 shadow-sm transition-transform" style="color: #0f172a">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        [6] Independent Sources
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Onvansertib could become 1L standard for RAS-mut mCRC—oral, chemo-enhancing, RAS-agnostic. (general medical guidance)</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Bispecifics (ivonescimab/ADG126) could &quot;heat up&quot; MSS tumors—dual immune/angiogenic attack.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: CTLA-4 toxicity (colitis, hepatitis) + PD-1 + VEGF (hypertension, bleeding, proteinuria) = high adverse event burden; tumor-activated ADG126 unproven in humans.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Ferroptosis (FLLL32) kills resistant cells via new mechanism—bypasses BCL2, p53, apoptosis defects.</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Iron metabolism targeting risks anemia, organ iron overload; STAT3 inhibition may affect normal immunity/regeneration; curcumin analogues have failed before.</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Hope: Liver transplant offers cure for some stage IV—Jones cancer-free 2 years, back coaching.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: &lt;1% of mCRC patients meet criteria; lifelong immunosuppression; donor shortage; only at few centers; cost ~$1M+; not standard of care.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Hope: Oral care bundle cuts surgical infections in half—simple, cheap, scalable.</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Not standard everywhere; periodontitis-specific effect unproven; dental access barriers for many.</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Onvansertib (an oral PLK1 inhibitor from Cardiff Oncology) with FOLFIRI and bevacizumab received FDA Fast Track designation on 16 November 2026 for first-line RAS-mutated metastatic colorectal cancer, based on the randomised PHASE 2 CRDF-004 trial (110 patients), where the 30 mg dose achieved a 72.2% response rate. A registrational phase 3 trial is planned for 2027 (independent fact-check: the draft described this as a Phase III fast-track with enrolment beginning in 2027; CRDF-004 is phase 2, and the phase 3 is only planned). (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Ivonescimab (Akeso/Adagene): PD-1/VEGF bispecific; 82% ORR in small MSS CRC trial (n=22) with chemo; China approval for NSCLC. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ADG126/Muzastotug (Adagene): Masked CTLA-4 bispecific; activates in tumor microenvironment (low pH); 3rd clinical program combining with PD-1 bispecific. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">FLLL32 (Wu et al., Mol Biomed 2026): STAT3-targeted ferroptosis inducer; patient-derived organoid screening hit; xenograft efficacy 50mg/kg IP daily; no overt toxicity.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Mirvetuximab soravtansine (ImmunoGen/Gilead): FOLR1 ADC; approved ovarian; preclinical CRC combo with anti-PD-1; FOLR1 IHC assay development needed.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Onvansertib (an oral PLK1 inhibitor from Cardiff Oncology) with FOLFIRI and bevacizumab received FDA Fast Track designation on 16 November 2026 for first-line RAS-mutated metastatic colorectal cancer, based on the randomised PHASE 2 CRDF-004 trial (110 patients), where the 30 mg dose achieved a 72.2% response rate. A registrational phase 3 trial is planned for 2027 (independent fact-check: the draft described this as a Phase III fast-track with enrolment beginning in 2027; CRDF-004 is phase 2, and the phase 3 is only planned). (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Ivonescimab/ADG126: Phase I only (n=36 planned); safety/PK primary; efficacy exploratory; bispecific toxicity (immune + VEGF) unknown in combo. (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">MIRV/FOLR1: Mouse syngeneic (CT26, MC38), in vitro human CRC lines; FOLR1-AARS1-STAT1 axis mechanistically detailed; human FOLR1 prevalence in MSS CRC not defined.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Liver transplant: Case reports/series (Jones, Iowa, literature); selection bias extreme; 5-yr OS on chemo 9% (Harnois); transplant series small; immunosuppression recurrence risk theoretical.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SCN4A neuropathy: Japanese prospective (n=76); rs2302237 protective for chronic neuropathy (B -4.4 to -5.2, p=0.009-0.016); exploratory, no multiplicity correction; European studies showed opposite effect.</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0f172a20; color: #0f172a;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Onvansertib (an oral PLK1 inhibitor from Cardiff Oncology) with FOLFIRI and bevacizumab received FDA Fast Track designation on 16 November 2026 for first-line RAS-mutated metastatic colorectal cancer, based on the randomised PHASE 2 CRDF-004 trial (110 patients), where the 30 mg dose achieved a 72.2% response rate. A registrational phase 3 trial is planned for 2027 (independent fact-check: the draft described this as a Phase III fast-track with enrolment beginning in 2027; CRDF-004 is phase 2, and the phase 3 is only planned). (general medical guidance)</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">City of Hope ivonescimab/ADG126 Phase I: Safety run-in, RP2D determination, expansion cohorts (MSS mCRC ± chemo).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">FLLL32 IND-enabling: Toxicology, PK, GMP manufacturing; first-in-human trial design (likely refractory CRC).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">MIRV + anti-PD-1 CRC trial: ImmunoGen/Gilead collaboration announcement; FOLR1 IHC companion diagnostic development.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SCN4A pharmacogenomics: Validation in non-Japanese cohorts; prospective trial of genotype-guided oxaliplatin dosing/scheduling.</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Oral care standardization: Perioperative oral care guideline endorsement (ASCO/SSO/ACS); dental-oncology integration models.</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://oncodaily.com/science/allan-pereira-gi-oncology-635874" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Allan Pereira: Onvansertib Receives FDA Fast Track Designation for First-Line RAS-Mutated Metastatic Colorectal Cancer</a>
+<a href="https://oncodaily.com/not-to-miss/onvansertib-633589" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Onvansertib Receives FDA Fast Track Designation in RAS-Mutated Colorectal Cancer</a>
+<a href="https://www.news-medical.net/news/20261117/City-of-Hope-and-Adagene-launch-clinical-trial-for-advanced-colorectal-cancer-therapy.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>City of Hope and Adagene launch clinical trial for advanced colorectal cancer therapy</a>
+<a href="https://bioengineer.org/curcumin-analogue-flll32-triggers-ferroptotic-cell-death-in-colorectal-cancer-models/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Curcumin Analogue FLLL32 Triggers Ferroptotic Cell Death in Colorectal Cancer Models</a>
+<a href="https://bioengineer.org/targeting-folate-receptor-overcomes-immunotherapy-resistance-in-colorectal-cancer-in-mice/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Targeting Folate Receptor Overcomes Immunotherapy Resistance in Colorectal Cancer in Mice</a>
+<a href="https://www.genengnews.com/topics/cancer/targeting-folate-receptor-reverses-colorectal-cancers-resistance-to-immunotherapy-in-mice/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Targeting Folate Receptor Reverses Colorectal Cancer&#x27;s Resistance to Immunotherapy in Mice</a>
+<a href="https://www.kctv5.com/2026/11/17/football-coach-receives-mayo-clinics-first-liver-transplant-metastatic-colon-cancer/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Football coach receives Mayo Clinic&#x27;s first liver transplant for metastatic colon cancer</a>
+<a href="https://www.kcci.com/article/iowa-dad-declared-cancer-free-after-liver-transplant-from-stranger/74458710" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Scans show Iowa dad is cancer-free after liver transplant from stranger</a>
+<a href="https://www.wral.com/news/local/faytteville-mom-colon-cancer-free-bell-duke-health-november-2026/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Fayetteville mom rings cancer-free bell after 3-year battle with stage 4 colon cancer</a>
+<a href="https://www.wxii12.com/article/winston-salem-father-rings-bell-after-stage-4-colon-cancer/74469763" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>&#x27;Forever grateful&#x27;: Winston-Salem father rings bell after stage 4 cancer battle</a>
+<a href="https://bioengineer.org/sodium-channel-variant-linked-to-lower-nerve-burden-in-colorectal-cancer/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Sodium Channel Variant Linked to Lower Nerve Burden in Colorectal Cancer</a>
+<a href="https://bioengineer.org/oral-care-linked-to-fewer-infections-after-colorectal-cancer-surgery/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-slate-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Oral Care Linked to Fewer Infections After Colorectal Cancer Surgery</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-slate-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-slate-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-slate-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>
