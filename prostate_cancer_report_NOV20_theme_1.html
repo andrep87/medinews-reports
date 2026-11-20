@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prostate Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #2563eb08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #2563eb !important;
+            color: #2563eb !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-blue-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #2563eb">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Prostate Cancer</h1>
+                    <p class="text-[10px] text-blue-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">American Cancer Society Issues First Direct Recommendation for Routine PSA Screening in 16 Years</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #2563eb">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"The American Cancer Society now directly recommends regular PSA [prostate-specific antigen, a protein made by the prostate] blood tests for men ages 50–69 every two years, and yearly for higher-risk men starting at age 45, replacing its earlier &quot;shared decision-making&quot; approach[cite: 3, 4]. This update reflects stronger evidence that screening lowers metastatic [spread to distant parts of the body] disease and prostate cancer deaths, while newer tools like MRI [magnetic resonance imaging, a detailed scan using magnets and radio waves] and biomarkers [biological signs or tests in blood, urine, or tissue] help reduce unneeded biopsies [tissue samples][cite: 3, 4]."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-blue-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The American Cancer Society (ACS) released its first prostate cancer screening guideline update since 2010, moving from &quot;discuss with your doctor&quot; to a direct recommendation for routine PSA [prostate-specific antigen, a protein made by the prostate] blood testing[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men at average risk ages 50–69 should get a PSA test every two years, while higher-risk men—Black men, men with a father, brother, or son diagnosed before age 65, or men with multiple affected relatives at any age—should start yearly screening at age 45[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men with one relative diagnosed at age 65 or older screen every two years from ages 45–69, men ages 70–74 decide individually with their doctor, and screening is not recommended at age 75 or older or when life expectancy is under 10 years (independent fact-check: the ACS 2026 guideline generally advises against routine screening at 75+, with individualized discussion in select very healthy men ages 75–79 and discouraging it after age 80 or with less than 10 years life expectancy)[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The guidelines advise repeating a high PSA result before taking further steps, using MRI and/or validated biomarker tests to help decide who needs a biopsy, and choosing active surveillance [close monitoring rather than immediate treatment] for low-risk cancer[cite: 3, 4].</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Long-term follow-up from the European ERSPC [European Randomized Study of Screening for Prostate Cancer] trial showed screening reduces prostate cancer deaths by 13% and lowers metastatic disease, while the U.S. PLCO trial had heavy &quot;control&quot; group screening that diluted differences[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Stepwise checks—repeating an elevated PSA, adding MRI or biomarkers—can spare many men unnecessary biopsies and avoid treating slow-growing tumors that would never cause harm[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Black men experience 67% higher incidence [rate of new cases] and nearly double the death rate (with one source noting up to threefold), so earlier, annual testing starting at 45 aims to catch aggressive cancer sooner[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Clearer guidance gives primary care clinicians a straightforward starting point instead of open-ended debate, helping more men who might otherwise be missed get timely evaluation[cite: 3, 4].</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men ages 50–69 at average risk (not Black and without strong family history) are advised to have a PSA blood test every two years[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Black men and men with a close relative (father, brother, or son) diagnosed before age 65, or multiple affected relatives at any age, are advised to start annual PSA testing at age 45[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men with a single close relative diagnosed at age 65 or older are advised to screen every two years from ages 45–69, while men ages 70–74 make an individualized choice based on overall health and life expectancy[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Screening is not recommended for men aged 75 and older or those whose health limits life expectancy to less than 10 years[cite: 3, 4].</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you are aged 50–69 and have not had a PSA test in two years, you may wish to schedule one at your next primary care visit; if you are aged 45–49 and Black or have a family history of prostate cancer, you may wish to ask about starting PSA testing now[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If your PSA comes back elevated (such as at least 3 ng/mL [nanograms per milliliter] for ages 45–69 or at least 6.5 ng/mL for ages 70–74), you may wish to ask about repeating the test in two weeks to three months before deciding on a biopsy[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If a biopsy is being considered after an elevated PSA, you may wish to ask your doctor whether a prostate MRI or a validated biomarker test fits your situation[cite: 3, 4] (general medical guidance).</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you are diagnosed with low-risk prostate cancer, you may wish to ask about active surveillance and what follow-up schedule of PSA checks, MRI scans, or repeat biopsies is recommended[cite: 3, 4] (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Major Guideline Update (American Cancer Society, 2026)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Long-Term European Randomized Trial (ERSPC, 20+ year follow-up)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        12 Cited Sources (Independent, Academic, and Health Outlets)
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Catching aggressive prostate cancer earlier saves lives, and using MRI and biomarkers can reduce unneeded biopsies and side effects such as urinary leakage or erection problems[cite: 3, 4] (general medical guidance).</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Screening can still detect slow-growing tumors that never needed treatment, and active surveillance involves repeated tests and appointments that can feel stressful[cite: 3, 4] (general medical guidance).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Hope: Earlier annual screening starting at age 45 offers a focused way to address higher risks in Black men and men with family history[cite: 3, 4].</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Real-world coverage and access to timely follow-up care can vary depending on a person&#x27;s health plan and local care setting[cite: 3, 4] (general medical guidance).</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">PSA blood testing remains the main screening test, while a digital rectal exam [a physical exam of the prostate through the rectum] is no longer recommended on its own as a screening test[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">When PSA is elevated, the updated care path centers on repeating the PSA test, then using MRI and/or validated biomarker tests before deciding on a targeted biopsy[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Active surveillance using regular monitoring instead of immediate surgery or radiation is an established approach for low-risk disease to protect quality of life[cite: 3, 4] (general medical guidance).</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The strongest mortality evidence comes from the ERSPC trial with more than 20 years of follow-up (showing a 13% overall reduction in prostate cancer death, with larger reductions reported in select European centers with organized screening), while exact figures for lifelong screening starting at ages 45 or 50 rely on modeling estimates[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Using higher PSA thresholds and MRI triage helps balance benefits and harms, though overdiagnosis [finding slow-growing cancers that would never cause symptoms] still occurs, especially in older men or those with other serious illnesses[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The U.S. Preventive Services Task Force (USPSTF) [an independent federal health panel] has previously used a more cautious individualized stance for men ages 55–69, so clinicians and patients may still see differing guidance across organizations[cite: 3, 4] (general medical guidance).</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Future guideline updates from other major groups, such as the USPSTF, and how primary care clinics put the new ACS schedule into practice[cite: 3, 4] (general medical guidance).</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Ongoing research into screening pathways, including imaging and blood or urine markers, aimed at improving accuracy and limiting overdiagnosis[cite: 3, 4] (general medical guidance).</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://www.post-gazette.com/health/prostate-cancer-guidelines-7RQHQEZF2DURMO77YS254KUUFA/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>What men need to know after a major update to prostate cancer guidelines</a>
+<a href="https://www.michiganmedicine.org/health-lab/updated-prostate-cancer-screening-guidelines-emphasize-benefits-early-detection" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Updated prostate cancer screening guidelines emphasize benefits of early detection</a>
+<a href="https://oncodaily.com/voices/daniele-paone-636171" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Daniele Paone։ Updated Recommendations From the American Cancer Society for Prostate Cancer Screening</a>
+<a href="https://www.healthline.com/health-news/new-guidelines-recommend-routine-prostate-cancer-screening" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New Guidelines Recommend Routine Prostate Cancer Screening for Men Over 50</a>
+<a href="https://baptisthealth.net/baptist-health-news/major-updates-to-prostate-cancer-screening-what-men-need-to-know-about-new-guidelines" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Major Updates to Prostate Cancer Screening: What Men Need to Know About New Guidelines</a>
+<a href="https://theconversation.com/prostate-cancer-testing-now-urged-for-men-in-their-50s-and-60s-a-lead-author-of-the-new-screening-guidelines-explains-why-296645" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Prostate cancer testing now urged for men in their 50s and 60s – a lead author of the new screening guidelines explains why</a>
+<a href="https://cancerletter.com/podcastc/20261118-psa/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Brawley: ACS prostate cancer screening guideline should say no to &quot;mass screening&quot;</a>
+<a href="https://www.hackensackmeridianhealth.org/en/healthier-you/2026/11/18/american-cancer-society-updates-prostate-cancer-screening-guidelines" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>American Cancer Society Updates Prostate Cancer Screening Guidelines</a>
+<a href="https://www.wbay.com/2026/11/18/interview-american-cancer-society-recommends-psa-screening-every-2-years-starting-age-50/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>INTERVIEW: American Cancer Society recommends PSA screening every 2 years starting at age 50</a>
+<a href="https://www.al.com/news/2026/11/new-prostate-cancer-screening-guidelines-are-a-license-to-live.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New prostate cancer screening guidelines are a license to live</a>
+<a href="https://www.uc.edu/news/articles/2026/11/n21445397.html" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>New Guidelines Recommend Routine Prostate Cancer Screening for Men Over 50</a>
+<a href="https://www.dakotanewsnow.com/2026/11/18/what-men-should-know-about-new-prostate-cancer-guidelines/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>What men should know about new prostate cancer guidelines</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-blue-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-blue-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-blue-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-blue-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lung Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0d948808; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #0d9488 !important;
+            color: #0d9488 !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-teal-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #0d9488">
+                    <i data-lucide="wind"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Lung Cancer</h1>
+                    <p class="text-[10px] text-teal-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Targeted Therapy Breakthroughs Redefine Care for Molecular Subsets of NSCLC</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #0d9488">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Three advances highlight precision care for specific genetic changes in non-small cell lung cancer: osimertinib plus savolitinib improved progression-free and overall survival after osimertinib resistance with MET [a cell-growth signaling protein] alterations; neladalkib (Nelkarmi) received accelerated approval for previously treated ALK-positive [anaplastic lymphoma kinase gene rearrangement] disease, with activity noted in the brain; and elticertinib received FDA Fast Track [an expedited review process] designation for EGFR [epidermal growth factor receptor] exon 20 insertion mutations after prior chemotherapy and amivantamab[cite: 1, 2]."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-teal-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-teal-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-teal-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-teal-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-teal-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">In the SAFFRON phase III trial of 338 patients with EGFR-mutated advanced NSCLC and MET overexpression or amplification after osimertinib [a targeted EGFR pill], adding savolitinib to osimertinib improved median progression-free survival [time without cancer worsening] to 7.6 vs. 5.4 months (HR [hazard ratio, a measure of relative risk over time] 0.55, P&lt;0.001) and median overall survival [length of time patients live] to 17.8 vs. 12.9 months (HR 0.68, P=0.010) compared with platinum-pemetrexed chemotherapy[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The FDA granted accelerated approval [conditional approval based on early clinical markers] to neladalkib (Nelkarmi) for previously treated ALK-positive NSCLC after alectinib (ORR [overall response rate, percentage of patients whose tumors shrink] 49%, 12-month DOR [duration of response] 52%) or after at least two prior ALK TKIs [tyrosine kinase inhibitors, targeted blocking pills] plus platinum chemotherapy (ORR 32%, 12-month DOR 51%), with intracranial [in the brain] activity also reported (independent fact-check: outside sources also report a 55% intracranial response rate in alectinib-pretreated patients with measurable brain metastases, though this figure was not in the week&#x27;s supplied sources)[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">The FDA granted Fast Track designation to elticertinib (PFL-721) for EGFR exon 20 insertion–mutated NSCLC after platinum chemotherapy and amivantamab, supported by phase I/II data showing a 54% ORR and 79% disease control rate at doses of 360 mg daily or higher[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">In a subset analysis of the phase II VISION trial of tepotinib in MET exon 14 skipping NSCLC, 8.3% of 313 patients had response durations over 36 months (up to nearly 79 months), including four patients who stopped treatment early for side effects and still had responses lasting up to 52 months off therapy[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">In preclinical [laboratory/animal] studies of KRAS-mutant [a common lung cancer gene mutation] NSCLC, blocking MYC [a cancer-driving protein] with OMO-103 shrank tumors directly and brought immune T cells into tumors, with higher response rates in mice when paired with OX40 or 4-1BB immune-stimulating antibodies[cite: 1, 2].</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">SAFFRON is reported as the first study after osimertinib progression to show both progression-free and overall survival gains with an all-oral targeted combination over chemotherapy in a biomarker-selected group[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Because MET alterations contribute to resistance in roughly 34% of cases after osimertinib, targeted combination therapy offers an important potential option; in SAFFRON, progression-free survival also favored the combination in patients with baseline brain metastases (HR 0.50)[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Neladalkib adds a newer ALK inhibitor option designed to enter the brain and reduce certain neurologic side effects seen with earlier drugs (independent fact-check: external sources and trial records also identify the first-line ALKAZAR phase III study [NCT06765109] and TRK-sparing / G1202R design details, which were not present in the week&#x27;s supplied sources)[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">EGFR exon 20 insertion NSCLC has historically seen limited benefit and tolerability challenges with standard options after platinum chemotherapy and amivantamab, making new targeted candidates like elticertinib notable[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Long-lasting responses in some tepotinib-treated patients point to underlying tumor biology worth studying to help more patients stay well longer[cite: 1, 2].</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults with advanced EGFR-mutated NSCLC whose cancer progressed on prior osimertinib and tested positive for MET overexpression or amplification on post-progression testing in the SAFFRON trial[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults with advanced ALK-positive NSCLC who previously received alectinib, or who received two or more prior ALK inhibitors plus platinum-based chemotherapy, for FDA-approved neladalkib[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults with advanced EGFR exon 20 insertion–mutated NSCLC whose disease progressed after platinum chemotherapy and amivantamab, for investigational elticertinib[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Adults with MET exon 14 skipping NSCLC, where tepotinib is used and favored first-line by clinical experts over immunotherapy given older patient age and retrospective data showing weaker immunotherapy responses even with high PD-L1 [programmed death-ligand 1, an immune-checkpoint protein][cite: 1, 2].</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If your EGFR-mutated NSCLC progressed on osimertinib, you may wish to ask your oncologist: &quot;Has repeat testing been done to check for MET overexpression or amplification, and could I be a candidate for osimertinib plus savolitinib or a related trial?&quot;[cite: 1, 2]</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have ALK-positive NSCLC and have been treated with alectinib or prior ALK inhibitors and chemotherapy, you may wish to ask: &quot;Does neladalkib fit my treatment history, and what lab or eye checks will we do for liver, kidney, and vision side effects?&quot;[cite: 1, 2]</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have an EGFR exon 20 insertion mutation after chemotherapy and amivantamab, you may wish to ask about clinical trial options, including the phase I/II elticertinib study (NCT06043817)[cite: 1, 2].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-teal-50/30 border border-teal-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #0d9488">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">When starting any targeted therapy, you may wish to ask your care team for a written summary of expected side effects—such as swelling (peripheral edema) with savolitinib or liver test changes with neladalkib—and who to call urgently for new symptoms[cite: 1, 2].</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0d948820; color: #0d9488;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-teal-100 shadow-sm transition-transform" style="color: #0d9488">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Phase III Randomized Trial (SAFFRON, n=338)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-teal-100 shadow-sm transition-transform" style="color: #0d9488">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Phase I/II Single-Arm Trial (ALKOVE-1, n=222)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-teal-100 shadow-sm transition-transform" style="color: #0d9488">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Phase I/II Dose-Escalation Study (Elticertinib, n=28 at target dose)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-teal-100 shadow-sm transition-transform" style="color: #0d9488">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Phase II Subset Analysis (VISION trial tepotinib long-term responders)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-teal-100 shadow-sm transition-transform" style="color: #0d9488">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        6 Cited Sources (5 Independent Outlets, MSKCC)
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: SAFFRON showed longer median overall survival (17.8 vs. 12.9 months) and higher one-year progression-free survival (36% vs. 10%) than chemotherapy in this post-osimertinib group[cite: 1, 2].</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: Savolitinib is not yet FDA-approved in the U.S. pending review of the September 2026 application, and out-of-pocket costs or insurance rules can still affect access[cite: 1, 2].</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Hope: Neladalkib expands oral options for previously treated ALK-positive NSCLC, including patients with central nervous system involvement[cite: 1, 2].</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Because approval is accelerated, continued U.S. approval requires confirming clinical benefit in follow-up studies, and regular monitoring for side effects such as liver, kidney, and eye changes is part of care[cite: 1, 2].</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0d948820; color: #0d9488;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Osimertinib (Tagrisso) plus savolitinib (oral once-daily osimertinib with twice-daily savolitinib): a New Drug Application was submitted to the FDA in September 2026, and the combination is approved in China for EGFR-mutated, MET-amplified NSCLC after prior EGFR TKI therapy[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Neladalkib (Nelkarmi): received FDA accelerated approval in November 2026 as a 150 mg once-daily oral pill for previously treated ALK-positive NSCLC, with confirmatory clinical trial follow-up required and first-line study work underway[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Elticertinib (PFL-721/STX-721): holds FDA Fast Track designation and is being studied in an ongoing phase I/II trial (NCT06043817) as an irreversible [permanently binding] inhibitor selective for EGFR and HER2 [human epidermal growth factor receptor 2] exon 20 insertions[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Tepotinib (Tepmetko): approved for MET exon 14 skipping NSCLC, with swelling often managed by holding treatment for a couple of weeks and restarting at a lower dose; four patients in the VISION subset maintained responses off therapy for up to 52 months[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">OMO-103: a MYC inhibitor in the phase I MYCure trial, with preclinical mouse studies showing strong antitumor activity when combined with OX40 or 4-1BB agonists [activating antibodies] and human combination trials still needed[cite: 1, 2].</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0d948820; color: #0d9488;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">SAFFRON was a randomized, controlled phase III study (n=338) with central MET testing that met its progression-free survival goal and showed an overall survival trend at 53% data maturity, while noting peripheral edema (49%), lower grade 3 or higher treatment-related side effects than chemotherapy (40% vs. 52%), and one fatal pneumonia case[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">ALKOVE-1 for neladalkib was a single-arm study (n=222) without a control group, meaning long-term survival comparisons are not established and accelerated approval depends on confirmatory trial results[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Elticertinib&#x27;s reported 54% response rate (95% CI [confidence interval, a statistical range of likely values] roughly 34–73%) and 79% disease control rate come from 28 patients at doses of 360 mg or higher in a small, early-phase, uncontrolled study without survival data yet[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The VISION long-term responder analysis looked at a subset of 313 patients (8.3% with response over 36 months), and why a small number of patients stayed in response off treatment is not yet understood[cite: 1, 2].</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #0d948820; color: #0d9488;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">FDA review of the September 2026 New Drug Application for osimertinib plus savolitinib[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Confirmatory and first-line clinical trial readouts for neladalkib[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Further clinical trial results for elticertinib in EGFR exon 20 insertion NSCLC[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Early human data from MYCure and studies testing MYC inhibition alongside immune-activating therapies[cite: 1, 2].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Laboratory and clinical research exploring why a small subset of tepotinib patients have prolonged responses even after stopping therapy[cite: 1, 2].</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://ascopost.com/articles/2026/11-november/saffron-osimertinib-plus-savolitinib-may-set-a-new-standard-of-care-for-patients-with-advanced-nsclc-after-progression-on-egfr-tki-treatment/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-teal-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>SAFFRON: Osimertinib Plus Savolitinib May Set a New Standard of Care for Advanced NSCLC After Progression on EGFR TKI</a>
+<a href="https://www.mskcc.org/news/fda-approves-neladalkib-for-alk-positive-lung" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-teal-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>FDA Approves Neladalkib for ALK-Positive Lung Cancer</a>
+<a href="https://www.curetoday.com/view/fda-approves-neladalkib-for-previously-treated-alk-lung-cancer" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-teal-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>FDA Approves Nelkarmi for Previously Treated ALK+ Lung Cancer</a>
+<a href="https://www.onclive.com/view/elticertinib-receives-fda-fast-track-designation-in-egfr-exon-20-mutated-nsclc" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-teal-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Elticertinib Receives FDA Fast Track Designation in EGFR Exon 20–Mutated NSCLC</a>
+<a href="https://www.onclive.com/view/testing-timing-and-toxicity-maximizing-tepotinib-s-durable-benefit-in-met-exon-14-skipping-nsclc" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-teal-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Testing, Timing, and Toxicity: Maximizing Tepotinib&#x27;s Durable Benefit in MET Exon 14 Skipping NSCLC</a>
+<a href="https://www.news-medical.net/news/20261120/Exposing-hidden-immune-vulnerabilities-in-KRAS-mutant-non-small-cell-lung-cancer.aspx" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-teal-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Exposing hidden immune vulnerabilities in KRAS-mutant non-small cell lung cancer</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-teal-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-teal-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-teal-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-teal-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prostate Cancer | Precision Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* HIDE GLOBAL SCROLLBARS TO PREVENT DOUBLE SCROLLBAR IN IFRAME */
+        html, body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #2563eb08; }
+        
+        .sub-tab.active {
+            border-bottom: 4px solid #2563eb !important;
+            color: #2563eb !important;
+            background-color: white;
+        }
+
+        .anim-slide {
+            animation: slideUp 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+        }
+
+        details[open] summary svg { transform: rotate(180deg); }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="pb-16 text-slate-900">
+    
+    <!-- LEGAL DISCLOSURE (MOVED TO VERY TOP) -->
+    <div class="w-full bg-slate-50 border-b border-slate-200 p-2 text-center text-[9px] text-slate-500 leading-tight no-print">
+        ⚠️ Not medical advice. Always check with your own doctor before acting on anything here or in linked content.
+    </div>
+
+    <!-- BRANDING HEADER (STICKY REMOVED) -->
+    <header class="glass border-b border-blue-100 px-6 py-5 no-print">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- Left: Main Title & Icon -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="p-2.5 md:p-3 rounded-2xl text-white shadow-lg shrink-0" style="background-color: #2563eb">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-slate-800">Prostate Cancer</h1>
+                    <p class="text-[10px] text-blue-400 font-bold uppercase tracking-widest mt-1">AI Clinical Feed</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+
+    <section id="content-theme-0" class="theme-section anim-slide">
+
+        <!-- Theme Title & Summary -->
+        <div class="mb-6 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tighter leading-tight">Liquid Biopsy and Genomic Testing Reshape Prostate Cancer Monitoring and Treatment Selection</h2>
+            <div class="bg-white border-l-4 p-6 rounded-r-3xl shadow-sm mb-10" style="border-color: #2563eb">
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed italic">"Exploratory data from the TALAPRO-2 trial show that ctDNA [circulating tumor DNA, tiny tumor DNA pieces in the bloodstream] and CTC [circulating tumor cells, intact cancer cells circulating in blood] measurements link to outcomes in metastatic castration-resistant prostate cancer, while tissue genomic testing with Decipher predicts risk in high-risk localized disease—though further validation is needed before routine treatment choices[cite: 3, 4]. Together with newer PSMA [prostate-specific membrane antigen] imaging advances, these tests are shaping how doctors track and personalize care[cite: 3, 4]."</p>
+            </div>
+        </div>
+
+        <!-- Section Content Tabs -->
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-white overflow-hidden mb-12">
+            <div class="grid grid-cols-2 md:flex md:justify-between border-b bg-blue-50/30">
+
+                <button onclick="switchSubTab(this, 'sub-0-what_happened')" 
+                        class="sub-tab active md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="zap" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What Happened</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-why_this_matters')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="target" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Why This Matters</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-who_this_applies_to')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>Who This Applies To</span>
+                </button>
+
+                <button onclick="switchSubTab(this, 'sub-0-what_you_can_do')" 
+                        class="sub-tab  md:flex-1 py-3 px-2 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 text-[10px] md:text-xs font-bold text-slate-400 hover:text-blue-600 transition-all border-b-4 border-transparent text-center leading-tight">
+                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 mb-0.5 md:mb-0"></i>
+                    <span>What You Can Do</span>
+                </button>
+</div><div class="p-6 md:p-12">
+<div id="sub-0-what_happened" class="sub-content  anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">In an exploratory analysis of TALAPRO-2 (talazoparib [a PARP inhibitor, a targeted cancer drug that blocks DNA repair] plus enzalutamide versus placebo plus enzalutamide in metastatic castration-resistant prostate cancer), detectable ctDNA at baseline was linked to shorter radiographic progression-free survival [time without scan-visible cancer growth] in both groups (hazard ratios 2.46 and 4.03)[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Clearing ctDNA to undetectable levels by week 9 was tied to longer median radiographic progression-free survival: 25.9 versus 10.8 months with talazoparib plus enzalutamide, and 16.5 versus 5.5 months with placebo plus enzalutamide[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">A drop in CTC counts by week 9 (from at least 5 to 4 or fewer per 7.5 mL [milliliters] of blood) was also strongly linked to longer radiographic progression-free survival (hazard ratios 0.13 and 0.16)[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Overall agreement between blood ctDNA and tumor tissue testing for HRR gene changes was 84% (and 89% when ctDNA fraction was at least 1%), while AR [androgen receptor, a hormone-binding protein on cells] changes were detected in 33.8% of ctDNA samples versus 4.3% of tissue samples[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">In a separate study of the tissue-based Decipher genomic test across STAMPEDE (401 patients) and a real-world group (27,607 patients), higher scores were linked to higher risks of metastasis and death, and lower scores suggested some men might potentially be spared intensive abiraterone treatment, pending further validation[cite: 3, 4].</span>
+                        </div>
+</div>
+<div id="sub-0-why_this_matters" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Blood tests for ctDNA and CTCs offer a less invasive way to track tumor biology and treatment response over time than repeating tissue biopsies[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Because ctDNA can capture genetic changes across multiple tumor sites (including AR alterations), liquid biopsy [a blood test looking for tumor DNA or cells] may play a helpful role alongside tissue testing in molecular profiling[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Genomic classifiers like Decipher are being studied to help distinguish who truly needs added therapy such as abiraterone from who might avoid extra treatment side effects, though routine decision-making still needs more validation[cite: 3, 4].</span>
+                        </div>
+</div>
+<div id="sub-0-who_this_applies_to" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men with metastatic castration-resistant prostate cancer receiving or starting treatment such as talazoparib plus enzalutamide, where blood biomarker changes were studied as prognostic [outcome-related] markers[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men with high-risk localized prostate cancer considering added therapy such as abiraterone, where Decipher is under study to help refine risk assessment rather than serving as an established routine treatment decider today[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Men whose PSA rises after surgery or radiation (biochemical recurrence), where newer PSMA PET imaging such as 64Cu-SAR-bisPSMA is being developed to detect lesions at low PSA levels[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">Patients for whom a repeat tissue biopsy is hard to obtain or not feasible, where liquid biopsy may provide a complementary way to check tumor genetics[cite: 3, 4].</span>
+                        </div>
+</div>
+<div id="sub-0-what_you_can_do" class="sub-content hidden anim-slide space-y-4">
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have metastatic castration-resistant prostate cancer and are discussing talazoparib plus enzalutamide, you may wish to ask your oncologist how treatment response will be monitored and whether blood biomarker testing is relevant in your care or a clinical trial[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If you have high-risk localized prostate cancer and are discussing adding abiraterone, you may wish to ask: &quot;Is genomic testing like Decipher appropriate to discuss here, and how much weight should it carry given that further validation is still needed?&quot;[cite: 3, 4]</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">If your PSA is rising after initial treatment, you may wish to ask about PSMA PET imaging options—including trials or updates on 64Cu-SAR-bisPSMA—to look for sites of recurrence[cite: 3, 4].</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 md:p-5 rounded-2xl bg-blue-50/30 border border-blue-100/50 group hover:bg-white hover:shadow-md transition-all">
+                            <span class="mt-1 flex-shrink-0 w-6 h-6 bg-white shadow-sm rounded-full flex items-center justify-center" style="color: #2563eb">
+                                <i data-lucide="check" class="w-3 h-3"></i>
+                            </span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium leading-relaxed">You may wish to ask your care team what tissue or blood molecular tests are available at your center and how your insurance covers them[cite: 3, 4] (general medical guidance).</span>
+                        </div>
+</div>
+</div></div>
+
+        <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-slate-700">Evidence Badges</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </summary>
+            <div class="px-8 pb-8 pt-2 anim-slide">
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Phase III Trial Exploratory Biomarker Analysis (TALAPRO-2, NCT03395197, 805 patients)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Large Genomic Classifier Study (Decipher in STAMPEDE n=401 and real-world n=27,607)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        1 Phase II Imaging Study with FDA Breakthrough Designation (64Cu-SAR-bisPSMA, Co-PSMA n=50)
+                    </span>
+
+                    <span class="inline-flex items-center bg-slate-50 text-[10px] font-bold px-3 py-2 rounded-xl border border-blue-100 shadow-sm transition-transform" style="color: #2563eb">
+                        <i data-lucide="award" class="w-3 h-3 mr-2"></i>
+                        5 Cited Sources (ASCO Post, Healthcare Today, CancerNetwork, University of Gothenburg, EMJ)
+                    </span>
+
+                </div>
+            </div>
+        </details>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200"><i data-lucide="sun"></i></div>
+                    <h4 class="text-xl font-extrabold text-emerald-900 tracking-tight">The Hope</h4>
+                </div><ul class="space-y-4">
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Hope: Blood tests and genomic tools could help doctors tailor treatments more closely and avoid unnecessary side effects for men who do not need extra therapy[cite: 3, 4].</li>
+<li class="text-emerald-800 text-sm pl-4 border-l-2 border-emerald-200 font-medium">Reality: None of these tools is a silver bullet yet—exploratory markers still need prospective validation, and tests or advanced scans may face practical or cost barriers[cite: 3, 4] (general medical guidance).</li>
+</ul></div><div class="bg-rose-50 border border-rose-100 rounded-[2.5rem] p-8 shadow-sm">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-rose-500 text-white rounded-xl shadow-lg shadow-rose-200"><i data-lucide="cloud-lightning"></i></div>
+                    <h4 class="text-xl font-extrabold text-rose-900 tracking-tight">The Reality</h4>
+                </div><ul class="space-y-4">
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Hope: More sensitive PSMA scans may spot recurrence earlier when PSA levels are low[cite: 3, 4].</li>
+<li class="text-rose-800 text-sm pl-4 border-l-2 border-rose-200 font-medium">Reality: Even more sensitive scans or favorable blood-marker readings cannot guarantee long-term disease control on their own[cite: 3, 4].</li>
+</ul></div></div>
+<div class="space-y-4"><h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-6 mb-4">Deep Dive Analysis</h3>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Research Progress</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">In TALAPRO-2 (805 patients unselected for HRR mutations), researchers evaluated baseline and week-9 ctDNA and CTC changes alongside talazoparib plus enzalutamide versus placebo plus enzalutamide[cite: 3, 4] (independent fact-check: talazoparib plus enzalutamide is FDA-approved for HRR gene-mutated metastatic castration-resistant prostate cancer, and has also been studied in metastatic hormone-sensitive disease in TALAPRO-3)[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">64Cu-SAR-bisPSMA is a copper-64–labeled PSMA PET imaging agent that received FDA Breakthrough Therapy Designation [an expedited FDA program for promising therapies in serious conditions] after the phase II Co-PSMA study (50 patients, median PSA 0.43 ng/mL) showed 1.26 versus 0.48 lesions detected per patient compared with gallium-68 PSMA-11[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The Decipher genomic test was evaluated across STAMPEDE and large real-world cohorts to link tumor gene-expression risk scores with metastasis and survival outcomes[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">In Sweden, researchers at the University of Gothenburg are studying an organized PSA-to-MRI screening pathway (including 37,000 men) and exploring artificial intelligence for diagnostic accuracy, alongside separate biomarker work[cite: 3, 4].</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="scale" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">Evidence Uncertainty</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The TALAPRO-2 ctDNA and CTC findings come from an exploratory analysis rather than a primary trial endpoint, so prospective [planned forward-looking] studies are needed before using blood-marker shifts to change therapy[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">The Decipher analysis was retrospective [looking back at collected data] across STAMPEDE and real-world records rather than a randomized trial testing Decipher-guided treatment choices directly[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">64Cu-SAR-bisPSMA&#x27;s lesion-detection advantage comes from a 50-patient phase II study, with phase III results awaited to confirm clinical impact[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Modeling data on PSA screening in older men show that higher age and other health conditions increase the ratio of overdiagnosis to prevented deaths, and MRI-based pathways reduce—but do not completely remove—these trade-offs[cite: 3, 4].</p>
+</div></details>
+
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 bg-slate-100 text-slate-500 rounded-xl group-open:text-white transition-all" style="background-color: #2563eb20; color: #2563eb;">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-bold text-slate-700">What To Watch</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                </summary>
+                <div class="px-8 pb-8 pt-2 space-y-4 anim-slide">
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Future clinical studies testing whether changing treatment based on ctDNA or CTC results improves patient outcomes[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Further validation studies of Decipher and other genomic tools in deciding who benefits from treatment intensification[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Phase III trial results (such as AMPLIFY and CLARIFY) for 64Cu-SAR-bisPSMA in recurrent prostate cancer[cite: 3, 4].</p>
+<p class="text-sm text-slate-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 font-medium">Long-term findings from organized PSA-to-MRI screening research and AI imaging studies[cite: 3, 4].</p>
+</div></details>
+<details class="group bg-slate-900 rounded-3xl overflow-hidden shadow-xl mt-4">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white">
+                <div class="flex items-center gap-4">
+                    <div class="p-2.5 bg-slate-800 text-slate-400 rounded-xl"><i data-lucide="library"></i></div>
+                    <span class="font-bold tracking-tight">Citations & Research Sources</span>
+                </div>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform"></i>
+            </summary>
+            <div class="px-6 pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-900">
+<a href="https://ascopost.com/articles/2026/11-november/circulating-biomarkers-associated-with-progression-free-survival-in-metastatic-castration-resistant-prostate-cancer/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Circulating Biomarkers Associated With Progression-Free Survival in Metastatic Castration-Resistant Prostate Cancer</a>
+<a href="https://healthcaretoday.com/article/prostate-cancer-diagnostic-test-could-reduce-unnecessary-intensive-treatments" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Prostate cancer diagnostic test could reduce unnecessary intensive treatments</a>
+<a href="https://www.cancernetwork.com/view/64cu-sar-bispsma-earns-fda-breakthrough-designation-in-recurrent-prostate-cancer" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>64Cu-SAR-bisPSMA Earns FDA Breakthrough Designation in Recurrent Prostate Cancer</a>
+<a href="https://www.gu.se/en/news/making-progress-toward-better-prostate-cancer-survival" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>Making progress toward better prostate cancer survival</a>
+<a href="https://www.emjreviews.com/oncology/news/psa-screening-trade-offs-worsen-with-age-and-ill-health/" target="_blank" class="p-4 rounded-2xl bg-slate-800 hover:bg-blue-600 border border-slate-700 transition-all flex items-center gap-3 text-xs font-bold text-slate-300 hover:text-white"><i data-lucide="external-link" class="w-4 h-4 opacity-50"></i>PSA Screening Trade-Offs Worsen With Age and Ill Health</a>
+</div></details>
+</div></section>
+
+        </main>
+
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 glass border border-blue-100 px-8 py-4 rounded-full shadow-2xl z-50 flex items-center gap-8 no-print">
+            <button onclick="window.print()" class="text-slate-500 hover:text-blue-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="printer" class="w-4 h-4"></i> Print PDF
+            </button>
+            <div class="h-4 w-px bg-blue-200"></div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-500 hover:text-blue-600 transition tracking-widest text-[10px] font-black uppercase flex items-center gap-2">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> Top
+            </button>
+        </div>
+
+        <script>
+        function switchSubTab(btn, id) {
+            const c = btn.closest('section');
+            c.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+            c.querySelectorAll('.sub-content').forEach(x => x.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(id).classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+        };
+        </script>
+    </body>
+    </html>
